@@ -1,0 +1,23 @@
+{
+  "mcpServers": {
+    "memory": {
+      "command": "npx",
+      "args": [
+        "-y",
+        "@modelcontextprotocol/server-memory"
+      ]
+    },
+    "supabase": {
+      "command": "npx",
+      "args": [
+        "-y",
+        "@supabase/mcp-server-supabase@0.5.5",
+        "--access-token",
+        "sbp_f65b166d22e1ecbf07d5cdea65ea5848c2d7dbb5"
+      ],
+      "alwaysAllow": [
+        "search_docs"
+      ]
+    }
+  }
+}

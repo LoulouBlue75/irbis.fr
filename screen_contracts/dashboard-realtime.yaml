@@ -1,0 +1,87 @@
+id: SC-01
+name: Dashboard Realtime
+route: /dashboard
+description: Vue d'ensemble avec mises à jour en temps réel des activités
+access: Private (Recruiter, Admin)
+
+layout:
+  type: DashboardLayout
+  sidebar: true
+  header: true
+
+sections:
+  - id: stats-overview
+    type: Grid
+    columns: 4
+    components:
+      - type: StatCard
+        props:
+          label: "Candidats (Total)"
+          value: "{stats.totalCandidates}"
+          icon: "Users"
+          trend: "{stats.candidatesTrend}"
+      - type: StatCard
+        props:
+          label: "Matches (Nouveaux)"
+          value: "{stats.newMatches}"
+          icon: "Zap"
+          trend: "{stats.matchesTrend}"
+          highlight: true
+      - type: StatCard
+        props:
+          label: "Missions (Actives)"
+          value: "{stats.activeJobs}"
+          icon: "Briefcase"
+      - type: StatCard
+        props:
+          label: "Messages (Non lus)"
+          value: "{stats.unreadMessages}"
+          icon: "MessageSquare"
+
+  - id: live-activity
+    type: Section
+    title: "Activité en temps réel"
+    components:
+      - type: ActivityFeed
+        props:
+          source: "supabase-realtime:activities"
+          limit: 10
+          renderItem: "ActivityItem"
+          emptyState: "Aucune activité récente"
+
+  - id: recent-matches
+    type: Section
+    title: "Derniers Matches"
+    components:
+      - type: Table
+        props:
+          data: "{matches}"
+          columns:
+            - header: "Candidat"
+              accessor: "candidate.name"
+            - header: "Mission"
+              accessor: "job.title"
+            - header: "Score"
+              accessor: "score"
+              render: "ScoreBadge"
+            - header: "Statut"
+              accessor: "status"
+            - header: "Action"
+              render: "MatchActions"
+
+interactions:
+  - trigger: "OnMount"
+    action: "Subscribe to Supabase Realtime channels (activities, matches)"
+  - trigger: "Click Match"
+    action: "Navigate to /jobs/[id]"
+  - trigger: "Click Candidate"
+    action: "Navigate to /dashboard/candidates/[id]"
+
+data_requirements:
+  - source: "supabase"
+    query: "getDashboardStats()"
+  - source: "supabase"
+    query: "getRecentMatches()"
+  - source: "supabase-realtime"
+    channel: "public:activities"
+    event: "INSERT"
