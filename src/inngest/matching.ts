@@ -1,16 +1,18 @@
 import { inngest } from '@/lib/inngest';
-import { createClient } from '@supabase/supabase-js';
+import { createClient, SupabaseClient } from '@supabase/supabase-js';
 import { google } from '@ai-sdk/google';
 import { embed, generateText } from 'ai';
 
-// Initialize Supabase client
-const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL!;
-const supabaseServiceKey = process.env.SUPABASE_SERVICE_ROLE_KEY!;
-const supabase = createClient(supabaseUrl, supabaseServiceKey);
-
-// Check for API keys
-if (!process.env.GOOGLE_GENERATIVE_AI_API_KEY) {
-  console.warn('GOOGLE_GENERATIVE_AI_API_KEY is not set. Embedding generation will fail.');
+// Lazy initialization for Supabase client - only create when needed (at runtime)
+function getSupabaseClient(): SupabaseClient {
+  const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL;
+  const supabaseServiceKey = process.env.SUPABASE_SERVICE_ROLE_KEY;
+  
+  if (!supabaseUrl || !supabaseServiceKey) {
+    throw new Error('Missing Supabase environment variables');
+  }
+  
+  return createClient(supabaseUrl, supabaseServiceKey);
 }
 
 export const generateCandidateEmbedding = inngest.createFunction(
@@ -21,6 +23,7 @@ export const generateCandidateEmbedding = inngest.createFunction(
 
     // 1. Fetch Candidate Data
     const candidate = await step.run('fetch-candidate', async () => {
+      const supabase = getSupabaseClient();
       const { data, error } = await supabase
         .from('candidates')
         .select('*')
@@ -51,6 +54,7 @@ export const generateCandidateEmbedding = inngest.createFunction(
 
     // 3. Update Candidate with Embedding
     await step.run('update-candidate', async () => {
+      const supabase = getSupabaseClient();
       const { error } = await supabase
         .from('candidates')
         .update({ embedding })
@@ -74,6 +78,7 @@ export const generateMatches = inngest.createFunction(
 
     // 1. Fetch Job Data
     const job = await step.run('fetch-job', async () => {
+      const supabase = getSupabaseClient();
       const { data, error } = await supabase
         .from('jobs')
         .select('*')
@@ -100,6 +105,7 @@ export const generateMatches = inngest.createFunction(
         });
 
         // Update job with embedding
+        const supabase = getSupabaseClient();
         await supabase
           .from('jobs')
           .update({ embedding })
@@ -111,6 +117,7 @@ export const generateMatches = inngest.createFunction(
 
     // 3. Vector Retrieval (The "Net")
     const topCandidates = await step.run('vector-retrieval', async () => {
+      const supabase = getSupabaseClient();
       const { data, error } = await supabase.rpc('match_candidates', {
         query_embedding: jobEmbedding,
         match_threshold: 0.5, // Adjust threshold as needed
@@ -179,6 +186,7 @@ export const generateMatches = inngest.createFunction(
     await step.run('persist-matches', async () => {
       if (scoredMatches.length === 0) return;
 
+      const supabase = getSupabaseClient();
       const { error } = await supabase
         .from('matches')
         .upsert(scoredMatches, { onConflict: 'job_id, candidate_id' });

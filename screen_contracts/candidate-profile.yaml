@@ -1,0 +1,454 @@
+# Screen Contract: Candidate Profile
+# Executive Search Platform - IRBIS
+
+metadata:
+  id: SC-02
+  name: "Candidate Profile (Talent Footprint)"
+  status: "In Progress"
+  priority: "High"
+  created: "2024-12-22"
+  updated: "2024-12-22"
+  design_system: "Swiss Minimalism"
+
+# ============================================
+# VISUAL IDENTITY
+# ============================================
+
+visual:
+  paradigm: "Split-Screen"
+  universe: "Minimalism Swiss"
+  theme: "Light Only"
+  palette:
+    primary: "#2563eb"
+    success: "#059669"
+    background: "#ffffff"
+    secondary: "#fafafa"
+    text: "#171717"
+
+# ============================================
+# LAYOUT
+# ============================================
+
+layout:
+  type: "Split-Screen"
+  container: "max-w-7xl mx-auto px-8 py-8"
+  grid: "2fr 1fr"
+  sections:
+    - name: "Left Column (The Analysis)"
+      width: "66%"
+      description: "Profile header, synthesis, career path, alignments"
+      
+    - name: "Right Column (The Follow-up)"
+      width: "33%"
+      description: "Activity history, notes, CRM actions"
+      sticky: true
+
+# ============================================
+# COMPONENTS
+# ============================================
+
+components:
+  # ====== LEFT COLUMN ======
+  
+  # Profile Header Card
+  - id: "profile-header"
+    type: "card-clean"
+    layout: "flex-row"
+    elements:
+      - type: "avatar"
+        size: "xl"
+        fallback: "initials"
+        
+      - type: "section"
+        content:
+          - type: "h1"
+            text: "[Candidate Name]"
+            style: "text-h2 font-bold text-primary"
+            
+          - type: "contact-row"
+            items:
+              - icon: "Mail"
+                text: "[email@example.com]"
+                link: "mailto:"
+              - icon: "Phone"
+                text: "[+33 6 12 34 56 78]"
+                link: "tel:"
+              - icon: "Linkedin"
+                text: "LinkedIn"
+                link: "https://linkedin.com/in/"
+                
+      - type: "button"
+        variant: "ghost"
+        label: "Modifier"
+        icon: "Edit"
+        alignment: "top-right"
+
+  # AI Synthesis Card
+  - id: "synthesis"
+    type: "card"
+    title: "Ce que révèle ce parcours..."
+    icon: "Sparkles"
+    content:
+      type: "ai-generated-text"
+      placeholder: "Analyse IA en cours..."
+      style: "text-base text-secondary leading-relaxed"
+      max_length: 300
+
+  # 8D Dimensions Card
+  - id: "8d-dimensions"
+    type: "card"
+    title: "Dimensions 8D"
+    description: "Profil comportemental et compétences"
+    content:
+      type: "progress-list"
+      items:
+        - label: "Leadership"
+          value: 85
+          color: "excellent"
+          
+        - label: "Image & Présentation"
+          value: 78
+          color: "good"
+          
+        - label: "Compétences Ventes"
+          value: 92
+          color: "excellent"
+          
+        - label: "Expertise Technique"
+          value: 88
+          color: "excellent"
+          
+        - label: "Gestion d'Équipe"
+          value: 75
+          color: "good"
+          
+        - label: "Communication"
+          value: 90
+          color: "excellent"
+          
+        - label: "Adaptabilité"
+          value: 82
+          color: "excellent"
+          
+        - label: "Vision Stratégique"
+          value: 79
+          color: "good"
+
+  # Career Path Timeline
+  - id: "career-path"
+    type: "card"
+    title: "Empreinte Professionnelle"
+    description: "Parcours chronologique"
+    content:
+      type: "timeline"
+      items:
+        - period: "2020 - Présent"
+          role: "CTO"
+          company: "TechCorp"
+          location: "Paris, France"
+          description: "Refonte architecture microservices, équipe de 15 devs"
+          skills:
+            - "Leadership"
+            - "Architecture"
+            - "Cloud"
+          
+        - period: "2017 - 2020"
+          role: "Lead Developer"
+          company: "StartupXYZ"
+          location: "Lyon, France"
+          description: "Développement produit SaaS B2B, 0 à 500k ARR"
+          skills:
+            - "React"
+            - "Node.js"
+            - "DevOps"
+          
+        - period: "2015 - 2017"
+          role: "Full Stack Developer"
+          company: "AgenceWeb"
+          location: "Paris, France"
+          description: "Projets clients e-commerce et corporate"
+          skills:
+            - "PHP"
+            - "JavaScript"
+            - "UX"
+
+  # Alignments Card
+  - id: "alignments"
+    type: "card"
+    title: "Alignements avec les Mandats"
+    description: "Opportunités identifiées"
+    content:
+      type: "match-cards-list"
+      items:
+        - mandate: "CTO - SaaS Fintech"
+          company: "FinanceApp"
+          score: 98
+          score_label: "Excellent Alignement"
+          score_color: "excellent"
+          badge: "Nouveau"
+          summary: "Profil idéal : 10+ ans en tech, expérience SaaS, leadership confirmé"
+          actions:
+            - label: "Initier Approche"
+              variant: "primary"
+            - label: "Détails"
+              variant: "ghost"
+              
+        - mandate: "VP Engineering - Scale-up"
+          company: "GrowthCo"
+          score: 85
+          score_label: "Très Compatible"
+          score_color: "excellent"
+          summary: "Match sur leadership et scaling, léger gap sur domain expertise"
+          actions:
+            - label: "Évaluer"
+              variant: "secondary"
+            - label: "Détails"
+              variant: "ghost"
+
+  # ====== RIGHT COLUMN ======
+  
+  # Activity History
+  - id: "activity-history"
+    type: "card"
+    title: "Historique"
+    description: "Suivi CRM"
+    sticky: true
+    content:
+      type: "timeline-feed"
+      items:
+        - icon: "MessageSquare"
+          title: "Note ajoutée"
+          author: "Vous"
+          time: "Il y a 2h"
+          preview: "Échange téléphonique positif, intéressé par..."
+          
+        - icon: "Phone"
+          title: "Appel téléphonique"
+          author: "Louis"
+          time: "Il y a 3 jours"
+          status: "success"
+          
+        - icon: "Mail"
+          title: "Email envoyé"
+          author: "Système"
+          time: "Il y a 5 jours"
+          preview: "Opportunité CTO FinanceApp"
+          
+        - icon: "UserPlus"
+          title: "Profil créé"
+          author: "Système"
+          time: "Il y a 1 semaine"
+
+  # Add Note Form (Collapsed)
+  - id: "add-note-form"
+    type: "collapsible-form"
+    trigger: "Ajouter une Note..."
+    expanded: false
+    content:
+      - type: "select"
+        label: "Type"
+        options:
+          - "Note"
+          - "Appel"
+          - "Email"
+          - "Réunion"
+        default: "Note"
+        
+      - type: "textarea"
+        label: "Contenu"
+        placeholder: "Détails de l'interaction..."
+        rows: 4
+        
+      - type: "button"
+        label: "Sauvegarder"
+        variant: "primary"
+        full_width: true
+
+  # Primary Action
+  - id: "primary-action"
+    type: "button"
+    label: "Initier l'Approche"
+    variant: "primary"
+    icon: "Send"
+    full_width: true
+    description: "Envoyer une opportunité"
+
+# ============================================
+# INTERACTIONS
+# ============================================
+
+interactions:
+  - trigger: "edit-button:click"
+    action: "navigate"
+    target: "/dashboard/candidates/[id]/edit"
+    
+  - trigger: "contact-link:click"
+    action: "open-mailto-or-tel"
+    
+  - trigger: "alignment-card:click"
+    action: "navigate"
+    target: "/dashboard/jobs/[job_id]"
+    
+  - trigger: "add-note-trigger:click"
+    action: "expand-form"
+    animation: "fadeIn"
+    
+  - trigger: "add-note-form:submit"
+    action: "create-activity"
+    then: "refresh-timeline"
+    
+  - trigger: "initiate-approach:click"
+    action: "open-modal"
+    modal: "select-mandate-and-send"
+
+# ============================================
+# DATA REQUIREMENTS
+# ============================================
+
+data:
+  queries:
+    - name: "getCandidateById"
+      type: "server-action"
+      params: ["id"]
+      fields:
+        - id
+        - name
+        - email
+        - phone
+        - linkedin_url
+        - avatar_url
+        - created_at
+        - updated_at
+        
+    - name: "getCandidateSynthesis"
+      type: "ai-generated"
+      params: ["candidate_id"]
+      cache: "24h"
+      
+    - name: "get8DDimensions"
+      type: "server-action"
+      params: ["candidate_id"]
+      fields:
+        - leadership
+        - image
+        - sales
+        - technical
+        - management
+        - communication
+        - adaptability
+        - vision
+        
+    - name: "getCareerPath"
+      type: "server-action"
+      params: ["candidate_id"]
+      order: "desc"
+      
+    - name: "getCandidateMatches"
+      type: "server-action"
+      params: ["candidate_id"]
+      order_by: "score"
+      limit: 10
+      
+    - name: "getCandidateActivities"
+      type: "server-action"
+      params: ["candidate_id"]
+      order: "desc"
+      limit: 20
+
+  mutations:
+    - name: "updateCandidate"
+      type: "server-action"
+      
+    - name: "createActivity"
+      type: "server-action"
+      params: ["candidate_id", "type", "content"]
+      
+    - name: "initiateApproach"
+      type: "server-action"
+      params: ["candidate_id", "job_id", "message"]
+
+# ============================================
+# ACCESSIBILITY
+# ============================================
+
+accessibility:
+  keyboard:
+    - "Tab through all sections"
+    - "Enter to expand collapsed forms"
+    - "Escape to close modals"
+    
+  aria:
+    - "role='article' on profile card"
+    - "aria-label on icon buttons"
+    - "aria-expanded on collapsible sections"
+    
+  contrast:
+    - "All text meets WCAG AA"
+    - "Score colors have sufficient contrast"
+    - "Focus indicators visible"
+
+# ============================================
+# RESPONSIVE BEHAVIOR
+# ============================================
+
+responsive:
+  mobile:
+    - "Stack columns vertically"
+    - "Right column appears below left"
+    - "Timeline collapses to compact view"
+    - "Add Note button fixed at bottom"
+    
+  tablet:
+    - "Columns: 60/40 split"
+    - "Right column scrollable"
+    
+  desktop:
+    - "Columns: 2fr 1fr split"
+    - "Right column sticky"
+
+# ============================================
+# PERFORMANCE
+# ============================================
+
+performance:
+  loading:
+    - "Show skeleton for profile header"
+    - "Progressive load: header → synthesis → details"
+    - "Lazy load activity timeline"
+    
+  caching:
+    - "AI Synthesis: 24h cache"
+    - "Career path: 1h cache"
+    - "Matches: 5min cache"
+    - "Activities: Real-time (Supabase)"
+
+# ============================================
+# TESTING SCENARIOS
+# ============================================
+
+testing:
+  unit:
+    - "8D dimensions render correctly"
+    - "Timeline items display in order"
+    - "Score colors match thresholds"
+    
+  integration:
+    - "Clicking alignment navigates to job"
+    - "Adding note updates timeline"
+    - "Contact links work correctly"
+    
+  e2e:
+    - "User can view full candidate profile"
+    - "User can add a note"
+    - "User can initiate an approach"
+    - "Mobile layout works correctly"
+
+# ============================================
+# NOTES & DECISIONS
+# ============================================
+
+notes:
+  - "Vocabulaire IRBIS: 'Talent' pas 'Candidat', 'Empreinte' pas 'CV'"
+  - "Emphasis sur l'analyse qualitative (8D, Synthesis)"
+  - "CRM intégré directement dans le profil (pas séparé)"
+  - "Design inspiré de Linear Issues + Notion Database"
