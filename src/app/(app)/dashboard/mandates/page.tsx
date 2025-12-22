@@ -17,10 +17,10 @@ export default async function JobsPage() {
   return (
     <div className="flex flex-col gap-8">
       <div className="flex justify-between items-center">
-        <h1 className="text-3xl font-bold text-white">Mandates</h1>
+        <h1 className="text-3xl font-bold text-primary">Mandates</h1>
         <Link
-          href="/dashboard/jobs/new"
-          className="bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+          href="/dashboard/mandates/new"
+          className="button-primary"
         >
           New Mandate
         </Link>

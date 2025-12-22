@@ -32,7 +32,7 @@ export function CandidateForm() {
       if (result.error) {
         setError(result.error);
       } else {
-        router.push('/dashboard/candidates');
+        router.push('/dashboard/talents');
       }
     } catch (err) {
       setError('An unexpected error occurred');

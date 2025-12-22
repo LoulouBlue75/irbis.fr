@@ -1,301 +1,49 @@
-# Screen Contract: Dashboard Overview
-# Executive Search Platform - IRBIS
+# ACI Contract: Dashboard Overview
+# ID: dashboard-overview
+# Description: Main entry point for the recruiter cockpit.
 
-metadata:
-  id: SC-01
-  name: "Dashboard Overview"
-  status: "In Progress"
-  priority: "High"
-  created: "2024-12-22"
-  updated: "2024-12-22"
-  design_system: "Swiss Minimalism"
-
-# ============================================
-# VISUAL IDENTITY
-# ============================================
-
-visual:
-  paradigm: "Bento Grid"
-  universe: "Minimalism Swiss"
-  theme: "Light Only"
-  palette:
-    primary: "#2563eb"
-    success: "#059669"
-    background: "#ffffff"
-    secondary: "#fafafa"
-    text: "#171717"
-
-# ============================================
-# LAYOUT
-# ============================================
-
-layout:
-  type: "Dashboard Grid"
-  container: "max-w-7xl mx-auto px-8 py-8"
-  sections:
-    - name: "Header"
-      description: "Welcome message + Actions"
-      grid: "full-width"
-      
-    - name: "Stats Grid"
-      description: "4 key metrics"
-      grid: "bento-grid"
-      columns: 4
-      
-    - name: "Main Content"
-      description: "Recent Activity + Top Matches"
-      grid: "2-column (2/3 + 1/3)"
-
-# ============================================
-# COMPONENTS
-# ============================================
-
-components:
-  # Header Section
-  - id: "header"
-    type: "section"
-    elements:
-      - type: "text"
-        variant: "h1"
-        content: "Bonjour, [User Name] 👋"
-        style: "text-h2 font-semibold text-primary"
-        
-      - type: "button-group"
-        alignment: "right"
-        buttons:
-          - label: "Vivier de Talents"
-            variant: "secondary"
-            icon: "Users"
-            href: "/dashboard/candidates"
-          - label: "Nouveau Mandat"
-            variant: "primary"
-            icon: "Plus"
-            href: "/dashboard/jobs/new"
-
-  # Stats Cards
-  - id: "stats-grid"
-    type: "bento-grid"
-    cards:
-      - id: "stat-candidates"
-        title: "Talents Identifiés"
-        value: "1,240"
-        trend: "+5%"
-        trend_direction: "up"
-        icon: "Users"
-        icon_color: "blue"
-        
-      - id: "stat-matches"
-        title: "Alignements (Nouveaux)"
-        value: "12"
-        trend: "+2"
-        trend_direction: "up"
-        icon: "Target"
-        icon_color: "green"
-        
-      - id: "stat-mandates"
-        title: "Mandats Actifs"
-        value: "5"
-        trend: "En cours"
-        icon: "Briefcase"
-        icon_color: "blue"
-        
-      - id: "stat-completion"
-        title: "Taux de Complétion"
-        value: "78%"
-        trend: "+12%"
-        trend_direction: "up"
-        icon: "TrendingUp"
-        icon_color: "green"
-
-  # Recent Activity Feed
-  - id: "activity-feed"
-    type: "card"
-    title: "Activité en Temps Réel"
-    description: "Dernières actions sur la plateforme"
-    style: "card-clean"
-    content:
-      type: "activity-list"
-      items:
-        - icon: "UserCheck"
-          text: "Jean D. a candidaté"
-          time: "2m"
-          status: "new"
-          
-        - icon: "Target"
-          text: "Nouvel alignement trouvé: CTO"
-          time: "5m"
-          status: "success"
-          
-        - icon: "FileText"
-          text: "CV analysé: Marie L."
-          time: "10m"
-          status: "pending"
-          
-        - icon: "Briefcase"
-          text: "Mandat créé: Sales Director"
-          time: "1h"
-          status: "new"
-      footer:
-        type: "link"
-        text: "Voir toute l'activité"
-        href: "/dashboard/activity"
-
-  # Top Matches Sidebar
-  - id: "top-matches"
-    type: "card"
-    title: "Meilleurs Alignements"
-    description: "Derniers matchs calculés"
-    style: "card"
-    content:
-      type: "match-list"
-      items:
-        - candidate: "Jean Dupont"
-          job: "CTO"
-          score: 98
-          score_color: "excellent"
-          badge: "Nouveau"
-          
-        - candidate: "Marie Leclerc"
-          job: "Dev Lead"
-          score: 85
-          score_color: "excellent"
-          
-        - candidate: "Paul Rousseau"
-          job: "Sales Manager"
-          score: 72
-          score_color: "good"
-      footer:
-        type: "button"
-        text: "Voir tous les alignements"
-        variant: "ghost"
-        href: "/dashboard/matches"
-
-# ============================================
-# INTERACTIONS
-# ============================================
-
-interactions:
-  - trigger: "stat-card:click"
-    action: "navigate"
-    target: "relevant-list-page"
-    
-  - trigger: "activity-item:click"
-    action: "open-detail-modal"
-    
-  - trigger: "match-item:click"
-    action: "navigate"
-    target: "/dashboard/candidates/[id]"
-    
-  - trigger: "realtime-update"
-    action: "prepend-activity-item"
-    animation: "fadeIn"
-
-# ============================================
-# DATA REQUIREMENTS
-# ============================================
+context:
+  user:
+    role: "recruiter" | "admin"
+    organizationId: string
 
 data:
-  queries:
-    - name: "getDashboardStats"
-      type: "server-action"
-      fields:
-        - total_candidates
-        - new_matches_count
-        - active_mandates
-        - completion_rate
-        
-    - name: "getRecentActivity"
-      type: "server-action"
-      limit: 10
-      order: "desc"
-      
-    - name: "getTopMatches"
-      type: "server-action"
-      limit: 5
-      order_by: "score"
-      filter: "created_at > 7 days"
+  stats:
+    activeMandates: number
+    pipelineCount: number
+    placementsThisMonth: number
+    newTalentsThisWeek: number
+  
+  recentActivity:
+    - id: string
+      type: "mandate_created" | "candidate_match" | "placement" | "system_alert"
+      message: string
+      timestamp: string
+      metadata: object
 
-  mutations:
-    - name: "markActivityAsRead"
-      type: "server-action"
+  quickActions:
+    - label: "New Mandate"
+      action: "createMandate"
+      icon: "plus-circle"
+    - label: "Ingest Profile"
+      action: "ingestProfile"
+      icon: "upload"
 
-# ============================================
-# ACCESSIBILITY
-# ============================================
+actions:
+  createMandate:
+    description: "Navigate to mandate creation wizard"
+    navigation: "/dashboard/mandates/new"
 
-accessibility:
-  keyboard:
-    - "Tab navigation between cards"
-    - "Enter to activate buttons"
-    - "Arrow keys in lists"
-    
-  aria:
-    - "role='main' on dashboard container"
-    - "aria-label on stat cards"
-    - "aria-live='polite' on activity feed"
-    
-  contrast:
-    - "All text meets WCAG AA (4.5:1)"
-    - "Interactive elements have focus indicators"
+  ingestProfile:
+    description: "Open profile ingestion modal or page"
+    navigation: "/dashboard/ingestion"
 
-# ============================================
-# RESPONSIVE BEHAVIOR
-# ============================================
+  viewMandate:
+    description: "Navigate to specific mandate cockpit"
+    parameters:
+      mandateId: string
+    navigation: "/dashboard/mandates/:mandateId"
 
-responsive:
-  mobile:
-    - "Stats grid: 2x2 instead of 4x1"
-    - "Main content: stack vertically"
-    - "Hide 'Top Matches' sidebar (accessible via tab)"
-    
-  tablet:
-    - "Stats grid: 2x2"
-    - "Main content: 60/40 split"
-    
-  desktop:
-    - "Stats grid: 4x1"
-    - "Main content: 2/3 + 1/3 split"
-
-# ============================================
-# PERFORMANCE
-# ============================================
-
-performance:
-  loading:
-    - "Show skeleton loaders for cards"
-    - "Progressive hydration for activity feed"
-    
-  caching:
-    - "Stats: refresh every 30s"
-    - "Activity: Supabase Realtime"
-    - "Matches: SWR with 5min stale time"
-
-# ============================================
-# TESTING SCENARIOS
-# ============================================
-
-testing:
-  unit:
-    - "Stats calculation is correct"
-    - "Activity items render properly"
-    - "Match scores display with correct colors"
-    
-  integration:
-    - "Clicking stat card navigates to correct page"
-    - "Real-time updates appear in activity feed"
-    - "Match items link to candidate profiles"
-    
-  e2e:
-    - "User can see dashboard after login"
-    - "All interactive elements are clickable"
-    - "Mobile layout adapts correctly"
-
-# ============================================
-# NOTES & DECISIONS
-# ============================================
-
-notes:
-  - "Design inspiré de Linear et Stripe Dashboard"
-  - "Accent mis sur la clarté et la hiérarchie visuelle"
-  - "Pas d'animations lourdes (performances)"
-  - "Real-time updates via Supabase Subscriptions"
+  viewTalentPool:
+    description: "Navigate to global talent list"
+    navigation: "/dashboard/talents"

@@ -39,7 +39,7 @@ export function JobForm({ initialData }: JobFormProps) {
       if (result.error) {
         setError(result.error);
       } else {
-        router.push('/dashboard/jobs');
+        router.push('/dashboard/mandates');
       }
     } catch (err) {
       setError('An unexpected error occurred');

@@ -38,17 +38,17 @@ export default async function CandidatesPage({
   return (
     <div className="flex flex-col gap-8">
       <div className="flex justify-between items-center">
-        <h1 className="text-3xl font-bold text-white">Talent Pool</h1>
+        <h1 className="text-3xl font-bold text-primary">Talent Pool</h1>
         <div className="flex gap-2">
           <Link
-            href="/dashboard/candidates/new"
-            className="bg-gray-800 hover:bg-gray-700 text-white font-bold py-2 px-4 rounded border border-gray-700"
+            href="/dashboard/talents/new"
+            className="button-secondary"
           >
             Manual Entry
           </Link>
           <Link
             href="/upload"
-            className="bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+            className="button-primary"
           >
             Profile Ingestion
           </Link>
@@ -63,11 +63,11 @@ export default async function CandidatesPage({
             name="search"
             defaultValue={search}
             placeholder="Filter by name or email..."
-            className="bg-gray-900 border border-gray-700 text-white rounded px-4 py-2 w-full max-w-md focus:outline-none focus:border-blue-500"
+            className="input max-w-md"
           />
           <button
             type="submit"
-            className="bg-gray-800 hover:bg-gray-700 text-white font-bold py-2 px-4 rounded border border-gray-700"
+            className="button-secondary"
           >
             Filter
           </button>
@@ -76,16 +76,16 @@ export default async function CandidatesPage({
 
       <div className="mb-8">
         <div className="flex justify-between items-center mb-4">
-          <h2 className="text-xl font-semibold text-white">Precision Search</h2>
+          <h2 className="text-xl font-semibold text-primary">Precision Search</h2>
           {semanticQuery && (
-            <Link href="/dashboard/candidates" className="text-sm text-blue-400 hover:text-blue-300">
+            <Link href="/dashboard/talents" className="text-sm text-accent-primary hover:text-accent-primary-hover">
               Clear Search
             </Link>
           )}
         </div>
         <CandidateSearch onSearch={async (query) => {
           'use server';
-          redirect(`/dashboard/candidates?semantic=${encodeURIComponent(query)}`);
+          redirect(`/dashboard/talents?semantic=${encodeURIComponent(query)}`);
         }} />
       </div>
 
@@ -94,14 +94,14 @@ export default async function CandidatesPage({
       {/* Pagination Controls - Only show for standard search */}
       {!semanticQuery && (
         <div className="flex justify-between items-center mt-4">
-          <div className="text-gray-400 text-sm">
+          <div className="text-secondary text-sm">
             Showing {candidates.length} of {total} talents
           </div>
           <div className="flex gap-2">
             {page > 1 && (
               <Link
-                href={`/dashboard/candidates?page=${page - 1}&search=${search}`}
-                className="bg-gray-800 hover:bg-gray-700 text-white font-bold py-2 px-4 rounded border border-gray-700"
+                href={`/dashboard/talents?page=${page - 1}&search=${search}`}
+                className="button-secondary"
               >
                 Previous
               </Link>
@@ -109,8 +109,8 @@ export default async function CandidatesPage({
             {/* Check if we have more pages based on total count */}
             {page * 10 < total && (
               <Link
-                href={`/dashboard/candidates?page=${page + 1}&search=${search}`}
-                className="bg-gray-800 hover:bg-gray-700 text-white font-bold py-2 px-4 rounded border border-gray-700"
+                href={`/dashboard/talents?page=${page + 1}&search=${search}`}
+                className="button-secondary"
               >
                 Next
               </Link>

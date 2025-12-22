@@ -1,0 +1,77 @@
+# ACI Contract: Mandate Cockpit
+# ID: mandate-cockpit
+# Description: Detailed view and management of a specific recruitment mandate.
+
+context:
+  mandateId: string
+  user:
+    role: "recruiter" | "admin"
+
+data:
+  mandate:
+    id: string
+    title: string
+    status: "active" | "pending" | "closed" | "draft"
+    client: string
+    location: string
+    salaryRange: string
+    description: string
+    requirements: string[]
+    createdAt: string
+    
+  pipeline:
+    stages:
+      - id: "sourcing"
+        label: "Sourcing"
+        count: number
+        candidates: [] # Array of candidate summaries
+      - id: "screening"
+        label: "Screening"
+        count: number
+        candidates: []
+      - id: "interview"
+        label: "Interview"
+        count: number
+        candidates: []
+      - id: "offer"
+        label: "Offer"
+        count: number
+        candidates: []
+      - id: "hired"
+        label: "Hired"
+        count: number
+        candidates: []
+
+  matches:
+    - candidateId: string
+      name: string
+      matchScore: number # 0-100
+      matchReasoning: string
+      skills: string[]
+      status: "new" | "viewed" | "contacted"
+
+actions:
+  updateMandateStatus:
+    description: "Change the status of the mandate"
+    parameters:
+      status: "active" | "pending" | "closed"
+    
+  moveCandidate:
+    description: "Move a candidate to a different pipeline stage"
+    parameters:
+      candidateId: string
+      targetStageId: string
+      
+  addNote:
+    description: "Add a private note to the mandate"
+    parameters:
+      content: string
+      
+  generateMatches:
+    description: "Trigger AI matching engine to find new candidates"
+    
+  viewCandidateProfile:
+    description: "Navigate to full candidate profile"
+    parameters:
+      candidateId: string
+    navigation: "/dashboard/talents/:candidateId"

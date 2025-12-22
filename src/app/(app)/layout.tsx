@@ -20,11 +20,11 @@ export default function AppLayout({
           <Link href="/projects" className="p-2 rounded hover:bg-gray-200 dark:hover:bg-gray-800">
             Projects
           </Link>
-          <Link href="/dashboard/candidates" className="p-2 rounded hover:bg-gray-200 dark:hover:bg-gray-800">
-            Candidates
+          <Link href="/dashboard/talents" className="p-2 rounded hover:bg-tertiary text-secondary hover:text-primary transition-colors">
+            Talents
           </Link>
-          <Link href="/dashboard/jobs" className="p-2 rounded hover:bg-gray-200 dark:hover:bg-gray-800">
-            Jobs
+          <Link href="/dashboard/mandates" className="p-2 rounded hover:bg-tertiary text-secondary hover:text-primary transition-colors">
+            Mandates
           </Link>
         </nav>
         <div className="mt-auto pt-8">

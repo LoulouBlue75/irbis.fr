@@ -1,0 +1,65 @@
+# ACI Contract: Talent Profile
+# ID: talent-profile
+# Description: Comprehensive view of a candidate's profile, insights, and history.
+
+context:
+  candidateId: string
+  user:
+    role: "recruiter" | "admin"
+
+data:
+  profile:
+    id: string
+    name: string
+    email: string
+    phone: string
+    location: string
+    linkedinUrl: string
+    avatarUrl: string
+    
+    skills: string[]
+    languages: string[]
+    
+    experience:
+      - title: string
+        company: string
+        startDate: string
+        endDate: string
+        description: string
+        
+    education:
+      - degree: string
+        institution: string
+        year: string
+
+  insights:
+    summary: string # AI-generated summary
+    strengths: string[]
+    weaknesses: string[]
+    culturalFit: string
+    
+  history:
+    - id: string
+      type: "note" | "email" | "status_change" | "match"
+      content: string
+      author: string
+      timestamp: string
+
+actions:
+  updateStatus:
+    description: "Change the global status of the candidate"
+    parameters:
+      status: "active" | "passive" | "blacklisted"
+      
+  addNote:
+    description: "Add a note to the candidate's history"
+    parameters:
+      content: string
+      
+  regenerateInsights:
+    description: "Trigger AI to re-analyze the profile"
+    
+  addToMandate:
+    description: "Associate candidate with a specific mandate"
+    parameters:
+      mandateId: string
