@@ -25,6 +25,28 @@ async function getProjectId(supabase: any) {
   return newProject?.id;
 }
 
+export async function getJobs() {
+  const supabase = await createClient();
+  
+  const projectId = await getProjectId(supabase);
+  if (!projectId) {
+    return [];
+  }
+
+  const { data: jobs, error } = await supabase
+    .from('jobs')
+    .select('*')
+    .eq('project_id', projectId)
+    .order('created_at', { ascending: false });
+
+  if (error) {
+    console.error('Error fetching jobs:', error);
+    return [];
+  }
+
+  return jobs;
+}
+
 export async function createJob(data: JobInput) {
   const supabase = await createClient();
   
