@@ -3,6 +3,28 @@
 import { useEffect } from 'react';
 import { createClient } from '@/lib/supabase/client';
 import { useRouter } from 'next/navigation';
+import type {
+  RealtimePostgresChangesPayload,
+  SupabaseClient,
+} from '@supabase/supabase-js';
+import type { Database } from '@/types/database.types';
+
+type PostgresEvent = 'INSERT' | 'UPDATE' | 'DELETE' | '*';
+
+type PostgresChangesChannel = ReturnType<SupabaseClient<Database>['channel']> & {
+  on: (
+    type: 'postgres_changes',
+    filter: {
+      event: PostgresEvent;
+      schema: 'public';
+      table?: string;
+      filter?: string;
+    },
+    callback: (
+      payload: RealtimePostgresChangesPayload<Record<string, unknown>>
+    ) => void
+  ) => PostgresChangesChannel;
+};
 
 export function useRealtimeSubscription(
   table: string,
@@ -10,13 +32,10 @@ export function useRealtimeSubscription(
   filter?: string
 ) {
   const router = useRouter();
-  const supabase = createClient();
+  const supabase = createClient() as SupabaseClient<Database>;
 
   useEffect(() => {
-    const channel = supabase
-      .channel(`realtime-${table}`)
-      // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-      // @ts-ignore - Supabase types are incorrect for postgres_changes
+    const channel = (supabase.channel(`realtime-${table}`) as PostgresChangesChannel)
       .on(
         'postgres_changes',
         {
@@ -25,7 +44,7 @@ export function useRealtimeSubscription(
           table: table,
           filter: filter,
         },
-        (payload: unknown) => {
+        (payload) => {
           console.log('Realtime update:', payload);
           router.refresh();
         }

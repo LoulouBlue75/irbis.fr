@@ -6,7 +6,8 @@ import { generateObject, embed } from 'ai';
 
 // Dynamic import for pdf-parse to avoid ESM bundler issues
 async function parsePdf(buffer: Buffer): Promise<{ text: string }> {
-  const pdfParse = await import('pdf-parse').then(m => m.default || m);
+  const pdfModule: any = await import('pdf-parse');
+  const pdfParse = pdfModule.default ?? pdfModule;
   return pdfParse(buffer);
 }
 
