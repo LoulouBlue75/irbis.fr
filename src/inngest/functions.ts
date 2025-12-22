@@ -1,7 +1,8 @@
 import { inngest } from '@/lib/inngest';
 import { z } from 'zod';
 import { createClient } from '@supabase/supabase-js';
-import pdf from 'pdf-parse';
+// @ts-ignore
+import pdf from 'pdf-parse/lib/pdf-parse.js';
 import { google } from '@ai-sdk/google';
 import { generateObject, embed } from 'ai';
 
