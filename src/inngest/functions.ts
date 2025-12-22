@@ -1,10 +1,14 @@
 import { inngest } from '@/lib/inngest';
 import { z } from 'zod';
 import { createClient } from '@supabase/supabase-js';
-// @ts-ignore
-import pdf from 'pdf-parse/lib/pdf-parse.js';
 import { google } from '@ai-sdk/google';
 import { generateObject, embed } from 'ai';
+
+// Dynamic import for pdf-parse to avoid ESM bundler issues
+async function parsePdf(buffer: Buffer): Promise<{ text: string }> {
+  const pdfParse = await import('pdf-parse').then(m => m.default || m);
+  return pdfParse(buffer);
+}
 
 // 1. Define supported source types
 type SourceType = 
@@ -256,7 +260,7 @@ export const processCV = inngest.createFunction(
     // 2. Extract Text
     const text = await step.run('extract-text', async () => {
       const buffer = Buffer.from(fileBuffer, 'base64');
-      const data = await pdf(buffer);
+      const data = await parsePdf(buffer);
       return data.text;
     });
 
