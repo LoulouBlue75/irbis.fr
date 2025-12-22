@@ -22,21 +22,21 @@ export function RecentActivity({ activities }: RecentActivityProps) {
 
   if (activities.length === 0) {
     return (
-      <div className="bg-gray-900 rounded-lg p-6 border border-gray-800">
-        <h3 className="text-lg font-semibold text-white mb-4">Recent Activity</h3>
-        <p className="text-gray-400 text-center py-4">No recent activity.</p>
+      <div className="card">
+        <h3 className="text-lg font-semibold text-primary mb-4">Recent Activity</h3>
+        <p className="text-tertiary text-center py-4">No recent activity.</p>
       </div>
     );
   }
 
   return (
-    <div className="bg-gray-900 rounded-lg p-6 border border-gray-800">
-      <h3 className="text-lg font-semibold text-white mb-4">Recent Activity</h3>
+    <div className="card">
+      <h3 className="text-lg font-semibold text-primary mb-4">Recent Activity</h3>
       <div className="space-y-4">
         {activities.map((activity) => (
           <div key={activity.id} className="flex items-start space-x-3">
             <div className={`mt-1 p-1.5 rounded-full ${
-              activity.type === 'candidate_added' ? 'bg-blue-500/10 text-blue-500' : 'bg-purple-500/10 text-purple-500'
+              activity.type === 'candidate_added' ? 'bg-blue-50 text-accent-primary' : 'bg-purple-50 text-purple-600'
             }`}>
               {activity.type === 'candidate_added' ? (
                 <UserPlus className="w-4 h-4" />
@@ -45,8 +45,8 @@ export function RecentActivity({ activities }: RecentActivityProps) {
               )}
             </div>
             <div className="flex-1">
-              <p className="text-sm text-gray-300">{activity.message}</p>
-              <p className="text-xs text-gray-500 mt-1">
+              <p className="text-sm text-secondary">{activity.message}</p>
+              <p className="text-xs text-tertiary mt-1">
                 {formatDistanceToNow(new Date(activity.created_at), { addSuffix: true })}
               </p>
             </div>

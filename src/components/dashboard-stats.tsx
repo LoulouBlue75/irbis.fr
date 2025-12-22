@@ -52,11 +52,11 @@ export function DashboardStats({ stats }: DashboardStatsProps) {
   return (
     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
       {cards.map((card) => (
-        <div key={card.label} className="bg-gray-900 rounded-lg p-6 border border-gray-800">
+        <div key={card.label} className="card-stats">
           <div className="flex items-center justify-between">
             <div>
-              <p className="text-sm font-medium text-gray-400">{card.label}</p>
-              <p className="text-3xl font-bold text-white mt-2">{card.value}</p>
+              <p className="text-sm font-medium text-secondary">{card.label}</p>
+              <p className="text-3xl font-bold text-primary mt-2">{card.value}</p>
             </div>
             <div className={`p-3 rounded-full ${card.bgColor}`}>
               <card.icon className={`w-6 h-6 ${card.color}`} />
