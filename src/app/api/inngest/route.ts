@@ -1,6 +1,14 @@
 import { serve } from 'inngest/next';
 import { inngest } from '@/lib/inngest';
-import { gatherContext, augmentContext, executeAIQuery } from '@/inngest/functions';
+import {
+  gatherContext,
+  augmentContext,
+  executeAIQuery,
+  processCV,
+  handleEmailWebhook,
+  handleWhatsappWebhook,
+  processIngestion,
+} from '@/inngest/functions';
 import { generateCandidateEmbedding, generateMatches } from '@/inngest/matching';
 
 export const { GET, POST, PUT } = serve({

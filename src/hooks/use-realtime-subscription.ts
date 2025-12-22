@@ -3,6 +3,7 @@
 import { useEffect } from 'react';
 import { createClient } from '@/lib/supabase/client';
 import { useRouter } from 'next/navigation';
+import type { RealtimePostgresChangesPayload } from '@supabase/supabase-js';
 
 export function useRealtimeSubscription(
   table: string,
@@ -15,15 +16,15 @@ export function useRealtimeSubscription(
   useEffect(() => {
     const channel = supabase
       .channel(`realtime-${table}`)
-      .on(
-        'postgres_changes',
+      .on<Record<string, unknown>>(
+        'postgres_changes' as const,
         {
           event: event,
           schema: 'public',
           table: table,
           filter: filter,
-        },
-        (payload) => {
+        } as const,
+        (payload: RealtimePostgresChangesPayload<Record<string, unknown>>) => {
           console.log('Realtime update:', payload);
           router.refresh();
         }
