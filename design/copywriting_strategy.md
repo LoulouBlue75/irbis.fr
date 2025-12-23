@@ -1,6 +1,6 @@
 # Irbis Copywriting Strategy (English First)
 
-> **Synthesis**: Blending Irbis's "Executive Search" expertise, TailorShift's "Retail Luxury" precision, and the "Enlightened Choices" philosophy of the Paris project.
+> **Synthesis**: Blending Irbis's "Executive Search" expertise, Taylor Shift's "Retail Luxury" precision, and "Enlightened Choices" philosophy of Paris project.
 
 ## 1. Verbal Identity
 
@@ -47,7 +47,7 @@
 
 ### Landing Page
 *   **Hero**: "Excellence isn't found. It's detected."
-*   **CTA**: "Discover the Approach" / "Submit a Mandate"
+*   **CTA**: "Discover Approach" / "Submit a Mandate"
 
 ### Dashboard
 *   **Title**: "Overview"
