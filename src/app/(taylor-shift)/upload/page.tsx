@@ -35,7 +35,7 @@ export default async function UploadPage() {
         
         <CVUpload />
 
-        <MandateList mandates={candidates} />
+        <MandateList mandates={talents} />
       </div>
     </div>
   );
