@@ -1,7 +1,7 @@
 import { Mail, Calendar, Briefcase, GraduationCap } from 'lucide-react';
 import { formatDistanceToNow } from 'date-fns';
 
-interface Candidate {
+interface Talent {
   id: string;
   name: string;
   email: string;
@@ -11,26 +11,26 @@ interface Candidate {
   created_at: string;
 }
 
-interface CandidateProfileProps {
-  candidate: Candidate;
+interface TalentProfileProps {
+  talent: Talent;
 }
 
-export function CandidateProfile({ candidate }: CandidateProfileProps) {
+export function TalentProfile({ talent }: TalentProfileProps) {
   return (
     <div className="bg-gray-900 rounded-lg border border-gray-800 overflow-hidden">
       <div className="p-6 border-b border-gray-800">
         <div className="flex justify-between items-start">
           <div>
-            <h2 className="text-2xl font-bold text-white">{candidate.name}</h2>
+            <h2 className="text-2xl font-bold text-white">{talent.name}</h2>
             <div className="flex items-center mt-2 text-gray-400">
               <Mail className="w-4 h-4 mr-2" />
-              <a href={`mailto:${candidate.email}`} className="hover:text-blue-400 transition-colors">
-                {candidate.email}
+              <a href={`mailto:${talent.email}`} className="hover:text-blue-400 transition-colors">
+                {talent.email}
               </a>
             </div>
             <div className="flex items-center mt-1 text-gray-400">
               <Calendar className="w-4 h-4 mr-2" />
-              <span>Added {formatDistanceToNow(new Date(candidate.created_at), { addSuffix: true })}</span>
+              <span>Added {formatDistanceToNow(new Date(talent.created_at), { addSuffix: true })}</span>
             </div>
           </div>
         </div>
@@ -41,7 +41,7 @@ export function CandidateProfile({ candidate }: CandidateProfileProps) {
         <div>
           <h3 className="text-lg font-semibold text-white mb-3">Skills</h3>
           <div className="flex flex-wrap gap-2">
-            {candidate.skills?.map((skill, index) => (
+            {talent.skills?.map((skill, index) => (
               <span
                 key={index}
                 className="px-3 py-1 bg-blue-500/10 text-blue-400 rounded-full text-sm border border-blue-500/20"
@@ -49,7 +49,7 @@ export function CandidateProfile({ candidate }: CandidateProfileProps) {
                 {skill}
               </span>
             ))}
-            {(!candidate.skills || candidate.skills.length === 0) && (
+            {(!talent.skills || talent.skills.length === 0) && (
               <p className="text-gray-500 italic">No skills listed</p>
             )}
           </div>
@@ -62,7 +62,7 @@ export function CandidateProfile({ candidate }: CandidateProfileProps) {
             Experience
           </h3>
           <div className="space-y-4">
-            {candidate.experience?.map((exp: any, index: number) => (
+            {talent.experience?.map((exp: any, index: number) => (
               <div key={index} className="border-l-2 border-gray-700 pl-4 ml-1">
                 <h4 className="text-white font-medium">{exp.position || exp.title}</h4>
                 <p className="text-blue-400 text-sm">{exp.company}</p>
@@ -74,7 +74,7 @@ export function CandidateProfile({ candidate }: CandidateProfileProps) {
                 )}
               </div>
             ))}
-            {(!candidate.experience || candidate.experience.length === 0) && (
+            {(!talent.experience || talent.experience.length === 0) && (
               <p className="text-gray-500 italic">No experience listed</p>
             )}
           </div>
@@ -87,7 +87,7 @@ export function CandidateProfile({ candidate }: CandidateProfileProps) {
             Education
           </h3>
           <div className="space-y-4">
-            {candidate.education?.map((edu: any, index: number) => (
+            {talent.education?.map((edu: any, index: number) => (
               <div key={index} className="border-l-2 border-gray-700 pl-4 ml-1">
                 <h4 className="text-white font-medium">{edu.degree}</h4>
                 <p className="text-blue-400 text-sm">{edu.institution}</p>
@@ -96,7 +96,7 @@ export function CandidateProfile({ candidate }: CandidateProfileProps) {
                 </p>
               </div>
             ))}
-            {(!candidate.education || candidate.education.length === 0) && (
+            {(!talent.education || talent.education.length === 0) && (
               <p className="text-gray-500 italic">No education listed</p>
             )}
           </div>

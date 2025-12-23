@@ -2,9 +2,9 @@
 
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
-import { createCandidate, CandidateInput } from '@/app/actions/candidates';
+import { createTalent, TalentInput } from '@/app/actions/talents';
 
-export function CandidateForm() {
+export function TalentForm() {
   const router = useRouter();
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
@@ -17,7 +17,7 @@ export function CandidateForm() {
     setError(null);
 
     const formData = new FormData(e.currentTarget);
-    const data: CandidateInput = {
+    const data: TalentInput = {
       name: formData.get('name') as string,
       email: formData.get('email') as string,
       skills: skills,
@@ -27,7 +27,7 @@ export function CandidateForm() {
     };
 
     try {
-      const result = await createCandidate(data);
+      const result = await createTalent(data);
 
       if (result.error) {
         setError(result.error);
@@ -179,7 +179,7 @@ export function CandidateForm() {
           disabled={loading}
           className="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-md text-sm font-medium disabled:opacity-50"
         >
-          {loading ? 'Saving...' : 'Create Candidate'}
+          {loading ? 'Saving...' : 'Create Talent'}
         </button>
       </div>
     </form>

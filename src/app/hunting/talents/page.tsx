@@ -1,12 +1,14 @@
 import { createClient } from "@/lib/supabase/server";
 import { redirect } from "next/navigation";
 import { getCandidates } from "@/app/actions/candidates";
-import { CandidateList } from "@/components/candidate-list";
-import { CandidateSearch } from "@/components/candidate-search";
+import { TalentList } from "@/components/talent-list";
+import { TalentSearch } from "@/components/talent-search";
 import { searchCandidates } from "@/app/actions/search";
 import Link from "next/link";
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
 
-export default async function CandidatesPage({
+export default async function TalentsPage({
   searchParams,
 }: {
   searchParams: { page?: string; search?: string; semantic?: string };
@@ -38,19 +40,17 @@ export default async function CandidatesPage({
   return (
     <div className="flex flex-col gap-8">
       <div className="flex justify-between items-center">
-        <h1 className="text-3xl font-bold text-primary">Talent Pool</h1>
+        <h1 className="text-3xl font-bold text-primary">Réserve de talents</h1>
         <div className="flex gap-2">
-          <Link
-            href="/dashboard/talents/new"
-            className="button-secondary"
-          >
-            Manual Entry
+          <Link href="/hunting/talents/create">
+            <Button variant="outline">
+              Saisie manuelle
+            </Button>
           </Link>
-          <Link
-            href="/upload"
-            className="button-primary"
-          >
-            Profile Ingestion
+          <Link href="/hunting/ingestion">
+            <Button>
+              Ingestion de profils
+            </Button>
           </Link>
         </div>
       </div>
@@ -58,61 +58,56 @@ export default async function CandidatesPage({
       {/* Simple Search Input */}
       {!semanticQuery && (
         <form className="flex gap-2">
-          <input
+          <Input
             type="text"
             name="search"
             defaultValue={search}
-            placeholder="Filter by name or email..."
-            className="input max-w-md"
+            placeholder="Filtrer par nom ou email..."
+            className="max-w-md"
           />
-          <button
-            type="submit"
-            className="button-secondary"
-          >
-            Filter
-          </button>
+          <Button type="submit" variant="outline">
+            Filtrer
+          </Button>
         </form>
       )}
 
       <div className="mb-8">
         <div className="flex justify-between items-center mb-4">
-          <h2 className="text-xl font-semibold text-primary">Precision Search</h2>
+          <h2 className="text-xl font-semibold text-primary">Recherche de précision</h2>
           {semanticQuery && (
-            <Link href="/dashboard/talents" className="text-sm text-accent-primary hover:text-accent-primary-hover">
-              Clear Search
+            <Link href="/hunting/talents" className="text-sm text-accent-primary hover:text-accent-primary-hover">
+              Effacer la recherche
             </Link>
           )}
         </div>
-        <CandidateSearch onSearch={async (query) => {
+        <TalentSearch onSearch={async (query) => {
           'use server';
-          redirect(`/dashboard/talents?semantic=${encodeURIComponent(query)}`);
+          redirect(`/hunting/talents?semantic=${encodeURIComponent(query)}`);
         }} />
       </div>
 
-      <CandidateList candidates={candidates} />
+      <TalentList talents={candidates} />
 
       {/* Pagination Controls - Only show for standard search */}
       {!semanticQuery && (
         <div className="flex justify-between items-center mt-4">
           <div className="text-secondary text-sm">
-            Showing {candidates.length} of {total} talents
+            Affichage de {candidates.length} sur {total} talents
           </div>
           <div className="flex gap-2">
             {page > 1 && (
-              <Link
-                href={`/dashboard/talents?page=${page - 1}&search=${search}`}
-                className="button-secondary"
-              >
-                Previous
+              <Link href={`/hunting/talents?page=${page - 1}&search=${search}`}>
+                <Button variant="outline">
+                  Précédent
+                </Button>
               </Link>
             )}
             {/* Check if we have more pages based on total count */}
             {page * 10 < total && (
-              <Link
-                href={`/dashboard/talents?page=${page + 1}&search=${search}`}
-                className="button-secondary"
-              >
-                Next
+              <Link href={`/hunting/talents?page=${page + 1}&search=${search}`}>
+                <Button variant="outline">
+                  Suivant
+                </Button>
               </Link>
             )}
           </div>

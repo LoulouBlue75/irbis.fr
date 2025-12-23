@@ -15,33 +15,33 @@ function getSupabaseClient(): SupabaseClient {
   return createClient(supabaseUrl, supabaseServiceKey);
 }
 
-export const generateCandidateEmbedding = inngest.createFunction(
-  { id: 'generate-candidate-embedding' },
-  { event: 'candidate/created' },
+export const generateTalentEmbedding = inngest.createFunction(
+  { id: 'generate-talent-embedding' },
+  { event: 'talent/created' },
   async ({ event, step }) => {
-    const { candidateId } = event.data;
+    const { talentId } = event.data;
 
-    // 1. Fetch Candidate Data
-    const candidate = await step.run('fetch-candidate', async () => {
+    // 1. Fetch Talent Data
+    const talent = await step.run('fetch-talent', async () => {
       const supabase = getSupabaseClient();
       const { data, error } = await supabase
-        .from('candidates')
+        .from('talents')
         .select('*')
-        .eq('id', candidateId)
+        .eq('id', talentId)
         .single();
 
-      if (error) throw new Error(`Failed to fetch candidate: ${error.message}`);
+      if (error) throw new Error(`Failed to fetch talent: ${error.message}`);
       return data;
     });
 
     // 2. Generate Embedding
     const embedding = await step.run('generate-embedding', async () => {
-      // Create a text representation of the candidate profile
+      // Create a text representation of the talent profile
       const textToEmbed = `
-        Name: ${candidate.name}
-        Skills: ${candidate.skills?.join(', ') || ''}
-        Experience: ${JSON.stringify(candidate.experience || [])}
-        Education: ${JSON.stringify(candidate.education || [])}
+        Name: ${talent.name}
+        Skills: ${talent.skills?.join(', ') || ''}
+        Experience: ${JSON.stringify(talent.experience || [])}
+        Education: ${JSON.stringify(talent.education || [])}
       `.trim();
 
       const { embedding } = await embed({
@@ -52,51 +52,51 @@ export const generateCandidateEmbedding = inngest.createFunction(
       return embedding;
     });
 
-    // 3. Update Candidate with Embedding
-    await step.run('update-candidate', async () => {
+    // 3. Update Talent with Embedding
+    await step.run('update-talent', async () => {
       const supabase = getSupabaseClient();
       const { error } = await supabase
-        .from('candidates')
+        .from('talents')
         .update({ embedding })
-        .eq('id', candidateId);
+        .eq('id', talentId);
 
-      if (error) throw new Error(`Failed to update candidate embedding: ${error.message}`);
+      if (error) throw new Error(`Failed to update talent embedding: ${error.message}`);
     });
 
-    return { success: true, candidateId };
+    return { success: true, talentId };
   }
 );
 
-export const generateMatches = inngest.createFunction(
-  { id: 'generate-matches' },
+export const generateAlignments = inngest.createFunction(
+  { id: 'generate-alignments' },
   [
-    { event: 'recruitment/match.requested' },
-    { event: 'jobs/created' }
+    { event: 'recruitment/alignment.requested' },
+    { event: 'mandates/created' }
   ],
   async ({ event, step }) => {
-    const { jobId, projectId } = event.data;
+    const { mandateId, projectId } = event.data;
 
-    // 1. Fetch Job Data
-    const job = await step.run('fetch-job', async () => {
+    // 1. Fetch Mandate Data
+    const mandate = await step.run('fetch-mandate', async () => {
       const supabase = getSupabaseClient();
       const { data, error } = await supabase
-        .from('jobs')
+        .from('mandates')
         .select('*')
-        .eq('id', jobId)
+        .eq('id', mandateId)
         .single();
 
-      if (error) throw new Error(`Failed to fetch job: ${error.message}`);
+      if (error) throw new Error(`Failed to fetch mandate: ${error.message}`);
       return data;
     });
 
-    // 2. Generate Job Embedding (if not exists)
-    let jobEmbedding = job.embedding;
-    if (!jobEmbedding) {
-      jobEmbedding = await step.run('generate-job-embedding', async () => {
+    // 2. Generate Mandate Embedding (if not exists)
+    let mandateEmbedding = mandate.embedding;
+    if (!mandateEmbedding) {
+      mandateEmbedding = await step.run('generate-mandate-embedding', async () => {
         const textToEmbed = `
-          Title: ${job.title}
-          Description: ${job.description}
-          Requirements: ${job.requirements?.join(', ') || ''}
+          Title: ${mandate.title}
+          Description: ${mandate.description}
+          Requirements: ${mandate.requirements?.join(', ') || ''}
         `.trim();
 
         const { embedding } = await embed({
@@ -104,53 +104,53 @@ export const generateMatches = inngest.createFunction(
           value: textToEmbed,
         });
 
-        // Update job with embedding
+        // Update mandate with embedding
         const supabase = getSupabaseClient();
         await supabase
-          .from('jobs')
+          .from('mandates')
           .update({ embedding })
-          .eq('id', jobId);
+          .eq('id', mandateId);
 
         return embedding;
       });
     }
 
     // 3. Vector Retrieval (The "Net")
-    const topCandidates = await step.run('vector-retrieval', async () => {
+    const topTalents = await step.run('vector-retrieval', async () => {
       const supabase = getSupabaseClient();
-      const { data, error } = await supabase.rpc('match_candidates', {
-        query_embedding: jobEmbedding,
+      const { data, error } = await supabase.rpc('match_talents', {
+        query_embedding: mandateEmbedding,
         match_threshold: 0.5, // Adjust threshold as needed
         match_count: 20,
-        p_project_id: projectId || job.project_id,
+        p_project_id: projectId || mandate.project_id,
       });
 
       if (error) throw new Error(`Vector search failed: ${error.message}`);
       return data;
     });
 
-    if (!topCandidates || topCandidates.length === 0) {
-      return { message: 'No candidates found matching criteria.' };
+    if (!topTalents || topTalents.length === 0) {
+      return { message: 'No talents found aligning with criteria.' };
     }
 
     // 4. LLM Scoring (The "Filter") - Parallel Map
-    const scoredMatches = await step.run('llm-scoring', async () => {
+    const scoredAlignments = await step.run('llm-scoring', async () => {
       // We'll process in batches or parallel
-      const results = await Promise.all(topCandidates.map(async (candidate: any) => {
+      const results = await Promise.all(topTalents.map(async (talent: any) => {
         const prompt = `
-          You are an expert recruiter. Evaluate the fit between the following job and candidate.
+          You are an expert recruiter. Evaluate the fit between the following mandate and talent.
           
-          JOB:
-          Title: ${job.title}
-          Description: ${job.description}
-          Requirements: ${job.requirements?.join(', ') || ''}
+          MANDATE:
+          Title: ${mandate.title}
+          Description: ${mandate.description}
+          Requirements: ${mandate.requirements?.join(', ') || ''}
           
-          CANDIDATE:
-          Name: ${candidate.name}
-          Skills: ${candidate.skills?.join(', ') || ''}
+          TALENT:
+          Name: ${talent.name}
+          Skills: ${talent.skills?.join(', ') || ''}
           
           Task:
-          1. Score the match from 0 to 100.
+          1. Score the alignment from 0 to 100.
           2. Provide a brief reasoning (max 2 sentences).
           
           Output JSON format: { "score": number, "reasoning": "string" }
@@ -167,14 +167,14 @@ export const generateMatches = inngest.createFunction(
           const result = JSON.parse(cleanText);
           
           return {
-            candidate_id: candidate.id,
-            job_id: jobId,
+            talent_id: talent.id,
+            mandate_id: mandateId,
             score: result.score,
             reasoning: result.reasoning,
-            vector_score: candidate.similarity
+            vector_score: talent.similarity
           };
         } catch (e) {
-          console.error(`Failed to score candidate ${candidate.id}`, e);
+          console.error(`Failed to score talent ${talent.id}`, e);
           return null;
         }
       }));
@@ -182,18 +182,18 @@ export const generateMatches = inngest.createFunction(
       return results.filter(r => r !== null);
     });
 
-    // 5. Persist Matches
-    await step.run('persist-matches', async () => {
-      if (scoredMatches.length === 0) return;
+    // 5. Persist Alignments
+    await step.run('persist-alignments', async () => {
+      if (scoredAlignments.length === 0) return;
 
       const supabase = getSupabaseClient();
       const { error } = await supabase
-        .from('matches')
-        .upsert(scoredMatches, { onConflict: 'job_id, candidate_id' });
+        .from('alignments')
+        .upsert(scoredAlignments, { onConflict: 'mandate_id, talent_id' });
 
-      if (error) throw new Error(`Failed to persist matches: ${error.message}`);
+      if (error) throw new Error(`Failed to persist alignments: ${error.message}`);
     });
 
-    return { success: true, matchesGenerated: scoredMatches.length };
+    return { success: true, alignmentsGenerated: scoredAlignments.length };
   }
 );

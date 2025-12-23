@@ -47,7 +47,6 @@ export async function updateSession(request: NextRequest) {
     '/references',
     '/use-cases',
     '/clients',
-    '/candidates',
     '/contact',
   ];
 

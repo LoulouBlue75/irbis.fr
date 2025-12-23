@@ -3,11 +3,11 @@
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
 
-interface CandidateSearchProps {
+interface TalentSearchProps {
   onSearch: (query: string) => void;
 }
 
-export function CandidateSearch({ onSearch }: CandidateSearchProps) {
+export function TalentSearch({ onSearch }: TalentSearchProps) {
   const [query, setQuery] = useState('');
 
   const handleSubmit = (e: React.FormEvent) => {
@@ -26,7 +26,7 @@ export function CandidateSearch({ onSearch }: CandidateSearchProps) {
         <input
           type="text"
           className="block w-full pl-10 pr-3 py-2 border border-gray-700 rounded-md leading-5 bg-gray-800 text-gray-300 placeholder-gray-400 focus:outline-none focus:bg-gray-900 focus:border-blue-500 focus:ring-blue-500 sm:text-sm"
-          placeholder="Search candidates by name, skills, or semantic query (e.g. 'React developer with fintech experience')"
+          placeholder="Search talents by name, skills, or semantic query (e.g. 'React developer with fintech experience')"
           value={query}
           onChange={(e) => setQuery(e.target.value)}
         />

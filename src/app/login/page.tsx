@@ -3,7 +3,8 @@ import { login, signup } from '../auth/actions'
 export default function LoginPage() {
   return (
     <div className="flex min-h-screen flex-col items-center justify-center p-24 bg-primary">
-      <h1 className="text-4xl font-bold mb-8 text-primary">Login</h1>
+      <h1 className="text-4xl font-bold mb-4 text-primary">Login</h1>
+      <p className="text-2xl mb-8 text-secondary">Let’s catch the uncatchable.</p>
       <form className="flex flex-col gap-4 w-full max-w-md">
         <label htmlFor="email" className="text-secondary">Email:</label>
         <input id="email" name="email" type="email" required className="input" />

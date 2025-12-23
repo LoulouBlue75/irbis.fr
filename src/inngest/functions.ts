@@ -252,9 +252,9 @@ export const processCV = inngest.createFunction(
       if (error) throw new Error(`Download failed: ${error.message}`);
       
       const arrayBuffer = await data.arrayBuffer();
-      return { 
+      return {
         fileBuffer: Buffer.from(arrayBuffer).toString('base64'),
-        fileType: data.type 
+        fileType: data.type
       };
     });
 
@@ -266,7 +266,7 @@ export const processCV = inngest.createFunction(
     });
 
     // 3. AI Structuring
-    const candidateData = await step.run('structure-data', async () => {
+    const talentData = await step.run('structure-data', async () => {
       const { object } = await generateObject({
         model: google('gemini-1.5-flash'),
         schema: z.object({
@@ -276,7 +276,7 @@ export const processCV = inngest.createFunction(
           experience: z.array(z.any()),
           education: z.array(z.any())
         }),
-        prompt: `Extract candidate information from the following CV text:\n\n${text}`
+        prompt: `Extract talent information from the following CV text:\n\n${text}`
       });
       
       return object;
@@ -285,10 +285,10 @@ export const processCV = inngest.createFunction(
     // 4. Generate Embedding
     const embedding = await step.run('generate-embedding', async () => {
       const textToEmbed = `
-        Name: ${candidateData.name}
-        Skills: ${candidateData.skills.join(', ')}
-        Experience: ${JSON.stringify(candidateData.experience)}
-        Education: ${JSON.stringify(candidateData.education)}
+        Name: ${talentData.name}
+        Skills: ${talentData.skills.join(', ')}
+        Experience: ${JSON.stringify(talentData.experience)}
+        Education: ${JSON.stringify(talentData.education)}
       `.trim();
 
       const { embedding } = await embed({
@@ -300,22 +300,22 @@ export const processCV = inngest.createFunction(
     });
 
     // 5. Save to Database
-    await step.run('save-candidate', async () => {
+    await step.run('save-talent', async () => {
       const supabase = createClient(
         process.env.NEXT_PUBLIC_SUPABASE_URL!,
         process.env.SUPABASE_SERVICE_ROLE_KEY!
       );
 
       const { error } = await supabase
-        .from('candidates')
+        .from('talents')
         .insert({
           project_id: projectId,
           source_id: sourceId,
-          name: candidateData.name,
-          email: candidateData.email,
-          skills: candidateData.skills,
-          experience: candidateData.experience,
-          education: candidateData.education,
+          name: talentData.name,
+          email: talentData.email,
+          skills: talentData.skills,
+          experience: talentData.experience,
+          education: talentData.education,
           embedding: embedding
         });
 
@@ -328,7 +328,7 @@ export const processCV = inngest.createFunction(
         .eq('id', sourceId);
     });
 
-    return { success: true, candidateId: sourceId };
+    return { success: true, talentId: sourceId };
   }
 );
 

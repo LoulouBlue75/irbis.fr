@@ -11,17 +11,20 @@ export default function AppLayout({
       <aside className="w-full md:w-64 bg-gray-100 dark:bg-gray-900 border-r p-4">
         <div className="font-bold text-xl mb-8">
           <span className="text-blue-900 dark:text-white">IRBIS</span>
-          <span className="text-yellow-500">HUNTING</span>
+          <span className="text-yellow-500">APP</span>
         </div>
         <nav className="flex flex-col gap-2">
-          <Link href="/hunting/dashboard" className="p-2 rounded hover:bg-gray-200 dark:hover:bg-gray-800">
+          <Link href="/dashboard" className="p-2 rounded hover:bg-gray-200 dark:hover:bg-gray-800">
             Dashboard
           </Link>
-          <Link href="/hunting/projects" className="p-2 rounded hover:bg-gray-200 dark:hover:bg-gray-800">
+          <Link href="/projects" className="p-2 rounded hover:bg-gray-200 dark:hover:bg-gray-800">
             Projects
           </Link>
-          <Link href="/hunting/candidates" className="p-2 rounded hover:bg-gray-200 dark:hover:bg-gray-800">
-            Candidates
+          <Link href="/hunting/talents" className="p-2 rounded hover:bg-tertiary text-secondary hover:text-primary transition-colors">
+            Talents
+          </Link>
+          <Link href="/hunting/mandates" className="p-2 rounded hover:bg-tertiary text-secondary hover:text-primary transition-colors">
+            Mandates
           </Link>
         </nav>
         <div className="mt-auto pt-8">

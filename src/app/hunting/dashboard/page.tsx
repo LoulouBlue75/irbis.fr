@@ -24,13 +24,13 @@ export default async function DashboardPage() {
         <h1 className="text-3xl font-bold text-primary">Overview</h1>
         <div className="flex gap-4">
           <Link
-            href="/dashboard/candidates"
+            href="/hunting/talents"
             className="button-secondary"
           >
             Talent Pool
           </Link>
           <Link
-            href="/dashboard/jobs/new"
+            href="/hunting/mandates/create"
             className="button-primary"
           >
             New Mandate
