@@ -86,13 +86,13 @@ export default async function TalentsPage({
         }} />
       </div>
 
-      <TalentList talents={candidates} />
+      <TalentList talents={talents} />
 
       {/* Pagination Controls - Only show for standard search */}
       {!semanticQuery && (
         <div className="flex justify-between items-center mt-4">
           <div className="text-secondary text-sm">
-            Affichage de {candidates.length} sur {total} talents
+            Affichage de {talents.length} sur {total} talents
           </div>
           <div className="flex gap-2">
             {page > 1 && (
