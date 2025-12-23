@@ -1,5 +1,5 @@
 import { CVUpload } from '@/components/cv-upload';
-import { TalentList } from '@/components/talent-list';
+import { MandateList } from '@/components/mandate-list';
 import { createClient } from '@/lib/supabase/server';
 
 export default async function UploadPage() {
@@ -35,7 +35,7 @@ export default async function UploadPage() {
         
         <CVUpload />
 
-        <CandidateList candidates={candidates} />
+        <MandateList mandates={candidates} />
       </div>
     </div>
   );
