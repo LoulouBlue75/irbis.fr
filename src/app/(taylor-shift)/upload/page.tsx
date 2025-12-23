@@ -1,5 +1,5 @@
 import { CVUpload } from '@/components/cv-upload';
-import { CandidateList } from '@/components/candidate-list';
+import { TalentList } from '@/components/talent-list';
 import { createClient } from '@/lib/supabase/server';
 
 export default async function UploadPage() {
@@ -9,17 +9,17 @@ export default async function UploadPage() {
   const { data: projects } = await supabase.from('projects').select('id').limit(1);
   const projectId = projects?.[0]?.id;
 
-  let candidates: any[] = [];
+  let talents: any[] = [];
 
   if (projectId) {
     const { data } = await supabase
-      .from('candidates')
+      .from('talents')
       .select('*')
       .eq('project_id', projectId)
       .order('created_at', { ascending: false });
     
     if (data) {
-      candidates = data;
+      talents = data;
     }
   }
 

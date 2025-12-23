@@ -9,7 +9,7 @@ import {
   handleWhatsappWebhook,
   processIngestion,
 } from '@/inngest/functions';
-import { generateCandidateEmbedding, generateMatches } from '@/inngest/matching';
+import { generateTalentEmbedding, generateAlignments } from '@/inngest/matching';
 
 export const { GET, POST, PUT } = serve({
   client: inngest,
@@ -17,8 +17,8 @@ export const { GET, POST, PUT } = serve({
     gatherContext,
     augmentContext,
     executeAIQuery,
-    generateCandidateEmbedding,
-    generateMatches,
+    generateTalentEmbedding,
+    generateAlignments,
     processCV,
     handleEmailWebhook,
     handleWhatsappWebhook,

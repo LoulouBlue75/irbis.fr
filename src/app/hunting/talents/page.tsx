@@ -1,9 +1,9 @@
 import { createClient } from "@/lib/supabase/server";
 import { redirect } from "next/navigation";
-import { getCandidates } from "@/app/actions/candidates";
+import { getTalents } from "@/app/actions/talents";
 import { TalentList } from "@/components/talent-list";
 import { TalentSearch } from "@/components/talent-search";
-import { searchCandidates } from "@/app/actions/search";
+import { searchTalents } from "@/app/actions/search";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -24,16 +24,16 @@ export default async function TalentsPage({
   const search = searchParams.search || '';
   const semanticQuery = searchParams.semantic || '';
 
-  let candidates = [];
+  let talents = [];
   let total = 0;
 
   if (semanticQuery) {
-    const result = await searchCandidates(semanticQuery);
-    candidates = result.candidates;
-    total = candidates.length; // Semantic search usually returns a fixed number of results
+    const result = await searchTalents(semanticQuery);
+    talents = result.talents;
+    total = talents.length; // Semantic search usually returns a fixed number of results
   } else {
-    const result = await getCandidates({ page, search });
-    candidates = result.candidates;
+    const result = await getTalents({ page, search });
+    talents = result.talents;
     total = result.total;
   }
 
