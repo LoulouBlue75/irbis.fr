@@ -71,7 +71,7 @@ Cette zone constitue la vitrine de marque et le premier point de contact avec le
 /nos-services
   ├── Executive Search : Service flagship
   ├── Conseil en décision : Accompagnement stratégique
-  └── Écosystème : Vue d'ensemble (Taylor Shift, etc.)
+  └── Écosystème : Vue d'ensemble (Tailor Shift, etc.)
 
 /methodologie
   ├── Notre processus : Les 4 phases
@@ -94,7 +94,7 @@ Cette zone constitue la vitrine de marque et le premier point de contact avec le
 Cette zone héberge les services additionnels sous forme de portails distincts, chacun avec son identité propre tout en restant connectÉ à la maison mère Irbis.
 
 ```
-/taylor-shift (-service)
+/tailor-shift (-service)
   ├── Landing dédiée
   ├── Plateforme de recrutement retail luxe
   └── Navigation vers Irbis (retour)

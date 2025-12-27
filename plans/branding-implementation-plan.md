@@ -80,7 +80,7 @@ This plan integrates the new branding strategy from [`branding_strategy.md`](bra
 | 3 | Update Approach page with new voice | High |
 | 4 | Update References page with new voice | High |
 | 5 | Update Contact page with new voice | High |
-| 6 | Update Taylor Shift page with new voice | High |
+| 6 | Update Tailor Shift page with new voice | High |
 | 7 | Update Paris page with new voice | High |
 | 8 | Update Hunting pages with new voice | High |
 | 9 | Replace "discreet" with "confidential by default" | High |
@@ -110,7 +110,7 @@ This plan integrates the new branding strategy from [`branding_strategy.md`](bra
 | 4 | Update References page with new pillars | High |
 | 5 | Update Contact page with new pillars | High |
 | 6 | Update About page with new pillars | High |
-| 7 | Update Taylor Shift page with new pillars | High |
+| 7 | Update Tailor Shift page with new pillars | High |
 | 8 | Update Paris page with new pillars | High |
 | 9 | Update Hunting pages with new pillars | High |
 
@@ -154,7 +154,7 @@ This plan integrates the new branding strategy from [`branding_strategy.md`](bra
 | 3 | Update About page ecosystem section | High |
 
 **Gateway model structure**:
-- Executive Search → Taylor Shift → Paris → Coming next
+- Executive Search → Tailor Shift → Paris → Coming next
 - Each service has dedicated site with external link
 - CTA: "Discuss your context" for new services
 
@@ -171,7 +171,7 @@ This plan integrates the new branding strategy from [`branding_strategy.md`](bra
 - [`src/app/(marketing)/approach/page.tsx`](src/app/(marketing)/approach/page.tsx) - Approach
 - [`src/app/(marketing)/references/page.tsx`](src/app/(marketing)/references/page.tsx) - References
 - [`src/app/(marketing)/contact/page.tsx`](src/app/(marketing)/contact/page.tsx) - Contact
-- [`src/app/(taylor-shift)/taylor-shift/page.tsx`](src/app/(taylor-shift)/taylor-shift/page.tsx) - Taylor Shift
+- [`src/app/(tailor-shift)/tailor-shift/page.tsx`](src/app/(tailor-shift)/tailor-shift/page.tsx) - Tailor Shift
 - [`src/app/(paris)/paris/page.tsx`](src/app/(paris)/paris/page.tsx) - Paris
 - [`src/app/hunting/mandates/page.tsx`](src/app/hunting/mandates/page.tsx) - Mandates
 - [`src/app/hunting/talents/page.tsx`](src/app/hunting/talents/page.tsx) - Talents

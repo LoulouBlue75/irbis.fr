@@ -155,9 +155,9 @@ Specialised ventures and tools — dedicated sites, aligned with the Irbis stand
 The flagship service for critical leadership hires.  
 CTA: Explore Executive Search
 
-**Taylor Shift — by Irbis**  
-Luxury retail recruitment on a dedicated platform.  
-CTA: Visit Taylor Shift
+**Tailor Shift — by Irbis**
+Luxury retail recruitment on a dedicated platform.
+CTA: Visit Tailor Shift
 
 **[Career Tool] — by Irbis**  
 Career perspective and guidance on a dedicated platform.  
@@ -360,7 +360,7 @@ Enter the Console (si tu assumes le côté “lieu”)
 
 Explore the ecosystem
 
-Visit Taylor Shift
+Visit Tailor Shift
 
 Visit [Career Tool]
 
@@ -384,7 +384,7 @@ Method = Study (rigueur)
 
 Proof / cases = Gallery
 
-Ecosystem = Portals (vers Taylor Shift / Career tool)
+Ecosystem = Portals (vers Tailor Shift / Career tool)
 
 Final CTA = The seal (signature or)
 
@@ -396,7 +396,7 @@ Executive Search (core)
 
 Console (private)
 
-Taylor Shift (external)
+Tailor Shift (external)
 
 Career tool (external)
 

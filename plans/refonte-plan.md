@@ -1,6 +1,6 @@
 # Plan de Refonte Complet pour Irbis
 
-Ce document fournit un guide exhaustif pour la refonte du site et de la plateforme Irbis en intégrant les différents volets du projet : Matrice Hunting, Taylor Shift et Paris. Il synthétise les informations trouvées dans le dépôt (sitemap, stratégie de copywriting, améliorations du design system, structure multi-produits, prompts de design) et décrit les modifications à effectuer.
+Ce document fournit un guide exhaustif pour la refonte du site et de la plateforme Irbis en intégrant les différents volets du projet : Matrice Hunting, Tailor Shift et Paris. Il synthétise les informations trouvées dans le dépôt (sitemap, stratégie de copywriting, améliorations du design system, structure multi-produits, prompts de design) et décrit les modifications à effectuer.
 
 ## 1. Contexte Général
 
@@ -8,7 +8,7 @@ Irbis évolue vers une plateforme multi-produits qui regroupe :
 
 - **Irbis Corporate (Executive Search)** : Vitrine publique présentant l’expertise en chasse de têtes et la méthodologie d’alignement 8D.
 - **Matrice Hunting** : Cockpit de recrutement interne permettant de gérer les mandats, les talents et les intégrations de CV. Il s’agit d’une application privée accessible aux collaborateurs après authentification.
-- **Taylor Shift** : Service de recrutement haut de gamme pour la distribution de luxe (Auxerre et Mittal). Ce projet sera hébergé sur un site distinct, mais l’interface Irbis doit en présenter la valeur ajoutée et rediriger vers le site externe.
+- **Tailor Shift** : Service de recrutement haut de gamme pour la distribution de luxe (Auxerre et Mittal). Ce projet sera hébergé sur un site distinct, mais l'interface Irbis doit en présenter la valeur ajoutée et rediriger vers le site externe.
 - **Paris (L’Outil de carrière)** : Plateforme d’orientation et de coaching basée sur la matrice 8D. Elle est également hébergée séparément et fera l’objet d’une page de présentation et d’un lien sortant depuis Irbis.
 - **Interface d’administration** : Outil réservé à l’équipe interne pour gérer les utilisateurs, les intégrations, la facturation et les logs.
 
@@ -33,14 +33,14 @@ Le tableau suivant décrit l’arborescence cible avec le type de contenu attend
 |                      | /hunting/talents         | Bibliothèque des talents avec fiche pour chaque profil. La page liste doit permettre le tri par score d’alignement, date, localisation. Prévoir un composant TalentCard affichant photo, score 8D, statut et actions. | Privé   |
 |                      | /hunting/talents/[id]    | Détail d’un talent : informations personnelles (présentation, compétences, appétences), diagramme radar de la matrice 8D, historique des interactions. Utiliser un layout split screen et des composants de graphique (radar). | Privé   |
 |                      | /hunting/ingestion       | Outil d’ingestion des CV avec drag-and-drop, parseur de CV et intégration aux API LinkedIn/Indeed. Prévoir un composant <Dropzone> réutilisable, un spinner pendant le traitement et des messages d’erreur uniformisés. | Privé   |
-| **Taylor Shift (page de présentation)** | /taylor-shift | Présenter la verticale Taylor Shift (recrutement pour le luxe) : mission, expertise retail, approche 8D appliquée aux métiers luxe (références, photos de boutiques). À la fin, un bouton « Accéder au site Taylor Shift » ouvrant le site externe. Utiliser le design system IRBIS, tout en évoquant l’univers luxe : palette de couleurs raffinées, typographie élégante. | Public  |
+| **Tailor Shift (page de présentation)** | /tailor-shift | Présenter la verticale Tailor Shift (recrutement pour le luxe) : mission, expertise retail, approche 8D appliquée aux métiers luxe (références, photos de boutiques). À la fin, un bouton « Accéder au site Tailor Shift » ouvrant le site externe. Utiliser le design system IRBIS, tout en évoquant l'univers luxe : palette de couleurs raffinées, typographie élégante. | Public  |
 | **Paris (page de présentation)** | /paris | Page consacrée à l’outil de carrière : présentation du test 8D pour découvrir son profil, exemples de parcours et offres de coaching. Inclure un bouton « Accéder au site Paris » qui redirige vers le site externe. La page doit présenter les bénéfices pour les talents et souligner la synergie avec Irbis. | Public  |
 | **Admin**            | /admin/dashboard         | Tableau de bord administratif : statistiques globales (utilisateurs, mandats, actions), accès aux logs. | Restreint |
 |                      | /admin/users             | Gestion des utilisateurs, des rôles et des permissions (ajout, édition, suppression). Utiliser des composants Table/Modal pour une meilleure ergonomie. | Restreint |
 |                      | /admin/integrations      | Gestion des intégrations (LinkedIn, Indeed, messagerie) et de la facturation. | Restreint |
 |                      | /admin/logs              | Vue sur les logs et exports pour la conformité et la sécurité. Prévoir des filtres et un bouton d’export CSV. | Restreint |
 
-Cette structure s’appuie sur les routes décrites dans la sitemap d’origine et les étend en tenant compte du multi-produits. Les pages pour Taylor Shift et Paris servent d’introduction et redirigent vers leurs plateformes respectives.
+Cette structure s'appuie sur les routes décrites dans la sitemap d'origine et les étend en tenant compte du multi-produits. Les pages pour Tailor Shift et Paris servent d'introduction et redirigent vers leurs plateformes respectives.
 
 ## 3. Ligne Éditoriale et Copywriting
 
@@ -70,7 +70,7 @@ Des suggestions de micro-copy sont fournies dans le fichier de stratégie. Exemp
 - Page de connexion : phrase d’accroche « Let’s catch the uncatchable. ».
 - Mandat création : texte rassurant « Chaque mandat est unique, partagez vos attentes ».
 
-Ces micro-copy doivent être adaptés à chaque verticale (Taylor Shift et Paris) pour refléter leur univers spécifique.
+Ces micro-copy doivent être adaptés à chaque verticale (Tailor Shift et Paris) pour refléter leur univers spécifique.
 
 ## 4. Améliorations du Design System
 
@@ -92,7 +92,7 @@ Le fichier multi-product-structure.md préconise d’utiliser des groupes de rou
 
 - **Groupes de routes** : Créer des dossiers racines : (marketing) pour Irbis Corporate, (hunting) pour Matrice Hunting, (taylor-shift) et (paris) pour les pages de présentation avec redirection vers les sites externes, et (admin) pour l’interface d’administration.
 - **Partage de composants et d’authentification** : Factoriser les composants et utiliser un wrapper d’authentification pour toutes les routes privées. L’authentification doit être unique pour toutes les verticales.
-- **Navigation et cross-sell** : Ajouter un menu global permettant de naviguer entre les produits et d’accéder aux pages de présentation de Taylor Shift et Paris. Sur le dashboard, prévoir des liens promouvant les autres services (ex. un encart « Découvrez Paris pour évaluer vos talents »).
+- **Navigation et cross-sell** : Ajouter un menu global permettant de naviguer entre les produits et d'accéder aux pages de présentation de Tailor Shift et Paris. Sur le dashboard, prévoir des liens promouvant les autres services (ex. un encart « Découvrez Paris pour évaluer vos talents »).
 - **Monorepo et conventions de nommage** : Renommer les dossiers et fichiers selon le nouveau lexique, séparer la logique métier par verticale, documenter les patterns de programmation. Prévoir un README par dossier de produit expliquant sa structure et ses composants.
 
 ## 6. Plan de Mise en Œuvre (Timeline Indicative)
@@ -132,7 +132,7 @@ Ce calendrier est indicatif ; il peut être adapté selon les priorités busines
 
 ## 8. Conclusion
 
-Cette refonte complète vise à transformer Irbis en une plateforme cohérente et évolutive, capable d’agréger plusieurs verticales tout en offrant une expérience utilisateur haut de gamme. Le présent document compile toutes les modifications nécessaires : nouvelle structure de routes, adoption d’un vocabulaire IRBIS unifié, mise en œuvre d’un design system solide, création de pages de présentation pour Taylor Shift et Paris avec liens externes, et plan d’action détaillé. En suivant cette feuille de route, vous pourrez structurer votre code, améliorer la qualité visuelle et éditoriale et préparer l’intégration de futurs services.
+Cette refonte complète vise à transformer Irbis en une plateforme cohérente et évolutive, capable d'agréger plusieurs verticales tout en offrant une expérience utilisateur haut de gamme. Le présent document compile toutes les modifications nécessaires : nouvelle structure de routes, adoption d'un vocabulaire IRBIS unifié, mise en œuvre d'un design system solide, création de pages de présentation pour Tailor Shift et Paris avec liens externes, et plan d'action détaillé. En suivant cette feuille de route, vous pourrez structurer votre code, améliorer la qualité visuelle et éditoriale et préparer l’intégration de futurs services.
 
 **Références :**
 - [copywriting_strategy.md](https://raw.githubusercontent.com/LoulouBlue75/irbis.fr/9187904fd953c0d5a594290bae12eebe7ae6af53/design/copywriting_strategy.md)

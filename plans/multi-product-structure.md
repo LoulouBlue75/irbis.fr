@@ -4,7 +4,7 @@
 Irbis Partners is evolving into a multi-product platform containing:
 1.  **Irbis Partners (Core)**: Executive Search with Adaptive Precision (B2B).
 2.  **Matrice Hunting**: The internal/client-facing app for executive search operations (B2B).
-3.  **Taylor Shift**: Global Luxury Retail Recruitment (B2B/B2C).
+3.  **Tailor Shift**: Global Luxury Retail Recruitment (B2B/B2C).
 4.  **Paris (Project Name)**: Career perspective tool for individuals (B2C).
 
 ## Routing Strategy (Next.js App Router)
@@ -24,9 +24,9 @@ We will use **Route Groups** to separate these distinct domains while keeping th
 *   **Features**: Context gathering, candidate search, mandate management.
 *   **Access**: Protected (Recruiters/Clients).
 
-### 3. Taylor Shift (Vertical)
-*   **Path**: `/taylor-shift`
-*   **Group**: `(taylor-shift)`
+### 3. Tailor Shift (Vertical)
+*   **Path**: `/tailor-shift`
+*   **Group**: `(tailor-shift)`
 *   **Layout**: Distinct branding (Luxury/Retail focus).
 *   **Pages**: Home, Opportunities, Candidates.
 *   **Access**: Public + Protected area for candidates.

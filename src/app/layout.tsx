@@ -19,7 +19,7 @@ export const metadata: Metadata = {
     template: "%s | Irbis"
   },
   description: "Irbis: Executive Search with Adaptive Precision. A multi-product platform combining human intuition and algorithmic precision for talent alignment.",
-  keywords: ["Executive Search", "Chasse de Têtes", "Recrutement", "Talent Alignment", "8D Methodology", "Matrice Hunting", "Taylor Shift", "Paris"],
+  keywords: ["Executive Search", "Chasse de Têtes", "Recrutement", "Talent Alignment", "8D Methodology", "Matrice Hunting", "Tailor Shift", "Paris"],
   authors: [{ name: "Irbis" }],
   openGraph: {
     type: "website",

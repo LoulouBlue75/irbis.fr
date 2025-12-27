@@ -28,7 +28,7 @@ export async function uploadCV(formData: FormData) {
      // Create a default project if none exists (for dev purposes)
      const { data: newProject, error: createError } = await supabase
         .from('projects')
-        .insert({ name: 'Taylor Shift', code: 'TS' }) // Assuming 'code' might be needed or just name
+        .insert({ name: 'Tailor Shift', code: 'TS' })
         .select()
         .single();
      
@@ -86,6 +86,6 @@ export async function uploadCV(formData: FormData) {
     }
   });
 
-  revalidatePath('/taylor-shift');
+  revalidatePath('/tailor-shift');
   return { success: true };
 }

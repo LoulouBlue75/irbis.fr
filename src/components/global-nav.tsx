@@ -14,7 +14,7 @@ export async function GlobalNav() {
         <Link href="/executive-search">Executive Search</Link>
         <Link href="/references">References</Link>
         <Link href="/contact">Contact</Link>
-        <Link href="/taylor-shift">Taylor Shift</Link>
+        <Link href="/tailor-shift">Tailor Shift</Link>
         <Link href="/paris">Paris</Link>
         {isLoggedIn && (
           <>

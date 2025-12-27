@@ -19,7 +19,7 @@ async function getProjectId(supabase: any) {
   // Create default if not exists
   const { data: newProject } = await supabase
     .from('projects')
-    .insert({ name: 'Taylor Shift', code: 'TS' })
+    .insert({ name: 'Tailor Shift', code: 'TS' })
     .select()
     .single();
   return newProject?.id;

@@ -143,12 +143,12 @@ export default async function Home() {
             </div>
             
             <div className="card">
-              <h3 className="text-xl font-bold mb-3 text-primary">Taylor Shift — by Irbis</h3>
+              <h3 className="text-xl font-bold mb-3 text-primary">Tailor Shift — by Irbis</h3>
               <p className="text-secondary leading-relaxed">
                 Luxury retail recruitment on a dedicated platform.
               </p>
-              <Link href="/taylor-shift" className="text-accent-primary hover:text-accent-primary-hover mt-4 inline-block">
-                Visit Taylor Shift
+              <Link href="/tailor-shift" className="text-accent-primary hover:text-accent-primary-hover mt-4 inline-block">
+                Visit Tailor Shift
               </Link>
             </div>
             

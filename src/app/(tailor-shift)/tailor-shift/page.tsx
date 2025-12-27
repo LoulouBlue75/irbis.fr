@@ -2,7 +2,7 @@ import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import Link from 'next/link';
 
-export default function TaylorShiftPage() {
+export default function TailorShiftPage() {
   const dimensions = [
     { title: 'Competences', desc: 'Expertise technique et savoir-faire metier' },
     { title: 'Valeurs', desc: 'Adhesion aux codes et a l\'ethique du luxe' },
@@ -20,7 +20,7 @@ export default function TaylorShiftPage() {
       <section className="py-20 px-4 md:px-8">
         <div className="max-w-6xl mx-auto text-center">
           <h1 className="text-5xl md:text-6xl font-bold text-primary mb-6">
-            Taylor Shift
+            Tailor Shift
           </h1>
           <p className="text-2xl md:text-3xl text-secondary mb-4 font-light">
             Le recrutement de luxe avec precision adaptative
@@ -30,9 +30,9 @@ export default function TaylorShiftPage() {
             Nous identifions les talents qui incarnent l\'excellence du retail haut de gamme.
           </p>
           <div className="flex justify-center gap-4">
-            <Link href="https://taylor-shift.com" target="_blank" rel="noopener noreferrer">
+            <Link href="https://tailor-shift.com" target="_blank" rel="noopener noreferrer">
               <Button size="lg" className="bg-amber-600 hover:bg-amber-700 text-white">
-                Acceder au site Taylor Shift
+                Accéder au site Tailor Shift
               </Button>
             </Link>
           </div>
@@ -169,11 +169,11 @@ export default function TaylorShiftPage() {
         <div className="max-w-4xl mx-auto text-center">
           <h2 className="text-3xl font-bold mb-6">Pret a trouver l\'excellence ?</h2>
           <p className="text-xl mb-8 opacity-90">
-            Decouvrez comment Taylor Shift peut transformer votre recrutement dans l\'univers du luxe.
+            Découvrez comment Tailor Shift peut transformer votre recrutement dans l'univers du luxe.
           </p>
-          <Link href="https://taylor-shift.com" target="_blank" rel="noopener noreferrer">
+          <Link href="https://tailor-shift.com" target="_blank" rel="noopener noreferrer">
             <Button size="lg" variant="outline" className="bg-white text-amber-700 hover:bg-amber-50">
-              Acceder au site Taylor Shift
+              Accéder au site Tailor Shift
             </Button>
           </Link>
         </div>
