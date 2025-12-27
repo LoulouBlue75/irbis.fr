@@ -25,14 +25,13 @@
 .office-placeholder {
   width: 100%;
   height: 100%;
-  /* Gradient placeholder simulant un bureau en bois avec fenêtres */
-  background: linear-gradient(
-    180deg,
-    #87CEEB 0%,      /* Ciel/fenêtres en haut */
-    #B8D4E8 30%,     /* Transition */
-    #D4A574 40%,     /* Bois clair */
-    #C19A6B 60%,     /* Bois moyen */
-    #8B7355 100%     /* Bois foncé bureau */
+  /* Improved gradient: Room with window light */
+  background: radial-gradient(
+    circle at 50% 0%,
+    #e0f7fa 0%,      /* Bright window light */
+    #b3e5fc 30%,     /* Sky blue */
+    #8d6e63 60%,     /* Room wall/wood tone */
+    #3e2723 100%     /* Dark corners */
   );
 }
 
@@ -89,48 +88,9 @@
    Z-INDEX: 3
    ======================================== */
 
+/* Shutters removed for cleaner visual */
 .shutters {
-  position: absolute;
-  inset: 0;
-  z-index: 3;
-  pointer-events: none;
-}
-
-.shutter {
-  position: absolute;
-  top: 10%;
-  width: 25%;
-  height: 40%;
-  background: linear-gradient(
-    90deg,
-    #3a2f2d 0%,
-    #4a3f3d 10%,
-    #3a2f2d 20%,
-    #4a3f3d 30%,
-    #3a2f2d 40%,
-    #4a3f3d 50%
-  );
-  box-shadow: inset 0 0 20px rgba(0, 0, 0, 0.5);
-  transform: translateX(-100%); /* Hors cadre initialement */
-  transition: transform 0.6s ease-out;
-  will-change: transform;
-}
-
-.shutter-1 {
-  left: 10%;
-}
-
-.shutter-2 {
-  left: 40%;
-}
-
-.shutter-3 {
-  left: 70%;
-}
-
-/* État fermé (pour Phase 2 animation) */
-.shutters.closed .shutter {
-  transform: translateX(0);
+  display: none;
 }
 
 /* ========================================

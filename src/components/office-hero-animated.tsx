@@ -62,19 +62,18 @@ export function OfficeHeroAnimated({ boards = defaultBoards }: OfficeHeroProps) 
 
       tlRef.current = tl;
 
-      // 1. Shutters closing (Day -> Night transition starts)
+      // 1. Day to Night transition (Background darkens)
       // 0% to 40% of scroll
-      tl.to('.shutter', {
-        x: '0%',
-        stagger: 0.05,
+      tl.to('.office-base', {
+        filter: 'brightness(0.3)',
         duration: 4,
-        ease: 'power2.inOut'
+        ease: 'power1.inOut'
       }, 0);
 
-      // 2. Light dimming (Window light fades out)
+      // 2. Window light fades out
       // 0% to 40%
       tl.to('.windows-overlay', {
-        opacity: 0.2,
+        opacity: 0,
         duration: 4,
         ease: 'power1.inOut'
       }, 0);
@@ -133,13 +132,6 @@ export function OfficeHeroAnimated({ boards = defaultBoards }: OfficeHeroProps) 
         <div className="window window-1" />
         <div className="window window-2" />
         <div className="window window-3" />
-      </div>
-      
-      {/* Layer 2: Shutters */}
-      <div className="shutters">
-        <div className="shutter shutter-1" />
-        <div className="shutter shutter-2" />
-        <div className="shutter shutter-3" />
       </div>
       
       {/* Layer 3: Lamps */}
