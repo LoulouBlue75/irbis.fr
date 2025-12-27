@@ -1,204 +1,133 @@
-import { createClient } from "@/lib/supabase/server";
 import Link from "next/link";
-import { OfficeHeroAnimated } from "@/components/office-hero-animated";
+import { Button } from "@/components/ui/button";
+import { Card, CardTitle, CardDescription } from "@/components/ui/card";
 
-export default async function Home() {
-  const supabase = await createClient();
-  const { data: { user } } = await supabase.auth.getUser();
-
+export default function Homepage() {
   return (
-    <div className="flex min-h-screen flex-col bg-primary text-primary">
-      {/* NEW: Office Hero with Animation Structure */}
-      <OfficeHeroAnimated />
-      
-      {/* What We Do Section */}
-      <section className="py-20 px-4 bg-primary">
-        <div className="max-w-6xl mx-auto">
-          <h2 className="text-3xl font-bold text-primary mb-8 text-center">
-            We help ambitious organisations make decisive appointments.
-          </h2>
-          
-          <div className="grid md:grid-cols-3 gap-8 mt-8">
-            {/* Executive Search */}
-            <div className="card hover:border-strong transition-colors">
-              <div className="w-12 h-12 bg-blue-50 rounded-lg flex items-center justify-center mb-6 text-accent-primary">
-                <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+    <div className="flex flex-col w-full">
+      {/* SECTION 2: HERO */}
+      <section className="bg-ivory min-h-[calc(100vh-64px)] flex flex-col items-center justify-center text-center px-6 py-20">
+        <h1 className="text-display font-serif font-bold text-ink mb-4">
+          High standards.<br />
+          Shared ambition.
+        </h1>
+        <p className="text-lg text-ink/80 mb-8">
+          Executive search. Adaptive precision.
+        </p>
+        <div className="flex flex-col gap-4 items-center">
+          <Button variant="default" size="lg" asChild>
+            <Link href="/contact">Start a conversation</Link>
+          </Button>
+          <Button variant="ghost" asChild>
+            <Link href="/approach">The approach →</Link>
+          </Button>
+        </div>
+      </section>
+
+      {/* SECTION 3: WHAT WE DO */}
+      <section className="bg-white py-20 px-6">
+        <div className="container mx-auto">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+            <Card variant="default" className="h-full">
+              <CardTitle>Executive Search</CardTitle>
+              <CardDescription className="text-base text-stone mt-4">
+                Leadership roles. Rare specialists. End-to-end.
+              </CardDescription>
+              <div className="mt-auto pt-6">
+                <Link href="/executive-search" className="text-sm font-medium text-ink hover:underline">
+                  Explore →
+                </Link>
               </div>
-              <h3 className="text-xl font-bold mb-3 text-primary">Executive Search</h3>
-              <p className="text-secondary leading-relaxed">
-                Leadership appointments and rare specialists — end-to-end, high bar, real cadence.
-              </p>
-              <Link href="/executive-search" className="text-accent-primary hover:text-accent-primary-hover mt-4 inline-block">
-                Explore Executive Search
-              </Link>
-            </div>
-            
-            {/* Decision Partnership */}
-            <div className="card hover:border-strong transition-colors">
-              <div className="w-12 h-12 bg-purple-50 rounded-lg flex items-center justify-center mb-6 text-purple-600">
-                <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2 2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"></path></svg>
+            </Card>
+            <Card variant="default" className="h-full">
+              <CardTitle>Sparring Partner</CardTitle>
+              <CardDescription className="text-base text-stone mt-4">
+                We challenge the brief. You own the decision.
+              </CardDescription>
+            </Card>
+            <Card variant="default" className="h-full">
+              <CardTitle>Ecosystem</CardTitle>
+              <CardDescription className="text-base text-stone mt-4">
+                Specialised ventures. Same standard.
+              </CardDescription>
+            </Card>
+          </div>
+        </div>
+      </section>
+
+      {/* SECTION 4: METHOD */}
+      <section className="bg-ivory py-20 px-6">
+        <div className="container mx-auto">
+          <h2 className="text-h2 font-serif font-semibold text-ink text-center mb-12">
+            Four steps. Full commitment.
+          </h2>
+          <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
+            {[
+              { num: "01", title: "Align", sub: "Stakes. Success. Non-negotiables." },
+              { num: "02", title: "Map", sub: "Research. Access. Reality." },
+              { num: "03", title: "Understand", sub: "Trajectory. Judgement. Fit." },
+              { num: "04", title: "Decide", sub: "Support. Control. Close." },
+            ].map((step) => (
+              <div key={step.num} className="bg-white rounded-lg p-6 border border-gray-200">
+                <span className="text-sm font-bold text-gold block mb-2">{step.num}</span>
+                <h3 className="text-xl font-semibold text-ink mb-2">{step.title}</h3>
+                <p className="text-sm text-stone">{step.sub}</p>
               </div>
-              <h3 className="text-xl font-bold mb-3 text-primary">Decision Partnership</h3>
-              <p className="text-secondary leading-relaxed">
-                We spar with you: we challenge the brief, sharpen criteria, and make trade-offs explicit.
-              </p>
-            </div>
-            
-            {/* Ecosystem */}
-            <div className="card hover:border-strong transition-colors">
-              <div className="w-12 h-12 bg-amber-50 rounded-lg flex items-center justify-center mb-6 text-accent-warning">
-                <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path></svg>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* SECTION 5: WHY IRBIS */}
+      <section className="bg-white py-20 px-6">
+        <div className="container mx-auto text-center">
+          <h2 className="text-h2 font-serif font-semibold text-ink mb-12">
+            Three commitments.
+          </h2>
+          <div className="flex flex-col gap-10 items-center">
+            <p className="text-xl font-medium text-ink">1. We share your ambition.</p>
+            <p className="text-xl font-medium text-ink">2. We own the outcome.</p>
+            <p className="text-xl font-medium text-ink">3. We respect people.</p>
+          </div>
+        </div>
+      </section>
+
+      {/* SECTION 6: ECOSYSTEM */}
+      <section className="bg-ivory py-20 px-6">
+        <div className="container mx-auto">
+          <h2 className="text-h2 font-serif font-semibold text-ink text-center mb-12">
+            The ecosystem.
+          </h2>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-4xl mx-auto">
+            {[
+              { title: "Executive Search", sub: "Flagship service.", cta: "Explore →", href: "/executive-search" },
+              { title: "Tailor Shift", sub: "Luxury retail.", cta: "Visit →", href: "/tailor-shift" },
+              { title: "Paris", sub: "Career clarity.", cta: "Visit →", href: "/paris" },
+              { title: "Next", sub: "In development.", cta: "Contact →", href: "/contact" },
+            ].map((item) => (
+              <div key={item.title} className="bg-white rounded-lg p-8 border border-gray-200 flex flex-col h-40 justify-between">
+                <div>
+                  <h3 className="text-xl font-semibold text-ink">{item.title}</h3>
+                  <p className="text-stone mt-1">{item.sub}</p>
+                </div>
+                <Link href={item.href} className="text-sm font-medium text-ink hover:underline self-start">
+                  {item.cta}
+                </Link>
               </div>
-              <h3 className="text-xl font-bold mb-3 text-primary">Ecosystem</h3>
-              <p className="text-secondary leading-relaxed">
-                Specialised ventures and tools — dedicated sites, aligned with Irbis standard.
-              </p>
-            </div>
+            ))}
           </div>
         </div>
       </section>
-      
-      {/* How We Work Section */}
-      <section className="py-20 px-4 bg-secondary">
-        <div className="max-w-6xl mx-auto">
-          <h2 className="text-3xl font-bold text-primary mb-8 text-center">
-            A disciplined process — fully engaged.
-          </h2>
-          
-          <div className="grid md:grid-cols-2 gap-8 mt-8">
-            <div className="card">
-              <h3 className="text-xl font-bold mb-3 text-primary">Align</h3>
-              <p className="text-secondary leading-relaxed">
-                Define success, stakes, and non-negotiables.
-              </p>
-            </div>
-            <div className="card">
-              <h3 className="text-xl font-bold mb-3 text-primary">Map</h3>
-              <p className="text-secondary leading-relaxed">
-                Research reality and approach the right people.
-              </p>
-            </div>
-            <div className="card">
-              <h3 className="text-xl font-bold mb-3 text-primary">Understand</h3>
-              <p className="text-secondary leading-relaxed">
-                Assess trajectory, judgement, and fit with nuance.
-              </p>
-            </div>
-            <div className="card">
-              <h3 className="text-xl font-bold mb-3 text-primary">Decide</h3>
-              <p className="text-secondary leading-relaxed">
-                Support the decision and close with control.
-              </p>
-            </div>
-          </div>
-        </div>
+
+      {/* SECTION 7: FINAL CTA */}
+      <section className="bg-ink py-20 px-6 text-center">
+        <h2 className="text-h1 font-serif font-semibold text-white mb-8">
+          Let's talk.
+        </h2>
+        <Button variant="default" size="lg" asChild>
+          <Link href="/contact">Start a conversation</Link>
+        </Button>
       </section>
-      
-      {/* Why Irbis Section */}
-      <section className="py-20 px-4 bg-primary">
-        <div className="max-w-6xl mx-auto">
-          <h2 className="text-3xl font-bold text-primary mb-8 text-center">
-            Demanding, benevolent, accountable.
-          </h2>
-          
-          <div className="grid md:grid-cols-3 gap-8 mt-8">
-            <div className="card">
-              <h3 className="text-xl font-bold mb-3 text-primary">We share ambition.</h3>
-              <p className="text-secondary leading-relaxed">
-                We help pull standards upward.
-              </p>
-            </div>
-            <div className="card">
-              <h3 className="text-xl font-bold mb-3 text-primary">We don't hide behind a process.</h3>
-              <p className="text-secondary leading-relaxed">
-                We take responsibility for the outcome.
-              </p>
-            </div>
-            <div className="card">
-              <h3 className="text-xl font-bold mb-3 text-primary">We respect people.</h3>
-              <p className="text-secondary leading-relaxed">
-                Candidates and clients — always.
-              </p>
-            </div>
-          </div>
-        </div>
-      </section>
-      
-      {/* Ecosystem Gateway Section */}
-      <section className="py-20 px-4 bg-secondary">
-        <div className="max-w-6xl mx-auto">
-          <h2 className="text-3xl font-bold text-primary mb-8 text-center">
-            An ecosystem built around decisive appointments.
-          </h2>
-          
-          <div className="grid md:grid-cols-2 gap-8 mt-8">
-            <div className="card">
-              <h3 className="text-xl font-bold mb-3 text-primary">Executive Search</h3>
-              <p className="text-secondary leading-relaxed">
-                The flagship service for critical leadership hires.
-              </p>
-              <Link href="/executive-search" className="text-accent-primary hover:text-accent-primary-hover mt-4 inline-block">
-                Explore Executive Search
-              </Link>
-            </div>
-            
-            <div className="card">
-              <h3 className="text-xl font-bold mb-3 text-primary">Tailor Shift — by Irbis</h3>
-              <p className="text-secondary leading-relaxed">
-                Luxury retail recruitment on a dedicated platform.
-              </p>
-              <Link href="/tailor-shift" className="text-accent-primary hover:text-accent-primary-hover mt-4 inline-block">
-                Visit Tailor Shift
-              </Link>
-            </div>
-            
-            <div className="card">
-              <h3 className="text-xl font-bold mb-3 text-primary">Paris — by Irbis</h3>
-              <p className="text-secondary leading-relaxed">
-                Career perspective and guidance on a dedicated platform.
-              </p>
-              <Link href="/paris" className="text-accent-primary hover:text-accent-primary-hover mt-4 inline-block">
-                Visit Paris
-              </Link>
-            </div>
-            
-            <div className="card">
-              <h3 className="text-xl font-bold mb-3 text-primary">Coming next</h3>
-              <p className="text-secondary leading-relaxed">
-                New specialised services in development.
-              </p>
-              <Link href="/contact" className="text-accent-primary hover:text-accent-primary-hover mt-4 inline-block">
-                Discuss your context
-              </Link>
-            </div>
-          </div>
-        </div>
-      </section>
-      
-      {/* Final CTA Band */}
-      <section className="py-20 px-4 bg-primary text-center">
-        <div className="max-w-4xl mx-auto">
-          <h2 className="text-3xl font-bold text-primary mb-6">
-            Let's step into the arena together.
-          </h2>
-          <p className="text-lg text-tertiary mb-8">
-            Share your role and stakes — we'll bring structure, clarity, and a high bar from brief to appointment.
-          </p>
-          <div className="flex flex-col md:flex-row gap-4 justify-center">
-            <Link href="/contact" className="button-primary">
-              Discuss a Search
-            </Link>
-            <Link href="/executive-search" className="button-primary">
-              Executive Search
-            </Link>
-          </div>
-        </div>
-      </section>
-      
-      {/* Footer */}
-      <footer className="py-12 text-center text-tertiary border-t border-secondary">
-        <p>© 2025 Irbis Partners. All rights reserved.</p>
-      </footer>
     </div>
   );
 }

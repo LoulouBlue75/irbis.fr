@@ -1,22 +1,43 @@
-import { login, signup } from '../auth/actions'
+import Link from "next/link";
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
 
 export default function LoginPage() {
   return (
-    <div className="flex min-h-screen flex-col items-center justify-center p-24 bg-primary">
-      <h1 className="text-4xl font-bold mb-4 text-primary">Login</h1>
-      <p className="text-2xl mb-8 text-secondary">Let’s catch the uncatchable.</p>
-      <form className="flex flex-col gap-4 w-full max-w-md">
-        <label htmlFor="email" className="text-secondary">Email:</label>
-        <input id="email" name="email" type="email" required className="input" />
+    <div className="min-h-screen w-full bg-ivory flex items-center justify-center px-6">
+      <div className="w-full max-w-md flex flex-col items-center text-center">
+        <Link href="/" className="text-2xl font-bold font-serif tracking-tight text-ink mb-12">
+          IRBIS
+        </Link>
         
-        <label htmlFor="password" className="text-secondary">Password:</label>
-        <input id="password" name="password" type="password" required className="input" />
-        
-        <div className="flex gap-4 mt-4">
-          <button formAction={login} className="button-primary flex-1">Log in</button>
-          <button formAction={signup} className="button-secondary flex-1">Sign up</button>
+        <div className="w-full bg-white rounded-lg border border-gray-200 p-8 shadow-sm">
+          <h1 className="text-h2 font-serif font-semibold text-ink mb-2">
+            Console
+          </h1>
+          <p className="text-stone mb-8">
+            Where decisions take shape.
+          </p>
+          
+          <form className="flex flex-col gap-4">
+            <div className="flex flex-col gap-2 text-left">
+              <label htmlFor="email" className="text-sm font-medium text-ink">Email</label>
+              <Input id="email" type="email" placeholder="name@company.com" />
+            </div>
+            <div className="flex flex-col gap-2 text-left">
+              <label htmlFor="password" className="text-sm font-medium text-ink">Password</label>
+              <Input id="password" type="password" placeholder="••••••••" />
+            </div>
+            <Button type="submit" size="lg" className="w-full mt-4">
+              Enter
+            </Button>
+          </form>
+          
+          <div className="mt-6 flex justify-between text-sm">
+            <Link href="/signup" className="text-stone hover:text-ink transition-colors">Create account</Link>
+            <Link href="/forgot-password" className="text-stone hover:text-ink transition-colors">Forgot password</Link>
+          </div>
         </div>
-      </form>
+      </div>
     </div>
-  )
+  );
 }

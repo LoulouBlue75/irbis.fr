@@ -1,118 +1,53 @@
-import { createClient } from "@/lib/supabase/server";
-import { redirect } from "next/navigation";
-import { getTalents } from "@/app/actions/talents";
-import { TalentList } from "@/components/talent-list";
-import { TalentSearch } from "@/components/talent-search";
-import { searchTalents } from "@/app/actions/search";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
+import { Badge } from "@/components/ui/badge";
+import { Card, CardContent } from "@/components/ui/card";
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 
-export default async function TalentsPage({
-  searchParams,
-}: {
-  searchParams: { page?: string; search?: string; semantic?: string };
-}) {
-  const supabase = await createClient();
-  const { data: { user } } = await supabase.auth.getUser();
-
-  if (!user) {
-    redirect("/login");
-  }
-
-  const page = Number(searchParams.page) || 1;
-  const search = searchParams.search || '';
-  const semanticQuery = searchParams.semantic || '';
-
-  let talents = [];
-  let total = 0;
-
-  if (semanticQuery) {
-    const result = await searchTalents(semanticQuery);
-    talents = result.talents;
-    total = talents.length; // Semantic search usually returns a fixed number of results
-  } else {
-    const result = await getTalents({ page, search });
-    talents = result.talents;
-    total = result.total;
-  }
-
+export default function TalentsPage() {
   return (
     <div className="flex flex-col gap-8">
-      <div className="flex justify-between items-center">
-        <h1 className="text-3xl font-bold text-primary">Réserve de talents</h1>
-        <div className="flex gap-2">
-          <Link href="/hunting/talents/create">
-            <Button variant="outline">
-              Saisie manuelle
-            </Button>
-          </Link>
-          <Link href="/hunting/ingestion">
-            <Button>
-              Ingestion de profils
-            </Button>
-          </Link>
-        </div>
+      <div className="flex items-center justify-between">
+        <h1 className="text-2xl font-bold text-ink">Talent Pool</h1>
+        <Button variant="default" size="sm">Add Talent</Button>
       </div>
 
-      {/* Simple Search Input */}
-      {!semanticQuery && (
-        <form className="flex gap-2">
-          <Input
-            type="text"
-            name="search"
-            defaultValue={search}
-            placeholder="Filtrer par nom ou email..."
-            className="max-w-md"
-          />
-          <Button type="submit" variant="outline">
-            Filtrer
-          </Button>
-        </form>
-      )}
-
-      <div className="mb-8">
-        <div className="flex justify-between items-center mb-4">
-          <h2 className="text-xl font-semibold text-primary">Recherche de précision</h2>
-          {semanticQuery && (
-            <Link href="/hunting/talents" className="text-sm text-accent-primary hover:text-accent-primary-hover">
-              Effacer la recherche
-            </Link>
-          )}
-        </div>
-        <TalentSearch onSearch={async (query) => {
-          'use server';
-          redirect(`/hunting/talents?semantic=${encodeURIComponent(query)}`);
-        }} />
+      {/* SEARCH & FILTERS */}
+      <div className="flex gap-4">
+        <Input placeholder="Search talents..." className="max-w-sm" />
+        {/* Add filters here if needed */}
       </div>
 
-      <TalentList talents={talents} />
-
-      {/* Pagination Controls - Only show for standard search */}
-      {!semanticQuery && (
-        <div className="flex justify-between items-center mt-4">
-          <div className="text-secondary text-sm">
-            Affichage de {talents.length} sur {total} talents
-          </div>
-          <div className="flex gap-2">
-            {page > 1 && (
-              <Link href={`/hunting/talents?page=${page - 1}&search=${search}`}>
-                <Button variant="outline">
-                  Précédent
-                </Button>
-              </Link>
-            )}
-            {/* Check if we have more pages based on total count */}
-            {page * 10 < total && (
-              <Link href={`/hunting/talents?page=${page + 1}&search=${search}`}>
-                <Button variant="outline">
-                  Suivant
-                </Button>
-              </Link>
-            )}
-          </div>
-        </div>
-      )}
+      {/* GRID */}
+      <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-6">
+        {[
+          { name: "Marc Dupont", title: "CTO", status: "available", initials: "MD" },
+          { name: "Julie Smith", title: "VP Engineering", status: "in-process", initials: "JS" },
+          { name: "Paul Richard", title: "Director", status: "placed", initials: "PR" },
+          { name: "Anne Martin", title: "Head of Product", status: "available", initials: "AM" },
+          { name: "Jean Leclerc", title: "Lead Dev", status: "available", initials: "JL" },
+          { name: "Marie Dubois", title: "CPO", status: "in-process", initials: "MD" },
+        ].map((talent, index) => (
+          <Link key={index} href="/hunting/talents/1">
+            <Card variant="default" className="h-full hover:shadow-md transition-shadow cursor-pointer">
+              <CardContent className="flex flex-col items-center text-center gap-4 pt-6">
+                <Avatar className="h-16 w-16">
+                  <AvatarImage src="" />
+                  <AvatarFallback className="bg-ivory text-ink font-medium">{talent.initials}</AvatarFallback>
+                </Avatar>
+                <div>
+                  <h3 className="font-semibold text-ink">{talent.name}</h3>
+                  <p className="text-sm text-stone">{talent.title}</p>
+                </div>
+                <Badge variant={talent.status === 'available' ? 'active' : talent.status === 'placed' ? 'closed' : 'progress'}>
+                  {talent.status === 'in-process' ? 'In Process' : talent.status.charAt(0).toUpperCase() + talent.status.slice(1)}
+                </Badge>
+              </CardContent>
+            </Card>
+          </Link>
+        ))}
+      </div>
     </div>
   );
 }

@@ -1,53 +1,60 @@
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Card, CardTitle, CardDescription } from "@/components/ui/card";
 
 export default function ReferencesPage() {
-  const caseStudies = [
-    { title: "Placement C-Level Tech", description: "Succès dans le placement d'un CTO pour une startup en croissance, avec 95% d'alignement 8D.", successRate: "98%" },
-    { title: "Recrutement Luxe Retail", description: "Identification d'un Directeur des Opérations pour une marque de luxe, temps réduit de 40%.", successRate: "100%" },
-    // Add more
-  ];
-
-  const testimonials = [
-    { quote: "Irbis a dépassé nos attentes avec leur approche précise.", author: "Client Finance" },
-    { quote: "Une expérience de recrutement sans égal.", author: "Client Industrie" },
-  ];
-
   return (
-    <div className="min-h-screen bg-background text-foreground py-12 px-4">
-      <div className="max-w-6xl mx-auto">
-        <h1 className="text-4xl font-bold mb-8 text-center">Références et Études de Cas</h1>
-        
-        <section className="mb-16">
-          <h2 className="text-3xl font-semibold mb-6">Études de Cas</h2>
-          <div className="grid md:grid-cols-2 gap-6">
-            {caseStudies.map((caseStudy, index) => (
-              <Card key={index}>
-                <CardHeader>
-                  <CardTitle>{caseStudy.title}</CardTitle>
-                </CardHeader>
-                <CardContent>
-                  <p className="mb-2">{caseStudy.description}</p>
-                  <p className="font-bold">Taux de Succès: {caseStudy.successRate}</p>
-                </CardContent>
+    <div className="flex flex-col w-full">
+      {/* HERO */}
+      <section className="bg-ivory min-h-[50vh] flex flex-col items-center justify-center text-center px-6 py-20">
+        <h1 className="text-display font-serif font-bold text-ink mb-4">
+          Proof.
+        </h1>
+        <p className="text-lg text-ink/80">
+          Selected outcomes.
+        </p>
+      </section>
+
+      {/* CASES */}
+      <section className="bg-white py-20 px-6">
+        <div className="container mx-auto">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+            {[
+              { sector: "Tech", role: "CTO", result: "95% alignment.", time: "8 weeks." },
+              { sector: "Luxury", role: "Ops Director", result: "Placed.", time: "Still there." },
+              { sector: "Finance", role: "CFO", result: "Pre-IPO.", time: "Delivered." },
+              { sector: "SaaS", role: "VP Sales", result: "Revenue +40%.", time: "6 weeks." },
+              { sector: "Retail", role: "CEO", result: "Turnaround.", time: "Confidential." },
+              { sector: "Health", role: "Head of R&D", result: "Expert fit.", time: "10 weeks." },
+            ].map((item, index) => (
+              <Card key={index} variant="default" className="h-full">
+                <CardTitle className="text-lg font-semibold text-ink">
+                  {item.sector} — {item.role}
+                </CardTitle>
+                <CardDescription className="text-base text-stone mt-4">
+                  {item.result} {item.time}
+                </CardDescription>
               </Card>
             ))}
           </div>
-        </section>
-        
-        <section className="mb-16">
-          <h2 className="text-3xl font-semibold mb-6">Témoignages Clients</h2>
-          <div className="grid md:grid-cols-2 gap-6">
-            {testimonials.map((test, index) => (
-              <Card key={index}>
-                <CardContent className="pt-6">
-                  <p className="italic mb-4">"{test.quote}"</p>
-                  <p className="text-right font-medium">- {test.author}</p>
-                </CardContent>
-              </Card>
+        </div>
+      </section>
+
+      {/* STATS */}
+      <section className="bg-ivory py-20 px-6">
+        <div className="container mx-auto">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-12 text-center">
+            {[
+              { value: "95%+", label: "Alignment" },
+              { value: "8 wks", label: "Avg. time" },
+              { value: "90%", label: "2yr retention" },
+            ].map((stat) => (
+              <div key={stat.label} className="flex flex-col gap-2">
+                <span className="text-display font-serif font-bold text-ink">{stat.value}</span>
+                <span className="text-sm font-medium text-stone uppercase tracking-wider">{stat.label}</span>
+              </div>
             ))}
           </div>
-        </section>
-      </div>
+        </div>
+      </section>
     </div>
   );
 }

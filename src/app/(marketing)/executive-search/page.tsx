@@ -1,145 +1,93 @@
-import Link from "next/link";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { Input } from "@/components/ui/input";
-import { Textarea } from "@/components/ui/textarea";
 import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import { Card, CardTitle, CardDescription } from "@/components/ui/card";
 
 export default function ExecutiveSearchPage() {
-  const sectors = [
-    "Technologie",
-    "Finance",
-    "Luxe et Retail",
-    "Santé",
-    "Industrie",
-  ];
-
-  const whatYouCanExpect = [
-    {
-      title: "Précision Adaptative",
-      description: "Notre méthodologie 8D assure un alignement parfait entre le talent et le mandat, avec un scoring contextuel pour une précision adaptative."
-    },
-    {
-      title: "Confidentialité Absolue",
-      description: "Les talents ne sont visibles que s'ils correspondent au mandat. Les budgets et identités sensibles sont masqués par conception."
-    },
-    {
-      title: "Choix Éclairés",
-      description: "Transparence des données et accès en temps réel aux informations pour les recruteurs comme pour les talents."
-    }
-  ];
-
   return (
-    <div className="min-h-screen bg-background text-foreground py-12 px-4">
-      <div className="max-w-6xl mx-auto">
-        <h1 className="text-4xl font-bold mb-4 text-center">Executive Search par Irbis</h1>
-        <p className="text-xl text-center text-muted-foreground mb-12">
-          Plus qu'une recherche — un partenariat de sparring
+    <div className="flex flex-col w-full">
+      {/* HERO */}
+      <section className="bg-ivory min-h-[60vh] flex flex-col items-center justify-center text-center px-6 py-20">
+        <h1 className="text-display font-serif font-bold text-ink mb-4">
+          Appointments that land.
+        </h1>
+        <p className="text-lg text-ink/80">
+          End-to-end. High bar. Real cadence.
         </p>
-        
-        <section className="mb-16">
-          <h2 className="text-3xl font-semibold mb-6">Notre Expertise en Chasse de Têtes</h2>
-          <p className="text-lg mb-6">
-            Chez Irbis, nous excellons dans la chasse de têtes pour les postes C-level et exécutifs. Notre approche unique combine intuition humaine et précision algorithmique pour identifier les talents exceptionnels.
-          </p>
-          <h3 className="text-2xl font-medium mb-4">Secteurs Adressés</h3>
-          <div className="grid md:grid-cols-3 gap-4">
-            {sectors.map((sector, index) => (
-              <Card key={index}>
-                <CardContent className="pt-6 text-center">
-                  <p className="font-medium">{sector}</p>
-                </CardContent>
-              </Card>
-            ))}
+      </section>
+
+      {/* SPARRING */}
+      <section className="bg-white py-20 px-6">
+        <div className="container mx-auto grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
+          <div>
+            <h2 className="text-h2 font-serif font-semibold text-ink mb-6">
+              More than search.
+            </h2>
+            <p className="text-lg text-stone">
+              We challenge the brief. Test assumptions. Sharpen criteria.
+            </p>
           </div>
-        </section>
-        
-        <section className="mb-16">
-          <h2 className="text-3xl font-semibold mb-6">Plus qu'une recherche — un partenariat de sparring</h2>
-          <p className="text-lg mb-8">
-            Nous ne sommes pas des chasseurs de têtes traditionnels. Nous sommes des partenaires qui relèvent la barre — et restent responsables jusqu'à ce que la nomination aboutisse.
-          </p>
-          <div className="grid md:grid-cols-3 gap-6">
-            {whatYouCanExpect.map((item, index) => (
-              <Card key={index}>
-                <CardHeader>
-                  <CardTitle className="text-xl">{item.title}</CardTitle>
-                </CardHeader>
-                <CardContent>
-                  <p className="text-muted-foreground">{item.description}</p>
-                </CardContent>
-              </Card>
-            ))}
+          <div className="bg-ivory h-64 rounded-lg flex items-center justify-center text-stone">
+            [Visual: Abstract or photo]
           </div>
-        </section>
-        
-        <section className="mb-16">
-          <h2 className="text-3xl font-semibold mb-6">La Différence Irbis</h2>
-          <p className="text-lg mb-6">
-            Contrairement aux approches traditionnelles, nous utilisons un scoring contextuel et une méthodologie 8D pour garantir que chaque alignement est basé sur une compréhension profonde des besoins et des aspirations.
-          </p>
-          <div className="grid md:grid-cols-2 gap-6">
-            <Card>
-              <CardHeader>
-                <CardTitle>Discipline</CardTitle>
-              </CardHeader>
-              <CardContent>
-                <p className="text-muted-foreground">
-                  Nous appliquons une rigueur méthodique à chaque étape du processus, de la définition du mandat à l'intégration finale.
-                </p>
-              </CardContent>
-            </Card>
-            <Card>
-              <CardHeader>
-                <CardTitle>Présence</CardTitle>
-              </CardHeader>
-              <CardContent>
-                <p className="text-muted-foreground">
-                  Nous sommes engagés à chaque instant, disponibles pour répondre à vos questions et ajuster notre approche selon vos besoins.
-                </p>
-              </CardContent>
-            </Card>
-            <Card>
-              <CardHeader>
-                <CardTitle>Illumination</CardTitle>
-              </CardHeader>
-              <CardContent>
-                <p className="text-muted-foreground">
-                  Nous apportons une clarté nouvelle grâce à notre méthodologie 8D, révélant des insights que d'autres pourraient manquer.
-                </p>
-              </CardContent>
-            </Card>
-            <Card>
-              <CardHeader>
-                <CardTitle>Élévation</CardTitle>
-              </CardHeader>
-              <CardContent>
-                <p className="text-muted-foreground">
-                  Nous élevons les standards de l'Executive Search, transformant chaque mandat en une opportunité de croissance mutuelle.
-                </p>
-              </CardContent>
-            </Card>
-          </div>
-        </section>
-        
-        <section className="mb-16">
-          <h2 className="text-3xl font-semibold mb-6">Nous Confier un Mandat</h2>
-          <p className="text-lg mb-6 text-center text-muted-foreground">
-            Chaque mandat est unique — partagez vos attentes et nous construirons ensemble la solution adaptée.
-          </p>
-          <form className="max-w-md mx-auto space-y-4">
-            <Input placeholder="Votre Nom" />
-            <Input type="email" placeholder="Votre Email" />
-            <Textarea placeholder="Description du Mandat" />
-            <Button type="submit" className="w-full">Envoyer</Button>
-          </form>
-        </section>
-        
-        <div className="text-center">
-          <Link href="/login" className="button-secondary">
-            Accéder au Cockpit
-          </Link>
         </div>
-      </div>
+      </section>
+
+      {/* 8D */}
+      <section className="bg-ivory py-20 px-6 text-center">
+        <div className="container mx-auto">
+          <h2 className="text-h2 font-serif font-semibold text-ink mb-12">
+            Eight dimensions.
+          </h2>
+          <div className="max-w-2xl mx-auto bg-white rounded-lg p-8 aspect-square flex items-center justify-center border border-gray-200">
+            {/* Placeholder for Radar Chart */}
+            <div className="relative w-full h-full flex items-center justify-center">
+              <div className="absolute inset-0 border border-gray-100 rounded-full" />
+              <div className="absolute inset-12 border border-gray-100 rounded-full" />
+              <div className="absolute inset-24 border border-gray-100 rounded-full" />
+              <span className="text-stone font-medium">RADAR CHART</span>
+              {/* Labels */}
+              <span className="absolute top-4 left-1/2 -translate-x-1/2 text-xs text-ink">Competencies</span>
+              <span className="absolute bottom-4 left-1/2 -translate-x-1/2 text-xs text-ink">Potential</span>
+              <span className="absolute left-4 top-1/2 -translate-y-1/2 text-xs text-ink">Values</span>
+              <span className="absolute right-4 top-1/2 -translate-y-1/2 text-xs text-ink">Vision</span>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* CTA + FORM */}
+      <section className="bg-white py-20 px-6">
+        <div className="container mx-auto max-w-xl">
+          <h2 className="text-h2 font-serif font-semibold text-ink text-center mb-12">
+            Discuss a mandate.
+          </h2>
+          <form className="flex flex-col gap-6">
+            <div className="flex flex-col gap-2">
+              <label htmlFor="name" className="text-sm font-medium text-ink">Name</label>
+              <Input id="name" placeholder="Your name" />
+            </div>
+            <div className="flex flex-col gap-2">
+              <label htmlFor="email" className="text-sm font-medium text-ink">Email</label>
+              <Input id="email" type="email" placeholder="Your email" />
+            </div>
+            <div className="flex flex-col gap-2">
+              <label htmlFor="company" className="text-sm font-medium text-ink">Company</label>
+              <Input id="company" placeholder="Your company" />
+            </div>
+            <div className="flex flex-col gap-2">
+              <label htmlFor="message" className="text-sm font-medium text-ink">Message</label>
+              <textarea 
+                id="message" 
+                className="flex min-h-[120px] w-full rounded-md border border-gray-200 bg-transparent px-3 py-2 text-sm shadow-sm placeholder:text-stone focus-visible:outline-none focus-visible:border-gold focus-visible:ring-2 focus-visible:ring-gold/20 disabled:cursor-not-allowed disabled:opacity-50"
+                placeholder="Tell us about your needs"
+              />
+            </div>
+            <Button type="submit" size="lg" className="w-full">
+              Send
+            </Button>
+          </form>
+        </div>
+      </section>
     </div>
   );
 }
