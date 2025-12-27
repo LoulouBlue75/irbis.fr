@@ -357,38 +357,542 @@ Visual: 8-point radar or simple list
 
 ---
 
-## 7. CONSOLE (HUNTING) — HIGH LEVEL
+## 7. PAGE: ABOUT
 
-### Navigation
+### Structure
 
-| Item | Route |
+```
+┌─────────────────────────────────────────┐
+│ HERO                                    │
+├─────────────────────────────────────────┤
+│ VISION — Founder energy                 │
+├─────────────────────────────────────────┤
+│ VALUES — 4 pillars                      │
+├─────────────────────────────────────────┤
+│ AI-AUGMENTED — Transparency             │
+├─────────────────────────────────────────┤
+│ METHOD + CONNECTION — Stats             │
+├─────────────────────────────────────────┤
+│ CTA                                     │
+└─────────────────────────────────────────┘
+```
+
+### Hero
+
+| Element | Content (EN) |
+|---------|--------------|
+| **Headline** | Method-obsessed. Human-led. |
+| **Subhead** | Irbis is built on a conviction: high-stakes decisions deserve disciplined method — and method must remain connected to human reality. |
+
+### Vision
+
+| Element | Content (EN) |
+|---------|--------------|
+| **Headline** | One vision. One method. |
+| **Body** | We observed that traditional approaches focus too often on technical skills at the expense of the human dimensions that make the difference between a good hire and an excellent one. Our 8D methodology is the fruit of this reflection: a rigorous framework that captures the essence of each talent and each mandate. |
+| **Quote** | "We don't use technology to replace the human. We use technology to amplify the human." |
+
+### Values (4 cards)
+
+| Pillar | Title | Body |
+|--------|-------|------|
+| 1 | Discipline | We apply methodical rigour at every step — from mandate definition to final integration. Discipline is not a constraint — it's the foundation of excellence. |
+| 2 | Presence | We are engaged at every moment, available to answer questions and adjust our approach to your needs. Presence means being there when it matters. |
+| 3 | Illumination | We bring new clarity through our 8D methodology, revealing insights others might miss. Illumination transforms uncertainty into opportunity. |
+| 4 | Elevation | We elevate the standards of Executive Search, transforming each mandate into an opportunity for mutual growth. Elevation is our shared ambition. |
+
+### AI-Augmented Section
+
+| Element | Content (EN) |
+|---------|--------------|
+| **Headline** | AI-augmented. Human-guided. |
+| **Subhead** | Our technology is not a black box. It's a transparent tool that helps us make more informed decisions, while keeping the human at the centre of every interaction. |
+
+**4 principles (cards)**:
+
+| # | Title | Body |
+|---|-------|------|
+| 1 | AI is an assistant, not a decider | All recommendations are validated by human experts. AI proposes, humans decide. |
+| 2 | Confidential by design | Sensitive data is never shared with third parties. Our infrastructure respects the highest security standards. |
+| 3 | Explainable decisions | We can explain why a profile is recommended. Transparency is essential for trust. |
+| 4 | Continuous improvement | Every interaction teaches us. We use these learnings to constantly improve our algorithms and processes. |
+
+### Method + Connection
+
+| Element | Content (EN) |
+|---------|--------------|
+| **Headline** | Method + Connection |
+| **Body** | The best methodology is useless without genuine connection. At Irbis, we invest time to understand your culture, your challenges, and your aspirations. This connection transforms a process into a partnership. |
+
+**Stats row**:
+
+| Stat | Label |
 |------|-------|
-| Overview | /hunting/dashboard |
-| Mandates | /hunting/mandates |
-| Talents | /hunting/talents |
-| Settings | /hunting/settings |
+| 8D | Dimensions of alignment |
+| 100% | Commitment until appointment |
+| ∞ | Potential for shared growth |
 
-### Dashboard widgets
+### CTA
 
-| Widget | Content |
-|--------|---------|
-| Active mandates | Count + list |
-| Talents in pipeline | Count |
-| Recent activity | Timeline |
-| Quick actions | New mandate, Search talents |
-
-### Vocabulary in UI
-
-| Element | Label |
-|---------|-------|
-| Job listing | Mandate |
-| Candidate card | Talent |
-| Match score | Alignment index |
-| Status badges | Active, In progress, Closed |
+| Element | Content (EN) |
+|---------|--------------|
+| **Headline** | Ready to raise your standards? |
+| **Primary CTA** | Explore our services |
+| **Secondary CTA** | Start a conversation |
 
 ---
 
-## 8. VISUAL PRINCIPLES (for Visily)
+## 8. PAGE: REFERENCES
+
+### Structure
+
+```
+┌─────────────────────────────────────────┐
+│ HERO                                    │
+├─────────────────────────────────────────┤
+│ CASE STUDIES — Cards                    │
+├─────────────────────────────────────────┤
+│ TESTIMONIALS — Quotes                   │
+├─────────────────────────────────────────┤
+│ STATS — Key metrics                     │
+├─────────────────────────────────────────┤
+│ CTA                                     │
+└─────────────────────────────────────────┘
+```
+
+### Hero
+
+| Element | Content (EN) |
+|---------|--------------|
+| **Headline** | Proof in the work. |
+| **Subhead** | Selected mandates and outcomes from our executive search practice. |
+
+### Case Studies (example format)
+
+| Element | Structure |
+|---------|-----------|
+| **Title** | [Sector] — [Role level] |
+| **Challenge** | 1-2 sentences on the context |
+| **Outcome** | Result with alignment score if relevant |
+| **Timeline** | Duration from brief to appointment |
+
+**Example cards**:
+
+| Card | Title | Challenge | Outcome |
+|------|-------|-----------|---------|
+| 1 | Tech — CTO Placement | High-growth startup needed a technical leader who could scale. | 95% alignment. Appointed in 8 weeks. |
+| 2 | Luxury Retail — Operations Director | Global brand needed a director with luxury DNA and operational rigour. | 100% alignment. Timeline reduced by 40%. |
+| 3 | Finance — CFO Search | PE-backed company required a CFO for pre-IPO phase. | Successful placement. Still in role 2 years later. |
+
+### Testimonials
+
+| Element | Structure |
+|---------|-----------|
+| **Quote** | "..." |
+| **Author** | Role, Company (anonymised if needed) |
+
+**Example**:
+- "Irbis exceeded our expectations with their precise approach." — CEO, Tech Company
+- "A recruitment experience without equal." — HR Director, Industry Leader
+
+### Stats Row
+
+| Stat | Value | Label |
+|------|-------|-------|
+| 1 | 95%+ | Alignment success rate |
+| 2 | 8 weeks | Average time to placement |
+| 3 | 90% | Still in role after 2 years |
+
+### CTA
+
+| Element | Content (EN) |
+|---------|--------------|
+| **Headline** | Ready to join them? |
+| **Primary CTA** | Discuss a search |
+
+---
+
+## 9. PAGE: LOGIN
+
+### Structure
+
+```
+┌─────────────────────────────────────────┐
+│ CENTERED FORM                           │
+│ Tagline + Form + CTAs                   │
+└─────────────────────────────────────────┘
+```
+
+### Content
+
+| Element | Content (EN) |
+|---------|--------------|
+| **Headline** | Enter the Console |
+| **Tagline** | Where decisions take shape. |
+| **Fields** | Email, Password |
+| **Primary CTA** | Log in |
+| **Secondary CTA** | Sign up |
+| **Link** | Forgot password? |
+
+**Notes**:
+- Minimal, centered design
+- Dark/navy background option for premium feel
+- Link back to homepage
+
+---
+
+## 10. PAGE: TAILOR SHIFT (Portal)
+
+### Structure
+
+```
+┌─────────────────────────────────────────┐
+│ HERO — Tailor Shift branding            │
+├─────────────────────────────────────────┤
+│ MISSION — Luxury recruitment            │
+├─────────────────────────────────────────┤
+│ EXPERTISE — Sectors served              │
+├─────────────────────────────────────────┤
+│ 8D APPLIED — Luxury dimensions          │
+├─────────────────────────────────────────┤
+│ STATS — Key metrics                     │
+├─────────────────────────────────────────┤
+│ CTA — External site                     │
+├─────────────────────────────────────────┤
+│ BACK TO IRBIS                           │
+└─────────────────────────────────────────┘
+```
+
+### Hero
+
+| Element | Content (EN) |
+|---------|--------------|
+| **Logo** | TAILOR SHIFT (wordmark) |
+| **Headline** | Luxury retail recruitment with adaptive precision. |
+| **Subhead** | An exclusive expertise dedicated to luxury houses, prestige retailers, and iconic brands. We identify talents who embody high-end retail excellence. |
+| **Primary CTA** | Visit Tailor Shift |
+
+### Mission (3 cards)
+
+| Card | Title | Body |
+|------|-------|------|
+| 1 | Service Excellence | We recruit professionals who understand the art of client service in the luxury universe. Every interaction must be a memorable experience. |
+| 2 | Retail Expertise | Deep knowledge of luxury codes, prestige houses, and the expectations of demanding international clientele. |
+| 3 | 8D Alignment | Our exclusive 8D alignment methodology guarantees precise matching between house requirements and talent potential. |
+
+### Expertise (2 columns)
+
+**Luxury Houses**:
+- Fashion and accessories brands
+- Fine watchmaking and jewellery
+- Prestige perfumery and cosmetics
+- Leather goods and artisan crafts
+
+**Key Roles**:
+- Boutique Directors
+- Department Managers
+- Expert Sales Advisors
+- Regional Managers
+
+### 8D Applied to Luxury
+
+| Dimension | Title | Description |
+|-----------|-------|-------------|
+| 1 | Competencies | Technical expertise and craft know-how |
+| 2 | Values | Adherence to luxury codes and ethics |
+| 3 | Potential | Capacity for evolution and leadership |
+| 4 | Culture | Affinity with brand universe |
+| 5 | Soft Skills | Relational and emotional intelligence |
+| 6 | Adaptability | Flexibility facing retail demands |
+| 7 | Engagement | Passion for service excellence |
+| 8 | Vision | Understanding of strategic challenges |
+
+### Stats
+
+| Stat | Value | Label |
+|------|-------|-------|
+| 1 | 95% | Placement success rate |
+| 2 | 50+ | Luxury houses served |
+| 3 | 200+ | C-level talents placed |
+
+### CTA
+
+| Element | Content (EN) |
+|---------|--------------|
+| **Headline** | Ready to find excellence? |
+| **Subhead** | Discover how Tailor Shift can transform your luxury recruitment. |
+| **Primary CTA** | Visit Tailor Shift |
+
+### Back Link
+
+**Text**: ← Back to Irbis Corporate
+
+---
+
+## 11. PAGE: PARIS (Portal)
+
+### Structure
+
+```
+┌─────────────────────────────────────────┐
+│ HERO — Paris branding                   │
+├─────────────────────────────────────────┤
+│ 8D TEST — Profile discovery             │
+├─────────────────────────────────────────┤
+│ BENEFITS — For talents                  │
+├─────────────────────────────────────────┤
+│ COACHING — Offerings                    │
+├─────────────────────────────────────────┤
+│ SYNERGY — Paris × Irbis                 │
+├─────────────────────────────────────────┤
+│ CTA                                     │
+└─────────────────────────────────────────┘
+```
+
+### Hero
+
+| Element | Content (EN) |
+|---------|--------------|
+| **Logo** | PARIS (wordmark) |
+| **Headline** | The career tool par excellence. |
+| **Subhead** | Discover your unique profile through our exclusive 8-dimension alignment methodology. Understand your strengths, identify your opportunities, and build your professional future. |
+| **Primary CTA** | Visit Paris |
+
+### 8D Test Section
+
+| Element | Content (EN) |
+|---------|--------------|
+| **Headline** | The 8D Test: Discover Your Unique Profile |
+
+**Two cards**:
+
+| Card | Title | Content |
+|------|-------|---------|
+| 1 | 8 Dimensions | Our methodology evaluates your profile across 8 key dimensions: Competencies, Values, Potential, Culture, Soft Skills, Adaptability, Engagement, Vision |
+| 2 | Personalised Results | Receive a detailed report with: Overall alignment score, Dominant strengths, Development axes, Personalised career recommendations |
+
+### Benefits (3 cards)
+
+| Card | Title | Body |
+|------|-------|------|
+| 1 | Career Clarity | Identify your strengths and areas for improvement to build a coherent professional trajectory. |
+| 2 | Precise Guidance | Benefit from personalised recommendations based on your unique 8D profile. |
+| 3 | Self-Confidence | Understand what makes you unique and value your differentiating assets. |
+
+### Coaching
+
+| Offering | Title | Features |
+|----------|-------|----------|
+| 1 | Individual Coaching | Face-to-face sessions, Personalised action plan, Progress tracking |
+| 2 | Group Coaching | Thematic workshops, Practical exercises, Peer networking |
+
+### Synergy Section
+
+| Element | Content (EN) |
+|---------|--------------|
+| **Headline** | The Paris × Irbis Synergy |
+| **Subhead** | Paris and Irbis work together to offer you a complete career development experience. |
+
+**Two cards**:
+
+| Card | Title | Body |
+|------|-------|------|
+| For Talents | Use Paris to discover your profile and benefit from our personalised coaching offers. |
+| For Companies | Irbis identifies talents aligned with your mandates through our exclusive 8D methodology. |
+
+### CTA
+
+| Element | Content (EN) |
+|---------|--------------|
+| **Headline** | Ready to discover your potential? |
+| **Primary CTA** | Visit Paris |
+| **Secondary CTA** | Back to Irbis Corporate |
+
+---
+
+## 12. CONSOLE (HUNTING) — DETAILED
+
+### Navigation (Sidebar)
+
+| Item | Route | Icon suggestion |
+|------|-------|-----------------|
+| Overview | /hunting/dashboard | Grid/Home |
+| Mandates | /hunting/mandates | Briefcase |
+| Talents | /hunting/talents | Users |
+| Settings | /hunting/settings | Cog |
+
+---
+
+### 12.1 DASHBOARD
+
+**Layout**: Bento grid with stats + activity feed
+
+**Header row**:
+| Element | Content (EN) |
+|---------|--------------|
+| **Title** | Overview |
+| **Quick actions** | New Mandate (primary), Talent Pool (secondary) |
+
+**Stats cards (4)**:
+| Card | Title | Value example | Trend |
+|------|-------|---------------|-------|
+| 1 | Active Mandates | 12 | +2 this week |
+| 2 | Talents in Pipeline | 47 | — |
+| 3 | Alignments Generated | 156 | +23 this week |
+| 4 | Placements YTD | 8 | — |
+
+**Recent Activity feed**:
+| Element | Format |
+|---------|--------|
+| Item | [Action] — [Object] — [Time ago] |
+| Examples | "New talent added — Marie D. — 2h ago" |
+| | "Alignment completed — CTO mandate — 1d ago" |
+
+**System status widget**:
+| Element | Content |
+|---------|---------|
+| Status indicator | Green dot + "Matching Engine: Active" |
+| User info | Logged in as [email] |
+
+---
+
+### 12.2 MANDATES LIST
+
+**Header row**:
+| Element | Content (EN) |
+|---------|--------------|
+| **Title** | Mandates |
+| **Primary CTA** | New Mandate |
+| **Filters** | Status (All, Active, Closed, Draft) |
+
+**Table columns**:
+| Column | Width | Content |
+|--------|-------|---------|
+| Title | 30% | Mandate name |
+| Status | 15% | Badge (Active, In progress, Closed) |
+| Talents | 15% | Count in pipeline |
+| Alignment | 15% | Average alignment % |
+| Created | 15% | Date |
+| Actions | 10% | View, Edit |
+
+**Empty state**:
+| Element | Content |
+|---------|---------|
+| **Headline** | No mandates yet |
+| **Body** | Create your first mandate to start aligning talents. |
+| **CTA** | New Mandate |
+
+---
+
+### 12.3 MANDATE DETAIL
+
+**Layout**: Split screen (2/3 info, 1/3 pipeline)
+
+**Left panel (Info)**:
+| Section | Content |
+|---------|---------|
+| Title | Mandate name |
+| Status badge | Active / In progress / Closed |
+| Description | Full text |
+| Requirements | List |
+| Created | Date |
+| Actions | Edit, Close, Delete |
+
+**Right panel (Pipeline)**:
+| Section | Content |
+|---------|---------|
+| **Headline** | Talent Pipeline |
+| **Kanban columns** | Identified → Contacted → Interview → Offer → Placed |
+| **Talent cards** | Name, Alignment %, Status |
+
+**Talent alignment section**:
+| Element | Content |
+|---------|---------|
+| **Headline** | Aligned Talents |
+| **Cards** | Talent name, 8D score, Quick actions (View, Contact) |
+| **Empty state** | No alignments yet. Run matching to find talents. |
+| **CTA** | Run Alignment |
+
+---
+
+### 12.4 TALENTS LIST
+
+**Header row**:
+| Element | Content (EN) |
+|---------|--------------|
+| **Title** | Talent Pool |
+| **Primary CTA** | Add Talent |
+| **Search** | Semantic search input |
+| **Filters** | Status, Skills, Availability |
+
+**Table/Grid**:
+| Column | Content |
+|--------|---------|
+| Name | Full name |
+| Title | Current/last role |
+| Status | Available, In process, Placed |
+| Skills | Top 3 tags |
+| Added | Date |
+| Actions | View, Edit |
+
+**Card view option**:
+| Element | Content |
+|---------|---------|
+| Avatar | Initials or photo |
+| Name | Full name |
+| Title | Role |
+| 8D Summary | Mini radar or score |
+| CTA | View Profile |
+
+---
+
+### 12.5 TALENT DETAIL
+
+**Layout**: Full page with tabs
+
+**Header**:
+| Element | Content |
+|---------|---------|
+| Name | Full name |
+| Title | Role |
+| Status badge | Available / In process / Placed |
+| Actions | Edit, Contact, Archive |
+
+**Tabs**:
+| Tab | Content |
+|-----|---------|
+| Profile | Bio, experience, skills |
+| 8D Analysis | Radar chart + dimension breakdown |
+| History | Activity timeline |
+| Mandates | Linked mandates + alignment scores |
+
+**8D Analysis section**:
+| Element | Content |
+|---------|---------|
+| **Radar chart** | Visual 8D representation |
+| **Dimension cards** | Score + description per dimension |
+| **Generated by** | "AI analysis on [date]" |
+
+---
+
+### 12.6 VOCABULARY REFERENCE (Console)
+
+| UI Element | Label (EN) |
+|------------|------------|
+| Job listing | Mandate |
+| Candidate card | Talent |
+| Match score | Alignment Index |
+| Match process | Generate Alignments |
+| Status: active | Active |
+| Status: wip | In Progress |
+| Status: done | Closed |
+| Add candidate | Add Talent |
+| CV upload | Profile Ingestion |
+| Search | Search Talents |
+
+---
+
+## 13. VISUAL PRINCIPLES (for Visily)
 
 ### Colors
 - **Primary**: Ink Navy #0F1A2E (text, structure)
@@ -414,15 +918,51 @@ Visual: 8-point radar or simple list
 
 ---
 
-## 9. NEXT STEPS
+## 14. NEXT STEPS
 
-- [ ] Validate homepage copy (this document)
-- [ ] Create Visily mockup for homepage
-- [ ] Iterate on executive-search page
-- [ ] Define console UI patterns
-- [ ] FR adaptation of all copy
+### Phase 1: Validate & Mockup
+- [ ] Review all page specs (this document)
+- [ ] Create Visily mockups for marketing pages (Homepage → Executive Search → About → Approach → Contact → References)
+- [ ] Create Visily mockups for portals (Tailor Shift, Paris)
+- [ ] Create Visily mockups for Console (Dashboard → Mandates → Talents)
+
+### Phase 2: Design Iteration
+- [ ] Review mockups with stakeholders
+- [ ] Refine layouts and component patterns
+- [ ] Define responsive behaviour (mobile, tablet)
+- [ ] Finalize component library specs
+
+### Phase 3: FR Adaptation
+- [ ] Translate all copy to French
+- [ ] Adjust wording for French market nuances
+- [ ] Review with native speaker
+
+### Phase 4: Implementation
+- [ ] Apply design system to codebase
+- [ ] Implement page-by-page from Visily exports
+- [ ] QA responsive and accessibility
+
+---
+
+## 15. PAGE CHECKLIST
+
+| Page | Spec ✓ | Mockup | Code |
+|------|--------|--------|------|
+| Homepage | ✓ | ○ | ○ |
+| Executive Search | ✓ | ○ | ○ |
+| Approach | ✓ | ○ | ○ |
+| About | ✓ | ○ | ○ |
+| References | ✓ | ○ | ○ |
+| Contact | ✓ | ○ | ○ |
+| Login | ✓ | ○ | ○ |
+| Tailor Shift | ✓ | ○ | ○ |
+| Paris | ✓ | ○ | ○ |
+| Console: Dashboard | ✓ | ○ | ○ |
+| Console: Mandates | ✓ | ○ | ○ |
+| Console: Talents | ✓ | ○ | ○ |
 
 ---
 
 *Document created: 2024-12-27*
+*Last updated: 2024-12-27*
 *Reference: design/unified-strategy.md*
