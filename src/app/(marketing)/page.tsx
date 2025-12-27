@@ -1,5 +1,6 @@
 import { createClient } from "@/lib/supabase/server";
 import Link from "next/link";
+import { OfficeHeroAnimated } from "@/components/office-hero-animated";
 
 export default async function Home() {
   const supabase = await createClient();
@@ -7,41 +8,8 @@ export default async function Home() {
 
   return (
     <div className="flex min-h-screen flex-col bg-primary text-primary">
-      {/* Hero Section - Option A: Balanced, Premium */}
-      <header className="flex flex-col items-center justify-center px-4 py-24 text-center bg-secondary border-b border-primary">
-        <div className="mb-8">
-          {/* Logo Placeholder */}
-          <div className="text-4xl font-bold tracking-tighter text-primary">
-            IRBIS <span className="text-accent-primary">.</span>
-          </div>
-        </div>
-        
-        <h1 className="text-5xl md:text-7xl font-serif font-bold mb-6 tracking-tight text-primary">
-          High standards. Shared ambition.
-        </h1>
-        
-        <p className="text-xl md:text-2xl text-secondary max-w-2xl mb-10 font-light">
-          Irbis steps into the arena with founders and leaders to appoint exceptional people — combining disciplined method, human presence, and AI-assisted clarity.
-        </p>
-        
-        <div className="flex gap-4">
-          {user ? (
-            <Link
-              href="/dashboard"
-              className="button-primary shadow-lg shadow-blue-900/10"
-            >
-              Discuss a Search
-            </Link>
-          ) : (
-            <Link
-              href="/login"
-              className="button-primary"
-            >
-              Explore Services
-            </Link>
-          )}
-        </div>
-      </header>
+      {/* NEW: Office Hero with Animation Structure */}
+      <OfficeHeroAnimated />
       
       {/* What We Do Section */}
       <section className="py-20 px-4 bg-primary">

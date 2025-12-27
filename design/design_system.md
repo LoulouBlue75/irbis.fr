@@ -1,12 +1,38 @@
 # IRBIS Design System — Swiss Minimalism
 
+> **Status**: Maintenu pour compatibilité technique - Référence principale: [design/unified-strategy.md](unified-strategy.md)
 > **Version** : 1.0  
 > **Style** : Épuré, Thème Blanc, Professional  
+> **Last Update**: 24 décembre 2024 (sync avec unified-strategy.md)
 > **Philosophy** : "Executive Search with Adaptive Precision" traduit visuellement
+
+## Synthèse des Points Clés
+
+| Élément | Valeur | Source |
+|---------|--------|--------|
+| **Palette Principale** | Ink Navy #0F1A2E, Foil Gold #BF9E59, Ivory #F6F1E7, Stone #CFC8BB | unified-strategy §4.1 |
+| **Typography** | Geist Sans (UI), Serif éditoriale (titres) | unified-strategy §4.2 |
+| **Grille** | 12 colonnes, style suisse | unified-strategy §4.4 |
+| **Animations** | 150-250ms micro, 300ms complexes | unified-strategy §4.6 |
+| **Ombres** | Subtiles uniquement (sm/md/lg) | unified-strategy §4.5 |
+
+## Référence au Document de Référence
+
+Pour une vision complète du design system Irbis, consulter **[design/unified-strategy.md](unified-strategy.md)** qui contient :
+
+- **Section 4** — Identité visuelle complète (couleurs, typographie, composants, layout)
+- **Section 4.7** — Iconographie et photographie
+- **Section 4.9** — Responsive et accessibilité
+
+## Notes de Maintenance
+
+Ce document est conservé pour référence technique (tokens CSS, composants). Toutes nouvelles révisions de design doivent être faites dans unified-strategy.md.
 
 ---
 
 ## 🎨 PALETTE DE COULEURS
+
+### Base Colors
 
 ### Base Colors
 ```css

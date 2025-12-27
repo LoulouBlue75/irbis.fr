@@ -1,63 +1,26 @@
 # Irbis Copywriting Strategy (English First)
 
-> **Synthesis**: Blending Irbis's "Executive Search" expertise, Taylor Shift's "Retail Luxury" precision, and "Enlightened Choices" philosophy of Paris project.
+> **Status**: Maintenu pour compatibilité arrière - Référence principale: [design/unified-strategy.md](unified-strategy.md)
+> **Last Update**: 24 décembre 2024 (sync avec unified-strategy.md)
 
-## 1. Verbal Identity
+## Synthèse des Points Clés
 
-### Primary Tagline
-**"Executive Search with Adaptive Precision."**
+| Élément | Valeur | Source |
+|---------|--------|--------|
+| **Tagline Principale** | "Executive Search with Adaptive Precision." | unified-strategy §1.4 |
+| **UVP** | "The alliance of human intuition and algorithmic precision." | unified-strategy §1.5 |
+| **Brand Signature** | "Irbis is a House of Perspective — a place to think clearly and decide well." | unified-strategy §1.6 |
+| **Tone of Voice** | Prestigious yet Modern, Lucid Catalyst, Confidential & Exclusive | unified-strategy §3.1 |
+| **Vocabulaire Clé** | Talent, Mandate, Alignment, Console, Partner | unified-strategy §3.4 |
 
-### Unique Value Proposition (UVP)
-**"The alliance of human intuition and algorithmic precision."**
+## Référence au Document de Référence
 
-### Tone of Voice
-*   **Prestigious yet Modern**: Luxury codes (sobriety, elegance) mixed with tech vocabulary (precision, data, matching).
-*   **"The Lucid Catalyst"**: We don't sell dreams; we reveal data-driven opportunities.
-*   **Confidential & Exclusive**: "Privacy by Design".
+Pour une vision complète du système verbal et du copywriting Irbis, consulter **[design/unified-strategy.md](unified-strategy.md)** qui contient :
 
-## 2. Communication Pillars
+- **Section 3** — Système verbal complet (ton, piliers, lexiques)
+- **Section 3.5** — Micro-copy détaillé par surface
+- **Section 3.6** — Principes éditoriaux
 
-### A. Adaptive Precision (The "How")
-*   **Concept**: No "spray and pray". Every match is calculated across 8 dimensions (Skills, Leadership, Image, etc.).
-*   **Wording**: "8D Matching", "Contextual Scoring", "Structural Alignment".
-*   **Message**: "Stop searching. Find with certainty."
+## Notes de Maintenance
 
-### B. Absolute Confidentiality (The "Safety")
-*   **Concept**: Talents are visible only if they match. Salaries are verified but masked.
-*   **Wording**: "Privacy by Design", "Budget Alignment", "Controlled Visibility".
-*   **Message**: "Alignment without revelation."
-
-### C. Enlightened Choices (The "Why")
-*   **Concept**: Empowering decision-making through data transparency.
-*   **Wording**: "Reveal Potential", "Course Hypotheses", "Actionable Clarity".
-*   **Message**: "We analyze. We reveal. You decide."
-
-## 3. Key Vocabulary (Lexicon)
-
-| Standard Term | Irbis Term | Why? |
-| :--- | :--- | :--- |
-| **Candidate** | **Talent** | More empowering, focuses on potential. |
-| **Job Offer** | **Mandate / Opportunity** | "Executive Search" code, more exclusive. |
-| **Matching** | **Alignment** | Suggests harmony rather than just correspondence. |
-| **CV** | **Professional Footprint** | More holistic (includes soft skills, image, leadership). |
-| **Dashboard** | **Cockpit** | Notion of piloting and precision. |
-| **Recruiter** | **Consultant / Partner** | Strategic accompaniment vs transactional. |
-
-## 4. Application UI (Microcopy)
-
-### Landing Page
-*   **Hero**: "Excellence isn't found. It's detected."
-*   **CTA**: "Discover Approach" / "Submit a Mandate"
-
-### Dashboard
-*   **Title**: "Overview"
-*   **Stats**: "Identified Talents", "Active Mandates", "Validated Alignments".
-
-### Talent Profile
-*   **Score**: "Compatibility Index"
-*   **Analysis**: "What this path reveals..."
-*   **Action**: "Initiate Approach" (vs "Contact")
-
-### Upload CV
-*   **Title**: "Profile Ingestion"
-*   **Instruction**: "Drop file for structural analysis."
+Ce document est conservé pour historique et compatibilité. Toutes nouvelles révisions de copywriting doivent être faites dans unified-strategy.md.
