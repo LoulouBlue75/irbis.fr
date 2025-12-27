@@ -1,7 +1,7 @@
 # IRBIS — Brand & UX Specification
 
-> **Version**: 1.0
-> **Status**: Working Document
+> **Version**: 2.0
+> **Status**: Complete - Ready for Visily
 > **Purpose**: Actionable specs for Visily mockups
 > **Language**: English-first (FR adaptation follows)
 
