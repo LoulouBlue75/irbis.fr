@@ -892,33 +892,310 @@ Visual: 8-point radar or simple list
 
 ---
 
-## 13. VISUAL PRINCIPLES (for Visily)
+## 13. COMPONENT LIBRARY
 
-### Colors
-- **Primary**: Ink Navy #0F1A2E (text, structure)
-- **Accent**: Foil Gold #BF9E59 (CTAs, highlights — rare)
-- **Background**: Ivory #F6F1E7 (main), White #FFFFFF (cards)
-- **Secondary text**: Stone #CFC8BB
-
-### Typography
-- **Headlines**: Serif (editorial feel)
-- **Body/UI**: Sans-serif (Geist)
-- **Hierarchy**: Display > H1 > H2 > H3 > Body > Labels
-
-### Spacing
-- Section padding: 80px vertical
-- Card padding: 24px
-- Grid gap: 32px
-- Touch targets: min 44x44px
-
-### Components
-- Cards: Light border (#e5e5e5), subtle hover shadow
-- Buttons: 12px 24px padding, 6px radius
-- Forms: Labels above, visible focus state
+> **Usage**: Reference for Visily/Gemini mockups and code implementation.
+> **Principle**: Every component has defined variants, states, and specs.
 
 ---
 
-## 14. NEXT STEPS
+### 13.1 BUTTONS
+
+| Variant | Background | Text | Border | Usage |
+|---------|------------|------|--------|-------|
+| **Primary** | Foil Gold #BF9E59 | White #FFFFFF | none | Main CTA (1 per screen max) |
+| **Secondary** | Transparent | Ink Navy #0F1A2E | 1px Ink Navy | Alternative actions |
+| **Ghost** | Transparent | Ink Navy #0F1A2E | none | Tertiary, navigation |
+| **Destructive** | #dc2626 | White | none | Delete, cancel (rare) |
+
+**States**:
+| State | Effect |
+|-------|--------|
+| Default | As defined |
+| Hover | Darken 10%, cursor pointer |
+| Focus | Ring 2px offset, accent color |
+| Disabled | Opacity 50%, cursor not-allowed |
+| Loading | Spinner icon, text hidden |
+
+**Sizes**:
+| Size | Padding | Font | Height |
+|------|---------|------|--------|
+| sm | 8px 16px | 14px | 32px |
+| md | 12px 24px | 16px | 40px |
+| lg | 16px 32px | 18px | 48px |
+
+**Specs**:
+- Border radius: 6px
+- Font weight: 500
+- Transition: 150ms ease
+
+---
+
+### 13.2 CARDS
+
+| Variant | Background | Border | Shadow | Usage |
+|---------|------------|--------|--------|-------|
+| **Default** | White #FFFFFF | 1px #e5e5e5 | none | Standard content |
+| **Editorial** | Ivory #F6F1E7 | 1px #d4d4d4 | none | Marketing, quotes |
+| **Stats** | White #FFFFFF | 1px #e5e5e5 | none | Dashboard metrics |
+| **Interactive** | White #FFFFFF | 1px #e5e5e5 | sm on hover | Clickable items |
+
+**States**:
+| State | Effect |
+|-------|--------|
+| Default | As defined |
+| Hover (interactive) | Shadow-sm, border darken |
+| Selected | Border accent, subtle bg tint |
+
+**Specs**:
+- Padding: 24px
+- Border radius: 8px
+- Gap between cards: 24px (grid) or 16px (list)
+
+---
+
+### 13.3 INPUTS
+
+| Variant | Usage |
+|---------|-------|
+| **Text** | Single line input |
+| **Textarea** | Multi-line, resizable |
+| **Select** | Dropdown choices |
+| **Search** | With search icon |
+
+**States**:
+| State | Border | Background | Effect |
+|-------|--------|------------|--------|
+| Default | #e5e5e5 | White | — |
+| Focus | #BF9E59 | White | Ring 2px |
+| Error | #dc2626 | #fef2f2 | Error message below |
+| Disabled | #f0f0f0 | #fafafa | Opacity 60% |
+
+**Specs**:
+- Padding: 12px 16px
+- Border radius: 6px
+- Font size: 16px
+- Label: Above, 14px, font-weight 500
+- Placeholder: #a3a3a3
+
+---
+
+### 13.4 BADGES
+
+| Variant | Background | Text | Usage |
+|---------|------------|------|-------|
+| **Active** | #d1fae5 | #065f46 | Active status |
+| **In Progress** | #fef3c7 | #92400e | Ongoing |
+| **Closed** | #f5f5f5 | #737373 | Completed/inactive |
+| **New** | #dbeafe | #1e40af | New items |
+| **Urgent** | #fee2e2 | #991b1b | High priority |
+
+**Specs**:
+- Padding: 4px 8px
+- Border radius: 4px
+- Font size: 12px
+- Font weight: 500
+- Text transform: none
+
+---
+
+### 13.5 NAVIGATION
+
+#### Header (Marketing)
+| Element | Specs |
+|---------|-------|
+| Height | 64px |
+| Background | White (transparent on hero, solid on scroll) |
+| Logo | Left, Ink Navy |
+| Nav links | Center or right, 16px, font-weight 500 |
+| CTA | Right, Primary button sm |
+| Sticky | Yes, z-index 50 |
+
+#### Sidebar (Console)
+| Element | Specs |
+|---------|-------|
+| Width | 240px (desktop), collapsed 64px (tablet) |
+| Background | White or Ink Navy (dark mode) |
+| Items | Icon + label, 14px |
+| Active state | Gold accent left border, bg tint |
+| Collapse | Icon-only on tablet |
+
+#### Footer
+| Element | Specs |
+|---------|-------|
+| Background | Ink Navy #0F1A2E |
+| Text | White / Stone |
+| Columns | 3-4, responsive |
+| Padding | 64px vertical |
+
+---
+
+### 13.6 TABLES
+
+| Element | Specs |
+|---------|-------|
+| Header row | Background #fafafa, font-weight 600, 14px |
+| Body row | White, border-bottom 1px #f0f0f0 |
+| Row hover | Background #fafafa |
+| Cell padding | 12px 16px |
+| Actions column | Right-aligned, icon buttons |
+
+**Empty state**:
+- Centered illustration (optional)
+- Headline + body text
+- CTA button
+
+---
+
+### 13.7 MODALS & DIALOGS
+
+| Element | Specs |
+|---------|-------|
+| Overlay | Black 50% opacity |
+| Container | White, max-width 480px (sm), 640px (md), 800px (lg) |
+| Border radius | 12px |
+| Padding | 24px |
+| Header | Title left, close button right |
+| Footer | Actions right-aligned |
+| Animation | Fade + scale, 200ms |
+
+---
+
+### 13.8 ICONS
+
+**Style**: Line icons, 1.5px stroke, rounded caps
+
+**Sizes**:
+| Size | Dimensions | Usage |
+|------|------------|-------|
+| sm | 16x16 | Inline, badges |
+| md | 20x20 | Buttons, nav |
+| lg | 24x24 | Headers, features |
+| xl | 32x32 | Empty states |
+
+**Library**: Lucide React (already in project)
+
+**Key icons**:
+| Icon | Usage |
+|------|-------|
+| Briefcase | Mandates |
+| Users | Talents |
+| Search | Search |
+| Plus | Add/create |
+| ChevronRight | Navigation, expand |
+| Check | Success, validation |
+| X | Close, error |
+| Settings | Settings |
+| LogOut | Logout |
+
+---
+
+### 13.9 TYPOGRAPHY SCALE
+
+| Token | Size | Weight | Line Height | Usage |
+|-------|------|--------|-------------|-------|
+| display | 56px | 700 | 1.1 | Hero headlines |
+| h1 | 40px | 600 | 1.2 | Page titles |
+| h2 | 32px | 600 | 1.25 | Section titles |
+| h3 | 24px | 600 | 1.3 | Card titles |
+| h4 | 20px | 600 | 1.4 | Subsections |
+| body-lg | 18px | 400 | 1.6 | Lead paragraphs |
+| body | 16px | 400 | 1.6 | Default text |
+| body-sm | 14px | 400 | 1.5 | Secondary text |
+| caption | 12px | 400 | 1.4 | Labels, hints |
+
+**Fonts**:
+- Headlines (editorial): System serif or custom
+- Body/UI: Geist Sans
+
+---
+
+### 13.10 SPACING SCALE
+
+| Token | Value | Usage |
+|-------|-------|-------|
+| space-1 | 4px | Micro gaps |
+| space-2 | 8px | Inline elements |
+| space-3 | 12px | Compact padding |
+| space-4 | 16px | Default gap |
+| space-6 | 24px | Card padding, component gap |
+| space-8 | 32px | Section gap |
+| space-12 | 48px | Large section gap |
+| space-16 | 64px | Page margins |
+| space-20 | 80px | Hero padding |
+
+---
+
+### 13.11 SHADOWS
+
+| Token | Value | Usage |
+|-------|-------|-------|
+| shadow-sm | 0 2px 8px rgba(0,0,0,0.04) | Card hover |
+| shadow-md | 0 4px 16px rgba(0,0,0,0.08) | Dropdowns |
+| shadow-lg | 0 8px 24px rgba(0,0,0,0.12) | Modals |
+
+---
+
+### 13.12 BREAKPOINTS
+
+| Token | Width | Target |
+|-------|-------|--------|
+| sm | 640px | Mobile landscape |
+| md | 768px | Tablet |
+| lg | 1024px | Desktop |
+| xl | 1280px | Large desktop |
+| 2xl | 1536px | Ultra-wide |
+
+---
+
+### 13.13 ANIMATION
+
+| Type | Duration | Easing | Usage |
+|------|----------|--------|-------|
+| Micro | 150ms | ease | Hover, focus |
+| Standard | 250ms | ease-out | Transitions |
+| Complex | 300ms | cubic-bezier(0.4, 0, 0.2, 1) | Modals, menus |
+
+**Principles**:
+- Transform and opacity only
+- Never bouncy
+- Calm, controlled, premium feel
+
+---
+
+## 14. QUICK REFERENCE (Visily Cheatsheet)
+
+### Colors
+| Token | Hex | Usage |
+|-------|-----|-------|
+| ink-navy | #0F1A2E | Text, structure |
+| foil-gold | #BF9E59 | CTA, accent (rare) |
+| ivory | #F6F1E7 | Background |
+| white | #FFFFFF | Cards |
+| stone | #CFC8BB | Secondary text |
+
+### Typography
+| Level | Size | Font |
+|-------|------|------|
+| Display | 56px | Serif |
+| H1 | 40px | Serif |
+| H2 | 32px | Serif |
+| Body | 16px | Geist Sans |
+| Caption | 12px | Geist Sans |
+
+### Key Specs
+| Element | Value |
+|---------|-------|
+| Button radius | 6px |
+| Card radius | 8px |
+| Card padding | 24px |
+| Section gap | 80px |
+| Header height | 64px |
+| Touch target | min 44px |
+
+---
+
+## 15. NEXT STEPS
 
 ### Phase 1: Validate & Mockup
 - [ ] Review all page specs (this document)
@@ -944,7 +1221,7 @@ Visual: 8-point radar or simple list
 
 ---
 
-## 15. PAGE CHECKLIST
+## 16. PAGE CHECKLIST
 
 | Page | Spec ✓ | Mockup | Code |
 |------|--------|--------|------|
@@ -965,4 +1242,5 @@ Visual: 8-point radar or simple list
 
 *Document created: 2024-12-27*
 *Last updated: 2024-12-27*
-*Reference: design/unified-strategy.md*
+*Component Library added: 2024-12-27*
+*Reference: design/unified-strategy.md, Matrice_dev*
