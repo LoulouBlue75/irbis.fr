@@ -7,30 +7,39 @@ export default function TailorShiftLayout({
 }) {
   return (
     <div className="flex min-h-screen flex-col">
-      <header className="sticky top-0 z-50 w-full border-b bg-black text-white">
-        <div className="container flex h-16 items-center justify-between">
-          <div className="flex items-center gap-2 font-bold text-xl">
-            <Link href="/tailor-shift" className="flex items-center gap-2">
-              <span className="text-white">TAILOR</span>
-              <span className="text-yellow-500">SHIFT</span>
-            </Link>
-          </div>
-          <nav className="hidden md:flex gap-6 text-sm font-medium">
-            <Link href="/tailor-shift" className="hover:text-gray-300">Home</Link>
-            <Link href="/tailor-shift/opportunities" className="hover:text-gray-300">Opportunities</Link>
-            <Link href="/tailor-shift/talents" className="hover:text-gray-300">Talents</Link>
-          </nav>
-          <div className="flex items-center gap-4">
-            <Link href="/login" className="text-sm font-medium hover:text-gray-300">
-              Login
+      {/* HEADER */}
+      <header className="sticky top-0 z-50 w-full bg-[#0F1A2E] text-white">
+        <div className="container mx-auto flex h-16 items-center justify-between px-6">
+          <Link href="/tailor-shift" className="flex items-center gap-2 font-bold text-xl">
+            <span className="text-white">TAILOR</span>
+            <span className="text-[#BF9E59]">SHIFT</span>
+          </Link>
+
+          <div className="flex items-center gap-6">
+            <Link
+              href="/"
+              className="text-sm text-white/70 hover:text-white transition-colors"
+            >
+              ← Back to Irbis
             </Link>
           </div>
         </div>
       </header>
+
       <main className="flex-1">{children}</main>
-      <footer className="bg-black text-white py-6">
-        <div className="container flex justify-center">
-          <p className="text-sm text-gray-400">© 2024 Tailor Shift. Luxury Retail Recruitment.</p>
+
+      {/* FOOTER */}
+      <footer className="bg-[#0F1A2E] text-white py-8">
+        <div className="container mx-auto px-6 flex flex-col md:flex-row justify-between items-center gap-4">
+          <p className="text-sm text-[#CFC8BB]">
+            © 2025 Tailor Shift — by Irbis Partners
+          </p>
+          <Link
+            href="/"
+            className="text-sm text-[#CFC8BB] hover:text-white transition-colors"
+          >
+            irbis.fr
+          </Link>
         </div>
       </footer>
     </div>

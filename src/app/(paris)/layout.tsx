@@ -7,30 +7,38 @@ export default function ParisLayout({
 }) {
   return (
     <div className="flex min-h-screen flex-col">
-      <header className="sticky top-0 z-50 w-full border-b bg-white text-black">
-        <div className="container flex h-16 items-center justify-between">
-          <div className="flex items-center gap-2 font-bold text-xl">
-            <Link href="/paris" className="flex items-center gap-2">
-              <span className="text-black">PARIS</span>
-              <span className="text-blue-500">CAREER</span>
-            </Link>
-          </div>
-          <nav className="hidden md:flex gap-6 text-sm font-medium">
-            <Link href="/paris" className="hover:text-gray-600">Home</Link>
-            <Link href="/paris/assessment" className="hover:text-gray-600">Assessment</Link>
-            <Link href="/paris/coaching" className="hover:text-gray-600">Coaching</Link>
-          </nav>
-          <div className="flex items-center gap-4">
-            <Link href="/login" className="text-sm font-medium hover:text-gray-600">
-              Login
+      {/* HEADER */}
+      <header className="sticky top-0 z-50 w-full bg-white border-b border-gray-100">
+        <div className="container mx-auto flex h-16 items-center justify-between px-6">
+          <Link href="/paris" className="flex items-center gap-2 font-bold text-xl">
+            <span className="text-[#0F1A2E]">PARIS</span>
+          </Link>
+
+          <div className="flex items-center gap-6">
+            <Link
+              href="/"
+              className="text-sm text-[#0F1A2E]/70 hover:text-[#0F1A2E] transition-colors"
+            >
+              ← Back to Irbis
             </Link>
           </div>
         </div>
       </header>
+
       <main className="flex-1">{children}</main>
-      <footer className="bg-white text-black py-6 border-t">
-        <div className="container flex justify-center">
-          <p className="text-sm text-gray-500">© 2024 Paris Career. Perspective for your path.</p>
+
+      {/* FOOTER */}
+      <footer className="bg-[#0F1A2E] text-white py-8">
+        <div className="container mx-auto px-6 flex flex-col md:flex-row justify-between items-center gap-4">
+          <p className="text-sm text-[#CFC8BB]">
+            © 2025 Paris — by Irbis Partners
+          </p>
+          <Link
+            href="/"
+            className="text-sm text-[#CFC8BB] hover:text-white transition-colors"
+          >
+            irbis.fr
+          </Link>
         </div>
       </footer>
     </div>

@@ -1,5 +1,4 @@
 import Link from "next/link";
-import Image from "next/image";
 
 export default function MarketingLayout({
   children,
@@ -8,43 +7,154 @@ export default function MarketingLayout({
 }) {
   return (
     <div className="flex min-h-screen flex-col">
-      <header className="sticky top-0 z-50 w-full border-b bg-white/95 backdrop-blur supports-[backdrop-filter]:bg-white/60 dark:bg-black/95 dark:supports-[backdrop-filter]:bg-black/60">
-        <div className="container flex h-16 items-center justify-between">
-          <div className="flex items-center gap-2 font-bold text-xl">
-            <Link href="/" className="flex items-center gap-2">
-              {/* Placeholder for Logo */}
-              <span className="text-blue-900 dark:text-white">IRBIS</span>
-              <span className="text-yellow-500">PARTNERS</span>
+      {/* HEADER */}
+      <header className="sticky top-0 z-50 w-full bg-white border-b border-gray-100">
+        <div className="container mx-auto flex h-16 items-center justify-between px-6">
+          {/* Logo */}
+          <Link href="/" className="flex items-center gap-2 font-bold text-xl">
+            <span className="text-[#0F1A2E]">IRBIS</span>
+            <span className="text-[#BF9E59]">PARTNERS</span>
+          </Link>
+
+          {/* Navigation - 4 links only */}
+          <nav className="hidden md:flex items-center gap-8">
+            <Link
+              href="/approach"
+              className="text-sm font-medium text-[#0F1A2E]/70 hover:text-[#0F1A2E] transition-colors"
+            >
+              Approach
             </Link>
-          </div>
-          <nav className="hidden md:flex gap-6 text-sm font-medium">
-            <Link href="/" className="transition-colors hover:text-foreground/80 text-foreground/60">Home</Link>
-            <Link href="/about" className="transition-colors hover:text-foreground/80 text-foreground/60">About</Link>
-            <Link href="/services" className="transition-colors hover:text-foreground/80 text-foreground/60">Services</Link>
-            <Link href="/references" className="transition-colors hover:text-foreground/80 text-foreground/60">References</Link>
-            <Link href="/use-cases" className="transition-colors hover:text-foreground/80 text-foreground/60">Use Cases</Link>
-            <Link href="/clients" className="transition-colors hover:text-foreground/80 text-foreground/60">Clients</Link>
-            <Link href="/candidates" className="transition-colors hover:text-foreground/80 text-foreground/60">Candidates</Link>
-          </nav>
-          <div className="flex items-center gap-4">
-            <Link href="/login" className="text-sm font-medium transition-colors hover:text-foreground/80 text-foreground/60">
-              Login
+            <Link
+              href="/executive-search"
+              className="text-sm font-medium text-[#0F1A2E]/70 hover:text-[#0F1A2E] transition-colors"
+            >
+              Executive Search
+            </Link>
+            <Link
+              href="/references"
+              className="text-sm font-medium text-[#0F1A2E]/70 hover:text-[#0F1A2E] transition-colors"
+            >
+              References
             </Link>
             <Link
               href="/contact"
-              className="hidden md:inline-flex h-9 items-center justify-center rounded-md bg-blue-900 px-4 py-2 text-sm font-medium text-white shadow transition-colors hover:bg-blue-900/90 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50"
+              className="text-sm font-medium text-[#0F1A2E]/70 hover:text-[#0F1A2E] transition-colors"
             >
-              Discuss a mandate
+              Contact
             </Link>
-          </div>
+          </nav>
+
+          {/* CTA */}
+          <Link
+            href="/contact"
+            className="hidden md:inline-flex h-10 items-center justify-center rounded-md bg-[#BF9E59] px-6 text-sm font-medium text-white transition-colors hover:bg-[#A8894D]"
+          >
+            Start a conversation
+          </Link>
+
+          {/* Mobile menu button */}
+          <button className="md:hidden p-2">
+            <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
+            </svg>
+          </button>
         </div>
       </header>
+
+      {/* Main content */}
       <main className="flex-1">{children}</main>
-      <footer className="border-t py-6 md:py-0">
-        <div className="container flex flex-col items-center justify-between gap-4 md:h-24 md:flex-row">
-          <p className="text-center text-sm leading-loose text-muted-foreground md:text-left">
-            © 2024 Irbis Partners. All rights reserved.
-          </p>
+
+      {/* FOOTER */}
+      <footer className="bg-[#0F1A2E] text-white py-16">
+        <div className="container mx-auto px-6">
+          <div className="grid grid-cols-1 md:grid-cols-4 gap-12 mb-12">
+            {/* Logo */}
+            <div>
+              <Link href="/" className="flex items-center gap-2 font-bold text-xl mb-4">
+                <span className="text-white">IRBIS</span>
+                <span className="text-[#BF9E59]">PARTNERS</span>
+              </Link>
+              <p className="text-sm text-[#CFC8BB]">
+                Executive search with adaptive precision.
+              </p>
+            </div>
+
+            {/* Services */}
+            <div>
+              <h4 className="font-semibold mb-4 text-sm">Services</h4>
+              <ul className="space-y-3">
+                <li>
+                  <Link href="/executive-search" className="text-sm text-[#CFC8BB] hover:text-white transition-colors">
+                    Executive Search
+                  </Link>
+                </li>
+                <li>
+                  <Link href="/tailor-shift" className="text-sm text-[#CFC8BB] hover:text-white transition-colors">
+                    Tailor Shift
+                  </Link>
+                </li>
+                <li>
+                  <Link href="/paris" className="text-sm text-[#CFC8BB] hover:text-white transition-colors">
+                    Paris
+                  </Link>
+                </li>
+              </ul>
+            </div>
+
+            {/* Company */}
+            <div>
+              <h4 className="font-semibold mb-4 text-sm">Company</h4>
+              <ul className="space-y-3">
+                <li>
+                  <Link href="/about" className="text-sm text-[#CFC8BB] hover:text-white transition-colors">
+                    About
+                  </Link>
+                </li>
+                <li>
+                  <Link href="/approach" className="text-sm text-[#CFC8BB] hover:text-white transition-colors">
+                    Approach
+                  </Link>
+                </li>
+                <li>
+                  <Link href="/references" className="text-sm text-[#CFC8BB] hover:text-white transition-colors">
+                    References
+                  </Link>
+                </li>
+              </ul>
+            </div>
+
+            {/* Connect */}
+            <div>
+              <h4 className="font-semibold mb-4 text-sm">Connect</h4>
+              <ul className="space-y-3">
+                <li>
+                  <Link href="/contact" className="text-sm text-[#CFC8BB] hover:text-white transition-colors">
+                    Contact
+                  </Link>
+                </li>
+                <li>
+                  <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer" className="text-sm text-[#CFC8BB] hover:text-white transition-colors">
+                    LinkedIn
+                  </a>
+                </li>
+              </ul>
+            </div>
+          </div>
+
+          {/* Bottom bar */}
+          <div className="border-t border-white/10 pt-8 flex flex-col md:flex-row justify-between items-center gap-4">
+            <p className="text-sm text-[#CFC8BB]">
+              © 2025 Irbis Partners. All rights reserved.
+            </p>
+            <div className="flex gap-6">
+              <Link href="/privacy" className="text-sm text-[#CFC8BB] hover:text-white transition-colors">
+                Privacy
+              </Link>
+              <Link href="/terms" className="text-sm text-[#CFC8BB] hover:text-white transition-colors">
+                Terms
+              </Link>
+            </div>
+          </div>
         </div>
       </footer>
     </div>
