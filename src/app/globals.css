@@ -1,6 +1,10 @@
 @import "tailwindcss";
 @import "tw-animate-css";
 
+/* Google Fonts - Stitch Design */
+@import url('https://fonts.googleapis.com/css2?family=Manrope:wght@200..800&family=Noto+Sans:wght@400;500;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap');
+
 @custom-variant dark (&:is(.dark *));
 
 /* ============================================
@@ -27,8 +31,19 @@
   /* Brand Colors (Legacy/Brand specific) */
   --ink: #0F1A2E;
   --gold: #BF9E59;
+  --gold-dark: #A8894D;
   --ivory: #F6F1E7;
   --stone: #CFC8BB;
+
+  /* Stitch Design System Colors */
+  --stitch-primary: #BF9E59;
+  --stitch-primary-dark: #A8894D;
+  --stitch-background-light: #ffffff;
+  --stitch-background-alt: #f8f9fc;
+  --stitch-background-dark: #0F1A2E;
+  --stitch-text-main: #0d121b;
+  --stitch-text-muted: #6b7280;
+  --stitch-border-light: #e7ebf3;
 
   /* Accents */
   --accent-primary: #2563eb;          /* Royal Blue - Actions */
@@ -356,4 +371,59 @@ a:hover {
   display: flex;
   flex-direction: column;
   gap: var(--space-4);
+}
+
+/* ============================================
+   STITCH DESIGN SYSTEM - Rich Effects
+   ============================================ */
+
+/* Material Symbols */
+.material-symbols-outlined {
+  font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+::-webkit-scrollbar-thumb {
+  background: #cbd5e1;
+  border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #94a3b8;
+}
+
+/* Selection Styling */
+::selection {
+  background: rgba(191, 158, 89, 0.2);
+  color: var(--gold);
+}
+
+/* Fade In Up Animation */
+@keyframes fade-in-up {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-fade-in-up {
+  animation: fade-in-up 0.8s ease-out forwards;
+}
+
+/* Font Display */
+.font-display {
+  font-family: 'Manrope', sans-serif;
+}
+
+.font-body {
+  font-family: 'Noto Sans', sans-serif;
 }
