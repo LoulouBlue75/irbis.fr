@@ -8,61 +8,33 @@
 @custom-variant dark (&:is(.dark *));
 
 /* ============================================
-   IRBIS DESIGN SYSTEM — Swiss Minimalism
-   Theme: Light Only (No Dark Mode)
+   IRBIS DESIGN SYSTEM — Stitch Blue Theme
+   Theme: Light & Dark Support
    ============================================ */
 
 :root {
-  /* Base Colors - Backgrounds */
-  --background-primary: #ffffff;      /* Pure White */
-  --background-secondary: #fafafa;    /* Subtle Gray for cards */
-  --background-tertiary: #f5f5f5;     /* Hover states */
-
-  /* Base Colors - Text */
-  --text-primary: #171717;            /* Deep Charcoal - Body */
-  --text-secondary: #737373;          /* Medium Gray - Labels */
-  --text-tertiary: #a3a3a3;           /* Light Gray - Hints */
-
-  /* Base Colors - Borders */
-  --border-primary: #e5e5e5;          /* Default borders */
-  --border-secondary: #f0f0f0;        /* Subtle dividers */
-  --border-strong: #d4d4d4;           /* Emphasized borders */
-
-  /* Brand Colors (Legacy/Brand specific) */
-  --ink: #0F1A2E;
-  --gold: #BF9E59;
-  --gold-dark: #A8894D;
-  --ivory: #F6F1E7;
-  --stone: #CFC8BB;
-
   /* Stitch Design System Colors */
-  --stitch-primary: #BF9E59;
-  --stitch-primary-dark: #A8894D;
-  --stitch-background-light: #ffffff;
-  --stitch-background-alt: #f8f9fc;
-  --stitch-background-dark: #0F1A2E;
-  --stitch-text-main: #0d121b;
-  --stitch-text-muted: #6b7280;
-  --stitch-border-light: #e7ebf3;
+  --primary: #1152d4;           /* Stitch Blue */
+  --primary-dark: #0d3da0;      /* Darker Blue */
+  
+  --background-light: #ffffff;
+  --background-alt: #f8f9fc;
+  --background-dark: #101622;
+  
+  --text-main: #0d121b;
+  --text-muted: #4c669a;
+  --border-light: #e7ebf3;
 
-  /* Accents */
-  --accent-primary: #2563eb;          /* Royal Blue - Actions */
-  --accent-primary-hover: #1d4ed8;    /* Darker blue on hover */
-  --accent-success: #059669;          /* Forest Green - Matches/Success */
-  --accent-warning: #f59e0b;          /* Amber - Warnings */
-  --accent-danger: #dc2626;           /* Red - Errors/Delete */
-
-  /* Status Colors */
-  --status-active: #059669;
-  --status-pending: #f59e0b;
-  --status-inactive: #737373;
-  --status-new: #2563eb;
-
-  /* Compatibility Scores */
-  --score-excellent: #059669;    /* > 85% */
-  --score-good: #2563eb;         /* 70-85% */
-  --score-average: #f59e0b;      /* 50-70% */
-  --score-low: #737373;          /* < 50% */
+  /* Mapping to generic variables for compatibility */
+  --background-primary: var(--background-light);
+  --background-secondary: var(--background-alt);
+  --text-primary: var(--text-main);
+  --text-secondary: var(--text-muted);
+  --border-primary: var(--border-light);
+  
+  /* Legacy/Brand specific mapping */
+  --gold: var(--primary); /* Remap gold to primary blue for compatibility */
+  --ink: var(--background-dark);
 
   /* Spacing System (4px base) */
   --space-1: 4px;
@@ -77,28 +49,6 @@
   --space-16: 64px;
   --space-20: 80px;
 
-  /* Typography Scale */
-  --text-display: 3.5rem;      /* 56px - Hero titles */
-  --text-h1: 2.5rem;          /* 40px */
-  --text-h2: 2rem;            /* 32px */
-  --text-h3: 1.5rem;          /* 24px */
-  --text-h4: 1.25rem;         /* 20px */
-  --text-h5: 1.125rem;        /* 18px */
-  --text-base: 1rem;          /* 16px - Default */
-  --text-sm: 0.875rem;        /* 14px - Labels */
-  --text-xs: 0.75rem;         /* 12px - Hints */
-
-  /* Font Weights */
-  --font-weight-normal: 400;
-  --font-weight-medium: 500;
-  --font-weight-semibold: 600;
-  --font-weight-bold: 700;
-
-  /* Line Heights */
-  --leading-tight: 1.25;
-  --leading-normal: 1.5;
-  --leading-relaxed: 1.75;
-
   /* Shadows */
   --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.04);
   --shadow-md: 0 4px 16px rgba(0, 0, 0, 0.08);
@@ -112,31 +62,21 @@
 }
 
 @theme inline {
-  --color-background-primary: var(--background-primary);
-  --color-background-secondary: var(--background-secondary);
-  --color-background-tertiary: var(--background-tertiary);
+  --color-primary: var(--primary);
+  --color-primary-dark: var(--primary-dark);
+  --color-background-light: var(--background-light);
+  --color-background-alt: var(--background-alt);
+  --color-background-dark: var(--background-dark);
+  --color-text-main: var(--text-main);
+  --color-text-muted: var(--text-muted);
+  --color-border-light: var(--border-light);
 
-  --color-text-primary: var(--text-primary);
-  --color-text-secondary: var(--text-secondary);
-  --color-text-tertiary: var(--text-tertiary);
+  /* Compatibility aliases */
+  --color-gold: var(--primary);
+  --color-ink: var(--background-dark);
 
-  --color-border-primary: var(--border-primary);
-  --color-border-secondary: var(--border-secondary);
-  --color-border-strong: var(--border-strong);
-
-  --color-ink: var(--ink);
-  --color-gold: var(--gold);
-  --color-ivory: var(--ivory);
-  --color-stone: var(--stone);
-
-  --color-accent-primary: var(--accent-primary);
-  --color-accent-primary-hover: var(--accent-primary-hover);
-  --color-accent-success: var(--accent-success);
-  --color-accent-warning: var(--accent-warning);
-  --color-accent-danger: var(--accent-danger);
-
-  --font-sans: var(--font-geist-sans);
-  --font-serif: ui-serif, Georgia, Cambria, "Times New Roman", Times, serif;
+  --font-display: 'Manrope', sans-serif;
+  --font-body: 'Noto Sans', sans-serif;
   
   --radius-sm: var(--radius-sm);
   --radius-md: var(--radius-md);
@@ -146,6 +86,19 @@
   --shadow-sm: var(--shadow-sm);
   --shadow-md: var(--shadow-md);
   --shadow-lg: var(--shadow-lg);
+  
+  --animate-fade-in-up: fade-in-up 0.8s ease-out forwards;
+  
+  @keyframes fade-in-up {
+    from {
+      opacity: 0;
+      transform: translateY(30px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
 }
 
 /* ============================================
@@ -162,220 +115,12 @@ html {
 }
 
 body {
-  background: var(--background-primary);
-  color: var(--text-primary);
-  font-family: var(--font-geist-sans), sans-serif;
-  font-size: var(--text-base);
-  line-height: var(--leading-normal);
+  background: var(--background-light);
+  color: var(--text-main);
+  font-family: var(--font-body);
   margin: 0;
   padding: 0;
 }
-
-/* ============================================
-   TYPOGRAPHY UTILITIES
-   ============================================ */
-
-h1, h2, h3, h4, h5, h6 {
-  margin: 0;
-  font-family: var(--font-serif);
-  font-weight: var(--font-weight-semibold);
-  line-height: 1.2;
-  color: var(--text-primary);
-}
-
-h1 { font-size: var(--text-h1); }
-h2 { font-size: var(--text-h2); }
-h3 { 
-  font-size: var(--text-h3); 
-  font-family: var(--font-geist-sans); /* Card titles use Sans per spec */
-}
-h4 { font-size: var(--text-h4); }
-h5 { font-size: var(--text-h5); }
-
-.text-display {
-  font-family: var(--font-serif);
-  font-size: var(--text-display);
-  font-weight: var(--font-weight-bold);
-}
-
-.text-caption {
-  font-family: var(--font-geist-sans);
-  font-size: var(--text-xs);
-  font-weight: var(--font-weight-normal);
-  color: var(--text-secondary);
-}
-
-p {
-  margin: 0;
-  line-height: var(--leading-relaxed);
-}
-
-a {
-  color: inherit;
-  text-decoration: none;
-  transition: opacity 0.2s ease;
-}
-
-a:hover {
-  opacity: 0.8;
-}
-
-/* ============================================
-   COMPONENT BASE STYLES
-   ============================================ */
-
-/* Buttons */
-.btn {
-  height: 44px;
-  border-radius: var(--radius-md);
-  font-weight: var(--font-weight-medium);
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  padding: 0 24px;
-  transition: all 0.2s ease;
-  cursor: pointer;
-  font-size: var(--text-base);
-}
-
-.btn-primary {
-  background: var(--accent-primary);
-  color: white;
-  border: none;
-}
-.btn-primary:hover {
-  background: var(--accent-primary-hover);
-}
-
-.btn-secondary {
-  background: white;
-  color: var(--text-primary);
-  border: 1px solid var(--border-primary);
-}
-.btn-secondary:hover {
-  border-color: var(--accent-primary);
-  color: var(--accent-primary);
-}
-
-.btn-ghost {
-  background: transparent;
-  color: var(--text-secondary);
-  border: none;
-}
-.btn-ghost:hover {
-  background: var(--background-tertiary);
-  color: var(--text-primary);
-}
-
-/* Cards */
-.card {
-  background: var(--background-secondary);
-  border: 1px solid var(--border-primary);
-  border-radius: var(--radius-lg);
-  padding: var(--space-6);
-  transition: all 0.2s ease;
-}
-.card:hover {
-  border-color: var(--border-strong);
-  box-shadow: var(--shadow-sm);
-}
-
-.card-clean {
-  background: white;
-  border: 1px solid var(--border-secondary);
-  border-radius: var(--radius-lg);
-  padding: var(--space-6);
-}
-
-.card-stats {
-  background: white;
-  border: 1px solid var(--border-primary);
-  border-radius: var(--radius-lg);
-  padding: var(--space-6);
-  text-align: left;
-}
-
-/* Badges */
-.badge {
-  display: inline-flex;
-  align-items: center;
-  padding: 4px 12px;
-  border-radius: var(--radius-sm);
-  font-size: var(--text-xs);
-  font-weight: var(--font-weight-medium);
-  background: var(--background-tertiary);
-  color: var(--text-secondary);
-  border: 1px solid var(--border-primary);
-}
-
-.badge-active {
-  background: #d1fae5;
-  color: #065f46;
-  border-color: #a7f3d0;
-}
-
-.badge-pending {
-  background: #fef3c7;
-  color: #92400e;
-  border-color: #fde68a;
-}
-
-.badge-inactive {
-  background: #f5f5f5;
-  color: #737373;
-  border-color: #e5e5e5;
-}
-
-/* Inputs */
-.input {
-  width: 100%;
-  padding: 12px 16px;
-  border: 1px solid var(--border-primary);
-  border-radius: var(--radius-md);
-  font-size: var(--text-base);
-  background: white;
-  color: var(--text-primary);
-  transition: all 0.2s ease;
-}
-
-.input:focus {
-  outline: none;
-  border-color: var(--accent-primary);
-  box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
-}
-
-.input::placeholder {
-  color: var(--text-tertiary);
-}
-
-/* Layout Utilities */
-.bento-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-  gap: var(--space-6);
-}
-
-.split-screen {
-  display: grid;
-  grid-template-columns: 2fr 1fr;
-  gap: var(--space-8);
-}
-
-@media (max-width: 768px) {
-  .split-screen {
-    grid-template-columns: 1fr;
-  }
-}
-
-.card-list {
-  display: flex;
-  flex-direction: column;
-  gap: var(--space-4);
-}
-
-/* ============================================
-   STITCH DESIGN SYSTEM - Rich Effects
-   ============================================ */
 
 /* Material Symbols */
 .material-symbols-outlined {
@@ -399,31 +144,85 @@ a:hover {
 
 /* Selection Styling */
 ::selection {
-  background: rgba(191, 158, 89, 0.2);
-  color: var(--gold);
+  background: rgba(17, 82, 212, 0.2); /* Primary Blue with opacity */
+  color: var(--primary);
 }
 
-/* Fade In Up Animation */
-@keyframes fade-in-up {
-  from {
-    opacity: 0;
-    transform: translateY(30px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
+/* ============================================
+   TYPOGRAPHY UTILITIES
+   ============================================ */
+
+h1, h2, h3, h4, h5, h6 {
+  margin: 0;
+  font-family: var(--font-display);
+  font-weight: 700;
+  line-height: 1.2;
+  color: var(--text-main);
 }
 
-.animate-fade-in-up {
-  animation: fade-in-up 0.8s ease-out forwards;
+p {
+  margin: 0;
+  line-height: 1.75;
+  color: var(--text-muted);
 }
 
-/* Font Display */
-.font-display {
-  font-family: 'Manrope', sans-serif;
+a {
+  color: inherit;
+  text-decoration: none;
+  transition: opacity 0.2s ease;
 }
 
-.font-body {
-  font-family: 'Noto Sans', sans-serif;
+a:hover {
+  opacity: 0.8;
+}
+
+/* ============================================
+   COMPONENT BASE STYLES
+   ============================================ */
+
+/* Buttons */
+.btn {
+  height: 44px;
+  border-radius: var(--radius-md);
+  font-weight: 600;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0 24px;
+  transition: all 0.2s ease;
+  cursor: pointer;
+  font-family: var(--font-body);
+}
+
+.btn-primary {
+  background: var(--primary);
+  color: white;
+  border: none;
+  box-shadow: 0 10px 15px -3px rgba(17, 82, 212, 0.2);
+}
+.btn-primary:hover {
+  background: var(--primary-dark);
+}
+
+.btn-secondary {
+  background: white;
+  color: var(--text-main);
+  border: 1px solid var(--border-light);
+}
+.btn-secondary:hover {
+  border-color: var(--primary);
+  color: var(--primary);
+}
+
+/* Cards */
+.card {
+  background: white;
+  border: 1px solid var(--border-light);
+  border-radius: var(--radius-xl);
+  padding: var(--space-8);
+  transition: all 0.3s ease;
+}
+.card:hover {
+  border-color: rgba(17, 82, 212, 0.3);
+  box-shadow: var(--shadow-xl);
 }

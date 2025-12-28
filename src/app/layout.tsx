@@ -48,7 +48,7 @@ export default async function RootLayout({
   return (
     <html lang="fr">
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased bg-background text-foreground`}
+        className={`${geistSans.variable} ${geistMono.variable} antialiased bg-background-light text-text-main`}
       >
         <GlobalNav />
         <main className="min-h-screen">
