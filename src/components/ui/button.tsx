@@ -5,26 +5,28 @@ import { cva, type VariantProps } from "class-variance-authority"
 import { cn } from "@/lib/utils"
 
 const buttonVariants = cva(
-  "inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg:not([class*='size-'])]:size-4 shrink-0 [&_svg]:shrink-0 h-[44px]",
+  "inline-flex items-center justify-center gap-[var(--space-2)] whitespace-nowrap text-[var(--text-sm)] font-[var(--font-semibold)] tracking-[var(--tracking-wide)] transition-all duration-[var(--duration-normal)] ease-[var(--ease-luxury)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--irbis-gold)] focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg:not([class*='size-'])]:size-4 shrink-0 [&_svg]:shrink-0 cursor-pointer border-none",
   {
     variants: {
       variant: {
         default:
-          "bg-gold text-white hover:bg-gold/90 shadow-sm",
-        destructive:
-          "bg-error text-white hover:bg-error/90 shadow-sm",
-        outline:
-          "border border-ink bg-transparent text-ink shadow-sm hover:bg-ink/5",
+          "bg-[var(--irbis-gold)] text-[var(--irbis-navy)] rounded-[var(--radius-md)] hover:bg-[var(--irbis-gold-dark)] hover:-translate-y-0.5 hover:shadow-[var(--shadow-gold)]",
         secondary:
-          "bg-stone text-ink hover:bg-stone/80 shadow-sm",
-        ghost: "hover:bg-ink/5 text-ink",
-        link: "text-ink underline-offset-4 hover:underline",
+          "bg-[var(--irbis-navy)] text-[var(--irbis-cream)] rounded-[var(--radius-md)] hover:bg-[var(--irbis-navy-light)] hover:-translate-y-0.5 hover:shadow-[var(--shadow-lg)]",
+        outline:
+          "bg-transparent text-[var(--irbis-navy)] border border-solid border-[var(--irbis-gold)] rounded-[var(--radius-md)] hover:bg-[var(--irbis-gold)] hover:text-[var(--irbis-navy)]",
+        ghost:
+          "bg-transparent text-[var(--irbis-navy)] rounded-[var(--radius-md)] hover:bg-[var(--overlay-gold)]",
+        destructive:
+          "bg-[var(--error)] text-white rounded-[var(--radius-md)] hover:bg-[var(--error)]/90",
+        link:
+          "text-[var(--irbis-navy)] underline-offset-4 hover:underline bg-transparent",
       },
       size: {
-        default: "px-6 py-2",
-        sm: "h-8 rounded-md px-3 text-xs",
-        lg: "h-12 rounded-md px-8",
-        icon: "h-9 w-9",
+        default: "h-11 px-[var(--space-6)] py-[var(--space-3)]",
+        sm: "h-9 px-[var(--space-4)] py-[var(--space-2)] text-[var(--text-xs)]",
+        lg: "h-14 px-[var(--space-8)] py-[var(--space-4)] text-[var(--text-base)]",
+        icon: "h-10 w-10 p-0",
       },
     },
     defaultVariants: {
