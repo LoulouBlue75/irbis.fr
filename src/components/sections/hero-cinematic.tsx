@@ -18,11 +18,10 @@ export function HeroCinematic() {
   const vignetteRef = useRef<HTMLDivElement>(null);
 
   const handleScrollToContent = () => {
-    const heroHeight = containerRef.current?.offsetHeight || window.innerHeight;
-    window.scrollTo({
-      top: heroHeight + window.innerHeight * 1.5, // After the pinned section
-      behavior: 'smooth',
-    });
+    const visionSection = document.getElementById('vision');
+    if (visionSection) {
+      visionSection.scrollIntoView({ behavior: 'smooth' });
+    }
   };
 
   useEffect(() => {
@@ -34,77 +33,37 @@ export function HeroCinematic() {
 
     if (!container || !image || !overlay || !content || !vignette) return;
 
-    // Create GSAP context for cleanup
     const ctx = gsap.context(() => {
-      // Main timeline with ScrollTrigger
       const tl = gsap.timeline({
         scrollTrigger: {
           trigger: container,
           start: 'top top',
-          end: '+=150%', // 1.5x viewport height of scroll
+          end: '+=150%',
           pin: true,
-          scrub: 1, // Smooth scrubbing
+          scrub: 1,
           anticipatePin: 1,
         },
       });
 
-      // Phase 1: Zoom into the focal area (between panther, Camus, Federer)
+      // Zoom towards right side (panther + Camus + Federer)
       tl.to(
         image,
         {
           scale: 2.8,
-          // Transform origin: center-right area (between panther head, Camus portrait, Federer book)
-          transformOrigin: '60% 58%',
+          transformOrigin: '72% 50%',
           duration: 0.7,
           ease: 'power2.inOut',
         },
         0
       );
 
-      // Phase 2: Vignette intensifies during zoom (0% - 50%)
-      tl.to(
-        vignette,
-        {
-          opacity: 0.6,
-          duration: 0.5,
-        },
-        0
-      );
-
-      // Phase 3: Vignette fades to reveal content (50% - 80%)
-      tl.to(
-        vignette,
-        {
-          opacity: 0,
-          duration: 0.3,
-        },
-        0.5
-      );
-
-      // Phase 4: Overlay (cream background) fades in (60% - 90%)
-      tl.to(
-        overlay,
-        {
-          opacity: 0.92,
-          duration: 0.3,
-        },
-        0.6
-      );
-
-      // Phase 5: Content appears (70% - 100%)
-      tl.to(
-        content,
-        {
-          opacity: 1,
-          y: 0,
-          duration: 0.3,
-          ease: 'power2.out',
-        },
-        0.7
-      );
+      tl.to(vignette, { opacity: 0.6, duration: 0.5 }, 0);
+      tl.to(vignette, { opacity: 0, duration: 0.3 }, 0.5);
+      tl.to(overlay, { opacity: 0.94, duration: 0.3 }, 0.6);
+      tl.to(content, { opacity: 1, y: 0, duration: 0.3, ease: 'power2.out' }, 0.7);
     }, container);
 
-    return () => ctx.revert(); // Cleanup
+    return () => ctx.revert();
   }, []);
 
   return (
@@ -118,8 +77,9 @@ export function HeroCinematic() {
         className="absolute inset-0 w-full h-full will-change-transform"
         style={{
           backgroundImage: 'url(/images/hero-2mb.jpg)',
-          backgroundSize: 'cover',
+          backgroundSize: 'contain',
           backgroundPosition: 'center',
+          backgroundRepeat: 'no-repeat',
         }}
       />
 
@@ -128,45 +88,52 @@ export function HeroCinematic() {
         ref={vignetteRef}
         className="absolute inset-0 pointer-events-none opacity-0"
         style={{
-          background:
-            'radial-gradient(ellipse at 60% 58%, transparent 20%, rgba(11, 17, 33, 0.8) 70%)',
+          background: 'radial-gradient(ellipse at 72% 50%, transparent 20%, rgba(11, 17, 33, 0.8) 70%)',
         }}
       />
 
-      {/* Cream Overlay (fades in at end) */}
+      {/* Cream Overlay */}
       <div
         ref={overlayRef}
         className="absolute inset-0 bg-paper-cream opacity-0"
       />
 
-      {/* Content — Option A: Minimal Portal */}
+      {/* Content — New Yorker Editorial Style */}
       <div
         ref={contentRef}
         className="absolute inset-0 flex flex-col items-center justify-center opacity-0 translate-y-8"
       >
-        {/* Official Logo */}
-        <img
-          src="/images/Irbis_Logo_full.svg"
-          alt="Irbis Partners"
-          className="h-16 md:h-20 lg:h-24 mb-12"
-        />
+        {/* Brand Name — New Yorker Typography */}
+        <h1 className="font-display text-center mb-6">
+          <span className="block text-6xl md:text-7xl lg:text-8xl xl:text-9xl italic font-light text-ink-navy tracking-tight">
+            Irbis
+          </span>
+          <span className="block text-2xl md:text-3xl lg:text-4xl font-medium text-foil-gold tracking-[0.3em] uppercase mt-2">
+            Partners
+          </span>
+        </h1>
+
+        {/* Tagline */}
+        <p className="font-display text-lg md:text-xl text-ink-light italic mb-12">
+          Executive Search with Adaptive Precision
+        </p>
 
         {/* Gold Line */}
-        <div className="w-24 h-px bg-gradient-to-r from-transparent via-foil-gold to-transparent mb-12" />
+        <div className="w-32 h-px bg-gradient-to-r from-transparent via-foil-gold to-transparent mb-12" />
 
-        {/* CTA */}
+        {/* CTA — The Hunt Begins */}
         <button
           onClick={handleScrollToContent}
           className="group inline-flex flex-col items-center gap-4 text-ink-navy transition-all duration-500 hover:text-foil-gold"
         >
-          <span className="text-sm font-semibold tracking-widest uppercase">
-            Enter the ecosystem
+          <span className="font-display text-lg md:text-xl italic tracking-wide">
+            The hunt begins
           </span>
           <ArrowDown className="w-5 h-5 animate-bounce" />
         </button>
       </div>
 
-      {/* Initial hint overlay - visible before scroll */}
+      {/* Initial scroll hint */}
       <div className="absolute bottom-12 left-1/2 -translate-x-1/2 text-paper-white/80 text-center animate-pulse">
         <p className="font-mono text-xs uppercase tracking-widest mb-2">
           Scroll to enter
