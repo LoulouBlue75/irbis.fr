@@ -3,27 +3,44 @@
 @custom-variant dark (&:is(.dark *));
 
 /* ============================================
-   IRBIS DESIGN SYSTEM v1.0
-   Visual Identity: "Sanctuaire Sculptural"
-   Theme: Light (Cream dominant)
-   Source: Matrice_dev/knowledge/design_system_irbis.md
+   IRBIS DESIGN SYSTEM v2.0
+   Visual Identity: "L'Édition Architecturale"
+   Theme: Paper & Ink (New Yorker / Stationery)
+   Source: Matrice_dev/knowledge/update_design_29DEC2059.md
    ============================================ */
 
 :root {
-  /* === BRAND IRBIS === */
-  --irbis-navy: #1A1F36;
-  --irbis-navy-light: #2A3152;
-  --irbis-navy-dark: #0F1221;
+  /* === LE PAPIER (Fonds) === */
+  --paper-cream: #F9F7F1;       /* Papier à lettre de luxe */
+  --paper-white: #FFFEFC;       /* Papier d'art */
 
-  --irbis-gold: #C9A962;
-  --irbis-gold-light: #D4BC82;
-  --irbis-gold-dark: #A8893E;
+  /* === L'ENCRE (Textes & Traits) === */
+  --ink-black: #121212;         /* Encre de Chine */
+  --ink-navy: #0B1121;          /* Navy très profond, presque noir */
+  --ink-light: #4A4A4A;         /* Encre diluée (gris chaud) */
 
-  --irbis-cream: #FAF8F5;
-  --irbis-cream-dark: #F0EDE8;
+  /* === L'OR (Dorure à chaud) === */
+  --foil-gold: #C6A87C;
+  --foil-bronze: #8C7353;
 
-  --irbis-charcoal: #2D2D2D;
-  --irbis-white: #FFFFFF;
+  /* === STRUCTURE (Architectural) === */
+  --border-hairline: 1px solid rgba(11, 17, 33, 0.08);
+  --border-thick: 3px solid var(--ink-navy);
+
+  /* === LEGACY ALIASES (backwards compat) === */
+  --irbis-navy: var(--ink-navy);
+  --irbis-navy-light: #1A2744;
+  --irbis-navy-dark: #060912;
+
+  --irbis-gold: var(--foil-gold);
+  --irbis-gold-light: #D4C4A0;
+  --irbis-gold-dark: var(--foil-bronze);
+
+  --irbis-cream: var(--paper-cream);
+  --irbis-cream-dark: #EFEAE0;
+
+  --irbis-charcoal: var(--ink-black);
+  --irbis-white: var(--paper-white);
 
   /* === SEMANTIC === */
   --success: #2E7D6B;
@@ -213,7 +230,16 @@
   --color-input: var(--input);
   --color-ring: var(--ring);
 
-  /* Irbis Brand Colors */
+  /* Paper & Ink Colors */
+  --color-paper-cream: var(--paper-cream);
+  --color-paper-white: var(--paper-white);
+  --color-ink-black: var(--ink-black);
+  --color-ink-navy: var(--ink-navy);
+  --color-ink-light: var(--ink-light);
+  --color-foil-gold: var(--foil-gold);
+  --color-foil-bronze: var(--foil-bronze);
+
+  /* Legacy Irbis Aliases */
   --color-irbis-navy: var(--irbis-navy);
   --color-irbis-navy-light: var(--irbis-navy-light);
   --color-irbis-navy-dark: var(--irbis-navy-dark);
