@@ -46,8 +46,8 @@ export function HeroCinematic() {
         image,
         {
           scale: 2.8,
-          // Transform origin: focus on the panther logo (approximately 60% from left, 70% from top)
-          transformOrigin: '70% 78%',
+          // Transform origin: focus on the panther head (center of desk)
+          transformOrigin: '48% 62%',
           duration: 0.7,
           ease: 'power2.inOut',
         },
@@ -111,8 +111,10 @@ export function HeroCinematic() {
         className="absolute inset-0 w-full h-full will-change-transform"
         style={{
           backgroundImage: 'url(/images/hero-2mb.jpg)',
-          backgroundSize: 'cover',
+          backgroundSize: 'contain',
           backgroundPosition: 'center',
+          backgroundRepeat: 'no-repeat',
+          backgroundColor: '#0B1121',
         }}
       />
 
@@ -122,7 +124,7 @@ export function HeroCinematic() {
         className="absolute inset-0 pointer-events-none opacity-0"
         style={{
           background:
-            'radial-gradient(ellipse at 70% 78%, transparent 20%, rgba(11, 17, 33, 0.8) 70%)',
+            'radial-gradient(ellipse at 48% 62%, transparent 20%, rgba(11, 17, 33, 0.8) 70%)',
         }}
       />
 

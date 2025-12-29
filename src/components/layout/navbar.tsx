@@ -58,28 +58,15 @@ export function Navbar({ isLoggedIn = false }: NavbarProps) {
             "flex items-center justify-between transition-all duration-300",
             isScrolled ? "h-16" : "h-20 lg:h-24"
           )}>
-            <Link href="/" className="flex items-center gap-3 group">
-              <div className={cn(
-                "text-[#1A1F36] transition-all duration-300",
-                isScrolled ? "w-8 h-8" : "w-10 h-10"
-              )}>
-                <svg className="w-full h-full" fill="none" viewBox="0 0 48 48">
-                  <path
-                    clipRule="evenodd"
-                    d="M24 0.757355L47.2426 24L24 47.2426L0.757355 24L24 0.757355ZM21 35.7574V12.2426L9.24264 24L21 35.7574Z"
-                    fill="currentColor"
-                    fillRule="evenodd"
-                  />
-                </svg>
-              </div>
-              <span className={cn(
-                "font-serif font-medium text-[#1A1F36] tracking-tight",
-                "transition-all duration-300 group-hover:text-[#C9A962]",
-                isScrolled ? "text-lg" : "text-xl lg:text-2xl",
-                "hidden sm:block"
-              )}>
-                Irbis Partners
-              </span>
+            <Link href="/" className="flex items-center group">
+              <img
+                src="/images/Irbis_Logo_full.svg"
+                alt="Irbis Partners"
+                className={cn(
+                  "transition-all duration-300",
+                  isScrolled ? "h-8" : "h-10 lg:h-12"
+                )}
+              />
             </Link>
 
             <nav className="hidden lg:flex items-center gap-10">
