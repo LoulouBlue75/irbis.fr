@@ -1,15 +1,15 @@
 import Link from "next/link";
 import { ArrowRight } from "lucide-react";
-import { HeroEditorial } from "@/components/sections/hero-editorial";
+import { HeroCinematic } from "@/components/sections/hero-cinematic";
 
 export default function HomePage() {
   return (
     <>
       {/* ============================================
-          HERO — "L'Édition Architecturale"
-          New Yorker / Magazine style
+          HERO — Cinematic GSAP Zoom
+          Rio office → Panther logo reveal → CTAs
           ============================================ */}
-      <HeroEditorial />
+      <HeroCinematic />
 
       {/* ============================================
           VISION — Quote section
