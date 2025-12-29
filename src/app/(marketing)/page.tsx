@@ -15,7 +15,7 @@ export default function HomePage() {
           VISION — Quote section
           Centered, monumental, breathing space
           ============================================ */}
-      <section className="py-32 lg:py-40 px-6 lg:px-12 bg-paper-cream">
+      <section id="vision" className="py-32 lg:py-40 px-6 lg:px-12 bg-paper-cream">
         <div className="max-w-[1280px] mx-auto flex flex-col items-center text-center">
           {/* Architectural grid line */}
           <div className="w-full h-px bg-ink-navy/5 mb-16" />
@@ -67,8 +67,10 @@ export default function HomePage() {
             {/* Paper shadow */}
             <div className="absolute inset-0 bg-ink-navy translate-x-3 translate-y-3 opacity-0 group-hover:opacity-10 transition-opacity duration-500"></div>
 
-            <Link
-              href="/tailor-shift"
+            <a
+              href="https://tailorshift.co"
+              target="_blank"
+              rel="noopener noreferrer"
               className="relative block bg-paper-white border border-ink-navy/10 overflow-hidden transition-transform duration-500 group-hover:-translate-y-1"
             >
               {/* Visual placeholder */}
@@ -98,7 +100,7 @@ export default function HomePage() {
                   <ArrowRight className="w-4 h-4" />
                 </span>
               </div>
-            </Link>
+            </a>
           </div>
 
           {/* Coming Soon — Paris */}

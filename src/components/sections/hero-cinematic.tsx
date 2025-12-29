@@ -3,8 +3,7 @@
 import { useEffect, useRef } from 'react';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
-import Link from 'next/link';
-import { ArrowRight, MessageCircle } from 'lucide-react';
+import { ArrowDown } from 'lucide-react';
 
 // Register GSAP plugin
 if (typeof window !== 'undefined') {
@@ -17,6 +16,14 @@ export function HeroCinematic() {
   const overlayRef = useRef<HTMLDivElement>(null);
   const contentRef = useRef<HTMLDivElement>(null);
   const vignetteRef = useRef<HTMLDivElement>(null);
+
+  const handleScrollToContent = () => {
+    const heroHeight = containerRef.current?.offsetHeight || window.innerHeight;
+    window.scrollTo({
+      top: heroHeight + window.innerHeight * 1.5, // After the pinned section
+      behavior: 'smooth',
+    });
+  };
 
   useEffect(() => {
     const container = containerRef.current;
@@ -41,13 +48,13 @@ export function HeroCinematic() {
         },
       });
 
-      // Phase 1: Zoom into the portfolio (0% - 70%)
+      // Phase 1: Zoom into the focal area (between panther, Camus, Federer)
       tl.to(
         image,
         {
           scale: 2.8,
-          // Transform origin: focus on the panther head (center of desk)
-          transformOrigin: '48% 62%',
+          // Transform origin: center-right area (between panther head, Camus portrait, Federer book)
+          transformOrigin: '60% 58%',
           duration: 0.7,
           ease: 'power2.inOut',
         },
@@ -111,10 +118,8 @@ export function HeroCinematic() {
         className="absolute inset-0 w-full h-full will-change-transform"
         style={{
           backgroundImage: 'url(/images/hero-2mb.jpg)',
-          backgroundSize: 'contain',
+          backgroundSize: 'cover',
           backgroundPosition: 'center',
-          backgroundRepeat: 'no-repeat',
-          backgroundColor: '#0B1121',
         }}
       />
 
@@ -124,7 +129,7 @@ export function HeroCinematic() {
         className="absolute inset-0 pointer-events-none opacity-0"
         style={{
           background:
-            'radial-gradient(ellipse at 48% 62%, transparent 20%, rgba(11, 17, 33, 0.8) 70%)',
+            'radial-gradient(ellipse at 60% 58%, transparent 20%, rgba(11, 17, 33, 0.8) 70%)',
         }}
       />
 
@@ -134,65 +139,31 @@ export function HeroCinematic() {
         className="absolute inset-0 bg-paper-cream opacity-0"
       />
 
-      {/* Content (Header + CTAs) */}
+      {/* Content — Option A: Minimal Portal */}
       <div
         ref={contentRef}
         className="absolute inset-0 flex flex-col items-center justify-center opacity-0 translate-y-8"
       >
-        {/* Logo / Brand */}
-        <div className="mb-8">
-          <div className="w-20 h-20 mx-auto mb-6 border-2 border-foil-gold rounded-full flex items-center justify-center">
-            {/* Panther icon placeholder - can be replaced with actual SVG */}
-            <svg
-              viewBox="0 0 24 24"
-              className="w-10 h-10 text-foil-gold"
-              fill="currentColor"
-            >
-              <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 17.93c-3.95-.49-7-3.85-7-7.93 0-.62.08-1.21.21-1.79L9 15v1c0 1.1.9 2 2 2v1.93zm6.9-2.54c-.26-.81-1-1.39-1.9-1.39h-1v-3c0-.55-.45-1-1-1H8v-2h2c.55 0 1-.45 1-1V7h2c1.1 0 2-.9 2-2v-.41c2.93 1.19 5 4.06 5 7.41 0 2.08-.8 3.97-2.1 5.39z" />
-            </svg>
-          </div>
-          <h1 className="font-display text-5xl md:text-7xl lg:text-8xl text-ink-navy text-center tracking-tight">
-            <span className="block italic font-light">Irbis</span>
-            <span className="block font-medium">Partners</span>
-          </h1>
-        </div>
-
-        {/* Tagline */}
-        <p className="text-ink-light text-lg md:text-xl text-center max-w-xl mb-12 px-6">
-          Executive Search with Adaptive Precision.
-          <br />
-          <span className="text-foil-bronze italic">
-            The alliance of instinct & methodology.
-          </span>
-        </p>
+        {/* Official Logo */}
+        <img
+          src="/images/Irbis_Logo_full.svg"
+          alt="Irbis Partners"
+          className="h-16 md:h-20 lg:h-24 mb-12"
+        />
 
         {/* Gold Line */}
         <div className="w-24 h-px bg-gradient-to-r from-transparent via-foil-gold to-transparent mb-12" />
 
-        {/* CTAs */}
-        <div className="flex flex-col sm:flex-row gap-4">
-          <Link
-            href="/contact"
-            className="group inline-flex items-center justify-center gap-3 px-8 py-4 bg-ink-navy text-paper-cream text-sm font-semibold tracking-wide transition-all duration-500 hover:bg-ink-black hover:-translate-y-1 hover:shadow-xl"
-          >
-            <MessageCircle className="w-4 h-4" />
-            Start a conversation
-          </Link>
-          <Link
-            href="/approach"
-            className="group inline-flex items-center justify-center gap-3 px-8 py-4 bg-transparent text-ink-navy text-sm font-semibold tracking-wide border border-ink-navy/20 transition-all duration-500 hover:border-foil-gold hover:text-foil-gold hover:-translate-y-1"
-          >
-            Discover the 8D method
-            <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
-          </Link>
-        </div>
-
-        {/* Scroll indicator (optional, subtle) */}
-        <div className="absolute bottom-8 left-1/2 -translate-x-1/2">
-          <p className="font-mono text-[10px] text-ink-light/50 uppercase tracking-widest">
-            Scroll to explore
-          </p>
-        </div>
+        {/* CTA */}
+        <button
+          onClick={handleScrollToContent}
+          className="group inline-flex flex-col items-center gap-4 text-ink-navy transition-all duration-500 hover:text-foil-gold"
+        >
+          <span className="text-sm font-semibold tracking-widest uppercase">
+            Enter the ecosystem
+          </span>
+          <ArrowDown className="w-5 h-5 animate-bounce" />
+        </button>
       </div>
 
       {/* Initial hint overlay - visible before scroll */}

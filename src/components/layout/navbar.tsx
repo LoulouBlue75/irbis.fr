@@ -3,24 +3,21 @@
 import { useEffect, useState, useRef } from "react";
 import Link from "next/link";
 import { cn } from "@/lib/utils";
-import { Menu, X } from "lucide-react";
+import { Menu, X, ExternalLink } from "lucide-react";
 
 interface NavItem {
   label: string;
   href: string;
+  external?: boolean;
 }
 
 const navItems: NavItem[] = [
-  { label: "Approach", href: "/approach" },
-  { label: "Executive Search", href: "/executive-search" },
-  { label: "Contact", href: "/contact" },
+  { label: "Talents", href: "/talents" },
+  { label: "Clients", href: "/clients" },
+  { label: "TailorShift", href: "https://tailorshift.co", external: true },
 ];
 
-interface NavbarProps {
-  isLoggedIn?: boolean;
-}
-
-export function Navbar({ isLoggedIn = false }: NavbarProps) {
+export function Navbar() {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const navRef = useRef<HTMLElement>(null);
@@ -64,48 +61,43 @@ export function Navbar({ isLoggedIn = false }: NavbarProps) {
                 alt="Irbis Partners"
                 className={cn(
                   "transition-all duration-300",
-                  isScrolled ? "h-8" : "h-10 lg:h-12"
+                  isScrolled ? "h-10" : "h-12 lg:h-14"
                 )}
               />
             </Link>
 
             <nav className="hidden lg:flex items-center gap-10">
               {navItems.map((item) => (
-                <Link
-                  key={item.href}
-                  href={item.href}
-                  className="relative text-sm font-medium text-[#1A1F36] hover:text-[#C9A962] transition-colors after:absolute after:bottom-0 after:left-0 after:w-0 after:h-px after:bg-[#C9A962] after:transition-all hover:after:w-full"
-                >
-                  {item.label}
-                </Link>
+                item.external ? (
+                  <a
+                    key={item.href}
+                    href={item.href}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="relative inline-flex items-center gap-1.5 text-sm font-medium text-[#1A1F36] hover:text-[#C9A962] transition-colors after:absolute after:bottom-0 after:left-0 after:w-0 after:h-px after:bg-[#C9A962] after:transition-all hover:after:w-full"
+                  >
+                    {item.label}
+                    <ExternalLink className="w-3 h-3 opacity-50" />
+                  </a>
+                ) : (
+                  <Link
+                    key={item.href}
+                    href={item.href}
+                    className="relative text-sm font-medium text-[#1A1F36] hover:text-[#C9A962] transition-colors after:absolute after:bottom-0 after:left-0 after:w-0 after:h-px after:bg-[#C9A962] after:transition-all hover:after:w-full"
+                  >
+                    {item.label}
+                  </Link>
+                )
               ))}
             </nav>
 
-            <div className="flex items-center gap-4">
-              {isLoggedIn ? (
-                <Link
-                  href="/hunting/dashboard"
-                  className="hidden sm:flex items-center justify-center px-5 h-10 bg-[#1A1F36] text-[#FAF8F5] text-sm font-semibold tracking-wide rounded-md transition-all duration-300 hover:bg-[#2A3152] hover:-translate-y-0.5"
-                >
-                  Console
-                </Link>
-              ) : (
-                <Link
-                  href="/contact"
-                  className="hidden sm:flex items-center justify-center px-5 h-10 bg-[#C9A962] text-[#1A1F36] text-sm font-semibold tracking-wide rounded-md transition-all duration-300 hover:bg-[#A8893E] hover:-translate-y-0.5 hover:shadow-[0_0_40px_rgba(201,169,98,0.12)]"
-                >
-                  Get in Touch
-                </Link>
-              )}
-
-              <button
-                onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-                className="lg:hidden flex items-center justify-center w-10 h-10 rounded-md text-[#1A1F36] hover:bg-[rgba(201,169,98,0.15)] transition-colors"
-                aria-label={isMobileMenuOpen ? "Close menu" : "Open menu"}
-              >
-                {isMobileMenuOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
-              </button>
-            </div>
+            <button
+              onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+              className="lg:hidden flex items-center justify-center w-10 h-10 rounded-md text-[#1A1F36] hover:bg-[rgba(201,169,98,0.15)] transition-colors"
+              aria-label={isMobileMenuOpen ? "Close menu" : "Open menu"}
+            >
+              {isMobileMenuOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
+            </button>
           </div>
         </div>
 
@@ -124,24 +116,29 @@ export function Navbar({ isLoggedIn = false }: NavbarProps) {
       )}>
         <nav className="flex flex-col items-center justify-center h-full gap-8 pt-20">
           {navItems.map((item) => (
-            <Link
-              key={item.href}
-              href={item.href}
-              onClick={() => setIsMobileMenuOpen(false)}
-              className="text-3xl font-serif text-[#1A1F36] hover:text-[#C9A962] transition-colors"
-            >
-              {item.label}
-            </Link>
+            item.external ? (
+              <a
+                key={item.href}
+                href={item.href}
+                target="_blank"
+                rel="noopener noreferrer"
+                onClick={() => setIsMobileMenuOpen(false)}
+                className="inline-flex items-center gap-2 text-3xl font-serif text-[#1A1F36] hover:text-[#C9A962] transition-colors"
+              >
+                {item.label}
+                <ExternalLink className="w-5 h-5 opacity-50" />
+              </a>
+            ) : (
+              <Link
+                key={item.href}
+                href={item.href}
+                onClick={() => setIsMobileMenuOpen(false)}
+                className="text-3xl font-serif text-[#1A1F36] hover:text-[#C9A962] transition-colors"
+              >
+                {item.label}
+              </Link>
+            )
           ))}
-          <div className="mt-8">
-            <Link
-              href="/contact"
-              onClick={() => setIsMobileMenuOpen(false)}
-              className="inline-flex items-center justify-center px-6 py-3 bg-[#C9A962] text-[#1A1F36] text-sm font-semibold rounded-md hover:bg-[#A8893E] transition-colors"
-            >
-              Get in Touch
-            </Link>
-          </div>
           <div className="w-16 h-px bg-gradient-to-r from-[#C9A962] to-transparent mt-8" />
         </nav>
       </div>
