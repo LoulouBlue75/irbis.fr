@@ -1,7 +1,7 @@
 # HANDOFF — Irbis Design System Implementation
 
 > **Date**: 29 décembre 2024
-> **Status**: Phase 1 Foundation — TERMINÉE
+> **Status**: Phase 2 Layout Components — EN COURS
 > **Source of Truth**: `Matrice_dev/knowledge/design_system_irbis.md`
 > **Visual Identity**: "Sanctuaire Sculptural" (Light Theme)
 
@@ -233,15 +233,17 @@ Déjà installées :
 
 - [x] Design System documenté dans la Matrice
 - [x] Visual Identity "Sanctuaire Sculptural" définie
-- [x] Sitemap validé
-- [x] Wording/Copywriting identifié
-- [x] CSS reset effectué
-- [x] HANDOFF rédigé
 - [x] Fonts ajoutées (Cormorant, Inter) → `layout.tsx`
 - [x] Tokens injectés dans globals.css (Light Theme)
-- [x] Container component créé → `components/layout/container.tsx`
-- [x] Section component créé → `components/layout/section.tsx`
+- [x] Container component → `components/layout/container.tsx`
+- [x] Section component → `components/layout/section.tsx`
 - [x] Button component mis à jour → `components/ui/button.tsx`
+
+### Phase 2 — Layout Components (EN COURS)
+
+- [x] Navbar → `components/layout/navbar.tsx` + `navbar-wrapper.tsx`
+- [x] Footer → `components/layout/footer.tsx`
+- [ ] PageTransition (Framer Motion)
 
 ### Effets visuels signature (dans globals.css)
 
@@ -249,7 +251,6 @@ Déjà installées :
 - [x] `.text-emerge` — Blur + fade emergence
 - [x] `.depth-shadow` — Ombre sculpturale
 - [x] `.gold-line` — Fil conducteur doré
-- [x] `.veil` — Brume cream aux bords
 
 ---
 
@@ -267,7 +268,6 @@ Fusion de deux directions créatives :
 | **Espace sacré** | 70%+ d'espace négatif |
 | **Un geste fort** | UN élément dominant par section |
 | **Profondeur** | Ombres douces, blur subtil, layers |
-| **Émergence** | Typographie qui "apparaît", transitions lentes |
 
 ### Différenciation avec TailorShift
 
@@ -277,15 +277,12 @@ Fusion de deux directions créatives :
 | Accent | Gold + Navy typo forte | Gold (#C9A962) |
 | Ton | Sculptural, monumental | Intimiste/Luxe |
 | Densité | Très aéré, 1 élément/section | Sections denses |
-| Échelle typo | Grande, monumentale | Élégante |
-| Public | B2B, Investisseurs | Talents, Brands |
 
 ### Cohérence Familiale
 
 - Même famille typographique (Cormorant)
 - Même accent gold (#C9A962)
 - Même fond cream (#FAF8F5)
-- Même niveau de qualité animation
 - Différenciation par l'ESPACE et l'ÉCHELLE, pas la couleur
 
 ---
@@ -300,15 +297,14 @@ Fusion de deux directions créatives :
 
 ---
 
-**Next Step** : Phase 2 — Layout Components (Navbar, Footer, PageTransition)
+**Next Step** : Phase 3 — Pages Marketing (Landing, /tailorshift, /coming-soon)
 
-### Fichiers modifiés cette session
+### Fichiers créés/modifiés cette session
 
 | Fichier | Action |
 |---------|--------|
-| `Matrice_dev/knowledge/design_system_irbis.md` | Ajout Visual Identity "Sanctuaire Sculptural" |
-| `src/app/globals.css` | Tokens complets Light Theme + effets visuels |
-| `src/app/layout.tsx` | Fonts Cormorant + Inter |
-| `src/components/layout/container.tsx` | NOUVEAU — Composant Container |
-| `src/components/layout/section.tsx` | NOUVEAU — Composant Section |
-| `src/components/ui/button.tsx` | MIS À JOUR — Styles Irbis Design System |
+| `src/components/layout/navbar.tsx` | NOUVEAU — Navbar client component |
+| `src/components/layout/navbar-wrapper.tsx` | NOUVEAU — Server wrapper pour auth |
+| `src/components/layout/footer.tsx` | NOUVEAU — Footer component |
+| `src/components/layout/index.ts` | MIS À JOUR — Exports |
+| `src/app/layout.tsx` | MIS À JOUR — Navbar + Footer intégrés |
