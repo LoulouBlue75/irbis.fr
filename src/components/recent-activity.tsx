@@ -1,8 +1,10 @@
 'use client';
 
 import { formatDistanceToNow } from 'date-fns';
-import { UserPlus, CheckCircle } from 'lucide-react';
+import { fr } from 'date-fns/locale';
+import { UserPlus, CheckCircle, Briefcase, Sparkles } from 'lucide-react';
 import { useRealtimeSubscription } from '@/hooks/use-realtime-subscription';
+import { Card, CardContent, CardHeader } from '@/components/ui/card';
 
 interface Activity {
   id: string;
@@ -16,43 +18,64 @@ interface RecentActivityProps {
 }
 
 export function RecentActivity({ activities }: RecentActivityProps) {
-  // Subscribe to changes in relevant tables to refresh activity
   useRealtimeSubscription('candidates');
   useRealtimeSubscription('matches');
 
+  const getIcon = (type: string) => {
+    switch (type) {
+      case 'candidate_added': return UserPlus;
+      case 'match_created': return Sparkles;
+      case 'job_created': return Briefcase;
+      default: return CheckCircle;
+    }
+  };
+
+  const getIconStyles = (type: string) => {
+    switch (type) {
+      case 'candidate_added': return 'bg-irbis-cream text-irbis-navy';
+      case 'match_created': return 'bg-irbis-gold/10 text-irbis-gold';
+      default: return 'bg-gray-100 text-gray-600';
+    }
+  };
+
   if (activities.length === 0) {
     return (
-      <div className="card">
-        <h3 className="text-lg font-semibold text-primary mb-4">Recent Activity</h3>
-        <p className="text-tertiary text-center py-4">No recent activity.</p>
-      </div>
+      <Card>
+        <CardHeader>
+          <h3 className="text-lg font-serif text-irbis-navy">Activité Récente</h3>
+        </CardHeader>
+        <CardContent>
+          <p className="text-gray-500 text-center py-4 italic">Aucune activité récente.</p>
+        </CardContent>
+      </Card>
     );
   }
 
   return (
-    <div className="card">
-      <h3 className="text-lg font-semibold text-primary mb-4">Recent Activity</h3>
-      <div className="space-y-4">
-        {activities.map((activity) => (
-          <div key={activity.id} className="flex items-start space-x-3">
-            <div className={`mt-1 p-1.5 rounded-full ${
-              activity.type === 'candidate_added' ? 'bg-blue-50 text-accent-primary' : 'bg-purple-50 text-purple-600'
-            }`}>
-              {activity.type === 'candidate_added' ? (
-                <UserPlus className="w-4 h-4" />
-              ) : (
-                <CheckCircle className="w-4 h-4" />
-              )}
-            </div>
-            <div className="flex-1">
-              <p className="text-sm text-secondary">{activity.message}</p>
-              <p className="text-xs text-tertiary mt-1">
-                {formatDistanceToNow(new Date(activity.created_at), { addSuffix: true })}
-              </p>
-            </div>
-          </div>
-        ))}
-      </div>
-    </div>
+    <Card>
+      <CardHeader>
+        <h3 className="text-lg font-serif text-irbis-navy">Activité Récente</h3>
+      </CardHeader>
+      <CardContent>
+        <div className="space-y-4">
+          {activities.map((activity) => {
+            const Icon = getIcon(activity.type);
+            return (
+              <div key={activity.id} className="flex items-start space-x-3">
+                <div className={"mt-0.5 p-2 rounded-lg " + getIconStyles(activity.type)}>
+                  <Icon className="w-4 h-4" />
+                </div>
+                <div className="flex-1 min-w-0">
+                  <p className="text-sm text-irbis-navy">{activity.message}</p>
+                  <p className="text-xs text-gray-400 mt-1 font-mono">
+                    {formatDistanceToNow(new Date(activity.created_at), { addSuffix: true, locale: fr })}
+                  </p>
+                </div>
+              </div>
+            );
+          })}
+        </div>
+      </CardContent>
+    </Card>
   );
 }

@@ -8,15 +8,15 @@ export default function MandateDetailPage() {
       <div className="flex items-center justify-between">
         <div className="flex items-center gap-4">
           <h1 className="text-2xl font-bold text-ink">CTO Search</h1>
-          <Badge variant="active">Active</Badge>
+          <Badge variant="success">Actif</Badge>
         </div>
-        <Button variant="default" size="sm">Run Alignment</Button>
+        <Button  size="sm">Run Alignment</Button>
       </div>
 
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 h-full">
         {/* INFO (60% -> 7 cols) */}
         <div className="lg:col-span-7 flex flex-col gap-6">
-          <Card variant="default">
+          <Card >
             <CardHeader>
               <CardTitle>Description</CardTitle>
             </CardHeader>
@@ -27,7 +27,7 @@ export default function MandateDetailPage() {
             </CardContent>
           </Card>
 
-          <Card variant="default">
+          <Card >
             <CardHeader>
               <CardTitle>Requirements</CardTitle>
             </CardHeader>
@@ -48,7 +48,7 @@ export default function MandateDetailPage() {
 
         {/* PIPELINE (40% -> 5 cols) */}
         <div className="lg:col-span-5 flex flex-col gap-6">
-          <Card variant="default" className="h-full">
+          <Card  className="h-full">
             <CardHeader>
               <CardTitle>Pipeline</CardTitle>
             </CardHeader>

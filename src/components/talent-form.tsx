@@ -3,6 +3,12 @@
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { createTalent, TalentInput } from '@/app/actions/talents';
+import { Button } from '@/components/ui/button';
+import { Input } from '@/components/ui/input';
+import { Textarea } from '@/components/ui/textarea';
+import { Badge } from '@/components/ui/badge';
+import { Alert, AlertDescription } from '@/components/ui/alert';
+import { X, Plus, Save, ArrowLeft, Loader2 } from 'lucide-react';
 
 export function TalentForm() {
   const router = useRouter();
@@ -28,14 +34,13 @@ export function TalentForm() {
 
     try {
       const result = await createTalent(data);
-
       if (result.error) {
         setError(result.error);
       } else {
-        router.push('/dashboard/talents');
+        router.push('/hunting/talents');
       }
     } catch (err) {
-      setError('An unexpected error occurred');
+      setError('Une erreur inattendue est survenue.');
     } finally {
       setLoading(false);
     }
@@ -53,72 +58,73 @@ export function TalentForm() {
   };
 
   return (
-    <form onSubmit={handleSubmit} className="space-y-6 max-w-2xl">
+    <form onSubmit={handleSubmit} className="space-y-8 max-w-2xl mx-auto py-8">
       {error && (
-        <div className="bg-red-900/50 border border-red-500 text-red-200 px-4 py-3 rounded">
-          {error}
-        </div>
+        <Alert variant="destructive">
+          <AlertDescription>{error}</AlertDescription>
+        </Alert>
       )}
 
-      <div>
-        <label htmlFor="name" className="block text-sm font-medium text-gray-300">
-          Full Name
-        </label>
-        <input
-          type="text"
-          name="name"
-          id="name"
-          required
-          className="mt-1 block w-full rounded-md bg-gray-800 border-gray-700 text-white shadow-sm focus:border-blue-500 focus:ring-blue-500 sm:text-sm px-4 py-2"
-        />
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <div className="space-y-2">
+          <label htmlFor="name" className="text-sm font-medium text-irbis-navy">
+            Nom Complet
+          </label>
+          <Input
+            name="name"
+            id="name"
+            required
+            placeholder="Ex: Alexandre Dumas"
+            className="bg-white"
+          />
+        </div>
+
+        <div className="space-y-2">
+          <label htmlFor="email" className="text-sm font-medium text-irbis-navy">
+            Email Professionnel
+          </label>
+          <Input
+            type="email"
+            name="email"
+            id="email"
+            required
+            placeholder="alexandre@example.com"
+            className="bg-white"
+          />
+        </div>
+
+        <div className="space-y-2">
+          <label htmlFor="experience_years" className="text-sm font-medium text-irbis-navy">
+            Expérience (Années)
+          </label>
+          <Input
+            type="number"
+            name="experience_years"
+            id="experience_years"
+            min="0"
+            required
+            placeholder="Ex: 8"
+            className="bg-white"
+          />
+        </div>
+
+        <div className="space-y-2">
+          <label htmlFor="education" className="text-sm font-medium text-irbis-navy">
+            Formation / École
+          </label>
+          <Input
+            name="education"
+            id="education"
+            placeholder="Ex: HEC Paris, MBA"
+            className="bg-white"
+          />
+        </div>
       </div>
 
-      <div>
-        <label htmlFor="email" className="block text-sm font-medium text-gray-300">
-          Email
-        </label>
-        <input
-          type="email"
-          name="email"
-          id="email"
-          required
-          className="mt-1 block w-full rounded-md bg-gray-800 border-gray-700 text-white shadow-sm focus:border-blue-500 focus:ring-blue-500 sm:text-sm px-4 py-2"
-        />
-      </div>
-
-      <div>
-        <label htmlFor="experience_years" className="block text-sm font-medium text-gray-300">
-          Experience (Years)
-        </label>
-        <input
-          type="number"
-          name="experience_years"
-          id="experience_years"
-          min="0"
-          required
-          className="mt-1 block w-full rounded-md bg-gray-800 border-gray-700 text-white shadow-sm focus:border-blue-500 focus:ring-blue-500 sm:text-sm px-4 py-2"
-        />
-      </div>
-
-      <div>
-        <label htmlFor="education" className="block text-sm font-medium text-gray-300">
-          Education (Degree/University)
-        </label>
-        <input
-          type="text"
-          name="education"
-          id="education"
-          className="mt-1 block w-full rounded-md bg-gray-800 border-gray-700 text-white shadow-sm focus:border-blue-500 focus:ring-blue-500 sm:text-sm px-4 py-2"
-        />
-      </div>
-
-      <div>
-        <label className="block text-sm font-medium text-gray-300 mb-2">
-          Skills
-        </label>
-        <div className="flex gap-2 mb-2">
-          <input
-            type="text"
+      <div className="space-y-3">
+        <label className="text-sm font-medium text-irbis-navy">Expertises & Compétences</label>
+        <div className="flex gap-2">
+          <Input
             value={newSkill}
             onChange={(e) => setNewSkill(e.target.value)}
             onKeyDown={(e) => {
@@ -127,60 +133,79 @@ export function TalentForm() {
                 addSkill();
               }
             }}
-            placeholder="Add a skill..."
-            className="block w-full rounded-md bg-gray-800 border-gray-700 text-white shadow-sm focus:border-blue-500 focus:ring-blue-500 sm:text-sm px-4 py-2"
+            placeholder="Ajouter une compétence (ex: Private Equity)..."
+            className="bg-white max-w-md"
           />
-          <button
+          <Button
             type="button"
             onClick={addSkill}
-            className="bg-gray-700 hover:bg-gray-600 text-white px-4 py-2 rounded-md text-sm"
+            variant="secondary"
+            size="icon"
+            className="shrink-0"
           >
-            Add
-          </button>
+            <Plus className="w-4 h-4" />
+          </Button>
         </div>
-        <div className="flex flex-wrap gap-2">
+        
+        <div className="flex flex-wrap gap-2 min-h-[40px] p-4 bg-irbis-cream rounded-md border border-gray-200/50">
+          {skills.length === 0 && (
+            <span className="text-sm text-gray-400 italic">Aucune compétence ajoutée</span>
+          )}
           {skills.map((skill, index) => (
-            <span key={index} className="flex items-center bg-blue-900/50 text-blue-200 px-3 py-1 rounded-full text-sm">
+            <Badge key={index} variant="secondary" className="bg-white text-irbis-navy border-gray-200 pl-3 pr-1 py-1">
               {skill}
               <button
                 type="button"
                 onClick={() => removeSkill(index)}
-                className="ml-2 text-blue-400 hover:text-blue-300"
+                className="ml-2 p-1 hover:text-red-600 rounded-full transition-colors"
               >
-                ×
+                <X className="w-3 h-3" />
               </button>
-            </span>
+            </Badge>
           ))}
         </div>
       </div>
 
-      <div>
-        <label htmlFor="notes" className="block text-sm font-medium text-gray-300">
-          Notes
+      <div className="space-y-2">
+        <label htmlFor="notes" className="text-sm font-medium text-irbis-navy">
+          Notes & Observations
         </label>
-        <textarea
+        <Textarea
           name="notes"
           id="notes"
-          rows={3}
-          className="mt-1 block w-full rounded-md bg-gray-800 border-gray-700 text-white shadow-sm focus:border-blue-500 focus:ring-blue-500 sm:text-sm px-4 py-2"
+          rows={5}
+          placeholder="Contexte confidentiel, prétentions salariales, fit culturel..."
+          className="bg-white resize-none"
         />
       </div>
 
-      <div className="flex justify-end gap-4">
-        <button
+      <div className="flex items-center justify-end gap-4 pt-6 border-t border-gray-100">
+        <Button
           type="button"
+          variant="ghost"
           onClick={() => router.back()}
-          className="bg-gray-700 hover:bg-gray-600 text-white px-4 py-2 rounded-md text-sm font-medium"
+          className="text-gray-500 hover:text-irbis-navy"
         >
-          Cancel
-        </button>
-        <button
+          <ArrowLeft className="w-4 h-4 mr-2" />
+          Annuler
+        </Button>
+        <Button
           type="submit"
           disabled={loading}
-          className="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-md text-sm font-medium disabled:opacity-50"
+          className="min-w-[140px]"
         >
-          {loading ? 'Saving...' : 'Create Talent'}
-        </button>
+          {loading ? (
+            <>
+              <Loader2 className="w-4 h-4 mr-2 animate-spin" />
+              Sauvegarde...
+            </>
+          ) : (
+            <>
+              <Save className="w-4 h-4 mr-2" />
+              Créer Talent
+            </>
+          )}
+        </Button>
       </div>
     </form>
   );

@@ -6,23 +6,31 @@ import { cn } from "@/lib/utils";
 import { LayoutDashboard, Briefcase, Users, Settings } from "lucide-react";
 
 const navigation = [
-  { name: "Overview", href: "/hunting/dashboard", icon: LayoutDashboard },
-  { name: "Mandates", href: "/hunting/mandates", icon: Briefcase },
+  { name: "Vue d'ensemble", href: "/hunting/dashboard", icon: LayoutDashboard },
+  { name: "Mandats", href: "/hunting/mandates", icon: Briefcase },
   { name: "Talents", href: "/hunting/talents", icon: Users },
-  { name: "Settings", href: "/hunting/settings", icon: Settings },
+  { name: "Paramètres", href: "/hunting/settings", icon: Settings },
 ];
 
 export function AppSidebar() {
   const pathname = usePathname();
 
   return (
-    <div className="hidden md:flex flex-col w-64 bg-white border-r border-gray-200 h-screen fixed left-0 top-0 z-40">
-      <div className="h-16 flex items-center px-6 border-b border-gray-200">
-        <Link href="/" className="text-xl font-bold font-serif tracking-tight text-ink">
-          IRBIS
+    <aside className="hidden md:flex flex-col w-72 bg-irbis-cream border-r border-irbis-cream-dark h-screen fixed left-0 top-0 z-40 shadow-[1px_0_20px_rgba(0,0,0,0.02)]">
+      {/* Header : Marque */}
+      <div className="h-24 flex items-center px-8">
+        <Link href="/" className="group flex items-center gap-3">
+           <div className="h-8 w-8 bg-irbis-navy text-irbis-gold flex items-center justify-center rounded-sm shadow-sm transition-transform group-hover:scale-105 duration-500">
+             <span className="font-serif font-bold text-xl">I</span>
+           </div>
+           <span className="text-2xl font-serif font-medium text-irbis-navy tracking-tight group-hover:text-irbis-gold transition-colors duration-300">
+            IRBIS
+          </span>
         </Link>
       </div>
-      <div className="flex flex-col gap-1 p-4">
+
+      {/* Navigation */}
+      <nav className="flex-1 flex flex-col gap-2 px-4 py-8">
         {navigation.map((item) => {
           const isActive = pathname.startsWith(item.href);
           return (
@@ -30,18 +38,37 @@ export function AppSidebar() {
               key={item.name}
               href={item.href}
               className={cn(
-                "flex items-center gap-3 px-3 py-2 rounded-md text-sm font-medium transition-colors",
+                "group flex items-center gap-4 px-4 py-3.5 text-sm font-medium transition-all duration-300 rounded-lg relative overflow-hidden",
                 isActive
-                  ? "bg-ivory text-ink font-semibold"
-                  : "text-stone hover:text-ink hover:bg-gray-50"
+                  ? "text-irbis-navy bg-white shadow-sm"
+                  : "text-gray-500 hover:text-irbis-navy hover:bg-white/50"
               )}
             >
-              <item.icon className={cn("h-5 w-5", isActive ? "text-gold" : "text-stone")} />
-              {item.name}
+              {/* Active Indicator Line (Gold) */}
+              <div className={cn(
+                "absolute left-0 top-0 bottom-0 w-1 bg-irbis-gold transition-transform duration-300",
+                isActive ? "scale-y-100" : "scale-y-0"
+              )} />
+
+              <item.icon
+                className={cn(
+                  "h-5 w-5 transition-colors duration-300",
+                  isActive ? "text-irbis-gold" : "text-gray-400 group-hover:text-irbis-navy"
+                )}
+              />
+              <span className="tracking-wide">{item.name}</span>
             </Link>
           );
         })}
+      </nav>
+
+      {/* Footer Sidebar */}
+      <div className="p-8 border-t border-irbis-cream-dark">
+        <div className="flex items-center gap-3 opacity-60 hover:opacity-100 transition-opacity">
+          <div className="h-2 w-2 rounded-full bg-green-500"></div>
+          <span className="text-xs text-irbis-navy font-mono uppercase tracking-wider">Sanctuaire v1.0</span>
+        </div>
       </div>
-    </div>
+    </aside>
   );
 }

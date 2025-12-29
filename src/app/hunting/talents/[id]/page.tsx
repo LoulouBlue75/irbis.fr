@@ -18,7 +18,7 @@ export default function TalentDetailPage() {
             <h1 className="text-2xl font-bold text-ink">Marc Dupont</h1>
             <p className="text-stone">Chief Technology Officer</p>
           </div>
-          <Badge variant="active" className="ml-2">Available</Badge>
+          <Badge variant="success" className="ml-2">Disponible</Badge>
         </div>
         <Button variant="default" size="sm">Contact</Button>
       </div>
@@ -34,7 +34,7 @@ export default function TalentDetailPage() {
         
         <TabsContent value="profile" className="mt-6">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-            <Card variant="default">
+            <Card>
               <CardHeader>
                 <CardTitle>Summary</CardTitle>
               </CardHeader>
@@ -44,7 +44,7 @@ export default function TalentDetailPage() {
                 </p>
               </CardContent>
             </Card>
-            <Card variant="default">
+            <Card>
               <CardHeader>
                 <CardTitle>Contact Info</CardTitle>
               </CardHeader>
@@ -67,7 +67,7 @@ export default function TalentDetailPage() {
         </TabsContent>
 
         <TabsContent value="8d" className="mt-6">
-          <Card variant="default">
+          <Card>
             <CardHeader>
               <CardTitle>8D Assessment</CardTitle>
             </CardHeader>
@@ -117,7 +117,7 @@ export default function TalentDetailPage() {
         </TabsContent>
 
         <TabsContent value="history" className="mt-6">
-          <Card variant="default">
+          <Card>
             <CardContent className="pt-6">
               <p className="text-stone">No history yet.</p>
             </CardContent>
@@ -125,7 +125,7 @@ export default function TalentDetailPage() {
         </TabsContent>
 
         <TabsContent value="mandates" className="mt-6">
-           <Card variant="default">
+           <Card>
             <CardContent className="pt-6">
               <p className="text-stone">Not assigned to any mandate.</p>
             </CardContent>

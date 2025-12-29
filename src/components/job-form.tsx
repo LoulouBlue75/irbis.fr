@@ -3,6 +3,12 @@
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { createJob, updateJob, JobInput } from '@/app/actions/jobs';
+import { Button } from '@/components/ui/button';
+import { Input } from '@/components/ui/input';
+import { Textarea } from '@/components/ui/textarea';
+import { Badge } from '@/components/ui/badge';
+import { Alert, AlertDescription } from '@/components/ui/alert';
+import { Loader2, Plus, X, ArrowLeft, Save } from 'lucide-react';
 
 interface JobFormProps {
   initialData?: JobInput & { id: string };
@@ -39,10 +45,10 @@ export function JobForm({ initialData }: JobFormProps) {
       if (result.error) {
         setError(result.error);
       } else {
-        router.push('/dashboard/mandates');
+        router.push('/hunting/mandates');
       }
     } catch (err) {
-      setError('An unexpected error occurred');
+      setError('Une erreur inattendue est survenue.');
     } finally {
       setLoading(false);
     }
@@ -60,48 +66,46 @@ export function JobForm({ initialData }: JobFormProps) {
   };
 
   return (
-    <form onSubmit={handleSubmit} className="space-y-6 max-w-2xl">
+    <form onSubmit={handleSubmit} className="space-y-8 max-w-2xl mx-auto py-8">
       {error && (
-        <div className="bg-red-900/50 border border-red-500 text-red-200 px-4 py-3 rounded">
-          {error}
-        </div>
+        <Alert variant="destructive">
+          <AlertDescription>{error}</AlertDescription>
+        </Alert>
       )}
 
-      <div>
-        <label htmlFor="title" className="block text-sm font-medium text-gray-300">
-          Job Title
+      <div className="space-y-2">
+        <label htmlFor="title" className="text-sm font-medium text-irbis-navy">
+          Titre du Mandat
         </label>
-        <input
-          type="text"
+        <Input
           name="title"
           id="title"
           required
           defaultValue={initialData?.title}
-          className="mt-1 block w-full rounded-md bg-gray-800 border-gray-700 text-white shadow-sm focus:border-blue-500 focus:ring-blue-500 sm:text-sm px-4 py-2"
+          placeholder="Ex: Directeur Commercial Retail Luxe"
+          className="bg-white"
         />
       </div>
 
-      <div>
-        <label htmlFor="description" className="block text-sm font-medium text-gray-300">
-          Description
+      <div className="space-y-2">
+        <label htmlFor="description" className="text-sm font-medium text-irbis-navy">
+          Description du Poste
         </label>
-        <textarea
+        <Textarea
           name="description"
           id="description"
-          rows={4}
+          rows={5}
           required
           defaultValue={initialData?.description}
-          className="mt-1 block w-full rounded-md bg-gray-800 border-gray-700 text-white shadow-sm focus:border-blue-500 focus:ring-blue-500 sm:text-sm px-4 py-2"
+          placeholder="Décrivez le contexte, les responsabilités, l'environnement..."
+          className="bg-white resize-none"
         />
       </div>
 
-      <div>
-        <label className="block text-sm font-medium text-gray-300 mb-2">
-          Requirements
-        </label>
-        <div className="flex gap-2 mb-2">
-          <input
-            type="text"
+      <div className="space-y-3">
+        <label className="text-sm font-medium text-irbis-navy">Critères & Compétences Requises</label>
+        <div className="flex gap-2">
+          <Input
             value={newRequirement}
             onChange={(e) => setNewRequirement(e.target.value)}
             onKeyDown={(e) => {
@@ -110,64 +114,67 @@ export function JobForm({ initialData }: JobFormProps) {
                 addRequirement();
               }
             }}
-            placeholder="Add a requirement..."
-            className="block w-full rounded-md bg-gray-800 border-gray-700 text-white shadow-sm focus:border-blue-500 focus:ring-blue-500 sm:text-sm px-4 py-2"
+            placeholder="Ajouter un critère (ex: MBA, 10+ ans expérience)..."
+            className="bg-white max-w-md"
           />
-          <button
-            type="button"
-            onClick={addRequirement}
-            className="bg-gray-700 hover:bg-gray-600 text-white px-4 py-2 rounded-md text-sm"
-          >
-            Add
-          </button>
+          <Button type="button" onClick={addRequirement} variant="secondary" size="icon">
+            <Plus className="w-4 h-4" />
+          </Button>
         </div>
-        <ul className="space-y-2">
+
+        <div className="flex flex-wrap gap-2 min-h-[40px] p-4 bg-irbis-cream rounded-md border border-gray-200/50">
+          {requirements.length === 0 && (
+            <span className="text-sm text-gray-400 italic">Aucun critère ajouté</span>
+          )}
           {requirements.map((req, index) => (
-            <li key={index} className="flex justify-between items-center bg-gray-800 px-3 py-2 rounded text-sm text-gray-300">
-              <span>{req}</span>
+            <Badge key={index} variant="secondary" className="bg-white text-irbis-navy border-gray-200 pl-3 pr-1 py-1">
+              {req}
               <button
                 type="button"
                 onClick={() => removeRequirement(index)}
-                className="text-red-400 hover:text-red-300"
+                className="ml-2 p-1 hover:text-red-600 rounded-full transition-colors"
               >
-                Remove
+                <X className="w-3 h-3" />
               </button>
-            </li>
+            </Badge>
           ))}
-        </ul>
+        </div>
       </div>
 
-      <div>
-        <label htmlFor="status" className="block text-sm font-medium text-gray-300">
-          Status
+      <div className="space-y-2">
+        <label htmlFor="status" className="text-sm font-medium text-irbis-navy">
+          Statut
         </label>
         <select
           name="status"
           id="status"
           defaultValue={initialData?.status || 'open'}
-          className="mt-1 block w-full rounded-md bg-gray-800 border-gray-700 text-white shadow-sm focus:border-blue-500 focus:ring-blue-500 sm:text-sm px-4 py-2"
+          className="w-full rounded-md border border-gray-200 bg-white px-4 py-2 text-sm text-irbis-navy focus:border-irbis-gold focus:ring-irbis-gold"
         >
-          <option value="open">Open</option>
-          <option value="closed">Closed</option>
-          <option value="draft">Draft</option>
+          <option value="open">Actif</option>
+          <option value="closed">Clôturé</option>
+          <option value="draft">Brouillon</option>
         </select>
       </div>
 
-      <div className="flex justify-end gap-4">
-        <button
-          type="button"
-          onClick={() => router.back()}
-          className="bg-gray-700 hover:bg-gray-600 text-white px-4 py-2 rounded-md text-sm font-medium"
-        >
-          Cancel
-        </button>
-        <button
-          type="submit"
-          disabled={loading}
-          className="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-md text-sm font-medium disabled:opacity-50"
-        >
-          {loading ? 'Saving...' : initialData ? 'Update Job' : 'Create Job'}
-        </button>
+      <div className="flex items-center justify-end gap-4 pt-6 border-t border-gray-100">
+        <Button type="button" variant="ghost" onClick={() => router.back()} className="text-gray-500 hover:text-irbis-navy">
+          <ArrowLeft className="w-4 h-4 mr-2" />
+          Annuler
+        </Button>
+        <Button type="submit" disabled={loading} className="min-w-[140px]">
+          {loading ? (
+            <>
+              <Loader2 className="w-4 h-4 mr-2 animate-spin" />
+              Sauvegarde...
+            </>
+          ) : (
+            <>
+              <Save className="w-4 h-4 mr-2" />
+              {initialData ? 'Mettre à jour' : 'Créer Mandat'}
+            </>
+          )}
+        </Button>
       </div>
     </form>
   );
