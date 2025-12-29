@@ -1,192 +1,170 @@
 import Link from "next/link";
+import { ArrowRight } from "lucide-react";
 
-export default function Homepage() {
+export default function HomePage() {
   return (
-    <main className="flex flex-col w-full min-h-screen pt-20">
-      {/* HERO SECTION */}
-      <section className="relative w-full h-[90vh] min-h-[600px] flex items-end pb-20 md:pb-32 px-6 lg:px-12 overflow-hidden group">
-        <div
-          className="absolute inset-0 w-full h-full z-0 transition-transform duration-[20s] ease-linear group-hover:scale-105 bg-cover bg-center"
-          data-alt="White leopard overlooking Paris"
-          style={{
-            backgroundImage: `linear-gradient(to bottom, rgba(255,255,255,0) 40%, rgba(255,255,255,0.6) 80%, rgba(255,255,255,0.95) 100%), url("https://lh3.googleusercontent.com/aida-public/AB6AXuC8tasP7mupglOaKmMnGil62wmQHm080VWa6jwcYJbVT88yvdWlt8DY7azjI4g-EMpVCxqokCUf3R2cqYzCH6FmyRxM0m7cC6VQChMUCmheVICi6qd0LB61ckwLBravSdDHglQVnAYHkmgtSApgJUBJlW6b9xZqVhOKaYUQX44UnQUTKGLlDz5hLgAvZZv-AB1xCMTdJ_egdO_o6l4Mcbz252AO26gNZLkf-w5Z6zub0pxYeXXDkeHWv4JsgIS7Kficc0qMPJ-RdfA")`
-          }}
-        />
-        <div className="relative z-10 w-full max-w-[1440px] mx-auto">
-          <div className="max-w-4xl animate-fade-in-up">
-            <h1 className="text-text-main text-5xl md:text-7xl lg:text-8xl font-black leading-[1.1] tracking-[-0.03em] mb-6">
-              High standards.<br />Shared ambition.
+    <>
+      {/* ============================================
+          HERO — "Le Seuil"
+          Sanctuaire Sculptural: huge ceiling, text left
+          ============================================ */}
+      <section className="relative min-h-[90vh] flex flex-col justify-end pb-16 lg:pb-24 bg-[#FAF8F5]">
+        {/* Huge ceiling space */}
+        <div className="flex-1 min-h-[25vh]" />
+
+        <div className="w-full max-w-[1280px] mx-auto px-6 lg:px-12">
+          <div className="max-w-3xl">
+            {/* Overline */}
+            <span className="block text-xs font-semibold text-[#C9A962] uppercase tracking-[0.2em] mb-6">
+              Irbis Partners
+            </span>
+
+            {/* Gold line */}
+            <div className="w-16 h-px bg-gradient-to-r from-[#C9A962] to-transparent mb-8" />
+
+            {/* Headline — Monumental */}
+            <h1 className="font-serif text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-light text-[#1A1F36] leading-[1.1] tracking-tight mb-8">
+              Executive Search with Adaptive Precision.
             </h1>
-            <div className="flex flex-col md:flex-row md:items-end gap-8">
-              <p className="text-text-main text-lg md:text-2xl font-normal leading-relaxed max-w-xl border-l-4 border-primary pl-6">
-                Executive search. Adaptive precision.
-              </p>
-              <div className="flex gap-4">
-                <Link
-                  href="/contact"
-                  className="flex items-center justify-center rounded-lg h-14 px-8 bg-primary text-white hover:bg-primary-dark transition-colors text-base font-bold tracking-wide shadow-xl shadow-primary/20"
-                >
-                  Start a conversation
-                </Link>
-              </div>
-            </div>
+
+            {/* Subheadline */}
+            <p className="text-lg lg:text-xl text-[#525252] leading-relaxed max-w-xl mb-10">
+              The alliance of human intuition and algorithmic precision.
+            </p>
+
+            {/* CTA */}
+            <Link
+              href="/contact"
+              className="inline-flex items-center gap-2 px-8 py-4 bg-[#C9A962] text-[#1A1F36] text-sm font-semibold tracking-wide rounded-md transition-all duration-300 hover:bg-[#A8893E] hover:-translate-y-0.5 hover:shadow-[0_0_40px_rgba(201,169,98,0.15)]"
+            >
+              Start a conversation
+              <ArrowRight className="w-4 h-4" />
+            </Link>
           </div>
         </div>
       </section>
 
-      {/* QUOTE SECTION */}
-      <section className="py-24 md:py-32 px-6 lg:px-12 bg-white">
-        <div className="max-w-[1440px] mx-auto flex flex-col items-center text-center">
-          <div className="w-12 h-1 bg-primary mb-12 rounded-full"></div>
-          <h2 className="text-text-main text-3xl md:text-5xl lg:text-6xl font-bold leading-tight tracking-[-0.02em] max-w-5xl mx-auto mb-8">
-            "Technology amplifies the human. Never replaces."
-          </h2>
-          <p className="text-text-muted text-lg md:text-xl max-w-2xl mx-auto leading-relaxed">
-            In a landscape of constant change, leadership is the only constant. We specialize in finding the unfindable—the rare blend of vision, grit, and expertise that defines world-class executives.
+      {/* ============================================
+          VISION — Quote section
+          Centered, monumental, breathing space
+          ============================================ */}
+      <section className="py-32 lg:py-40 px-6 lg:px-12 bg-[#FAF8F5]">
+        <div className="max-w-[1280px] mx-auto flex flex-col items-center text-center">
+          {/* Gold line */}
+          <div className="w-16 h-px bg-gradient-to-r from-transparent via-[#C9A962] to-transparent mb-12" />
+
+          {/* Quote */}
+          <blockquote className="mb-8">
+            <p className="font-serif text-2xl md:text-3xl lg:text-4xl xl:text-5xl font-light text-[#1A1F36] leading-tight tracking-tight max-w-4xl">
+              &ldquo;Technology amplifies the human. Never replaces.&rdquo;
+            </p>
+          </blockquote>
+
+          {/* Description */}
+          <p className="text-base lg:text-lg text-[#525252] leading-relaxed max-w-2xl">
+            In a landscape of constant change, leadership is the only constant. 
+            We specialize in finding the unfindable—the rare blend of vision, 
+            grit, and expertise that defines world-class executives.
           </p>
         </div>
       </section>
 
-      {/* EXPERTISE SECTION */}
-      <section className="py-20 px-6 lg:px-12 bg-background-alt border-y border-border-light">
-        <div className="max-w-[1440px] mx-auto">
-          <div className="flex flex-col md:flex-row justify-between items-start md:items-end mb-16 gap-6">
-            <div>
-              <span className="text-primary font-bold tracking-widest uppercase text-sm mb-2 block">Our Expertise</span>
-              <h3 className="text-text-main text-3xl md:text-4xl font-bold tracking-tight">Three pillars. One standard.</h3>
-            </div>
-            <Link href="/executive-search" className="group flex items-center gap-2 text-text-main font-bold hover:text-primary transition-colors">
-              View all services
-              <span className="material-symbols-outlined transition-transform group-hover:translate-x-1">arrow_forward</span>
+      {/* ============================================
+          PORTFOLIO — "Une pièce, une œuvre"
+          ONE product card, centered, monumental
+          ============================================ */}
+      <section className="py-32 lg:py-40 px-6 lg:px-12 bg-[#FAF8F5]">
+        <div className="max-w-[1280px] mx-auto">
+          {/* Section header */}
+          <div className="text-center mb-16">
+            <span className="block text-xs font-semibold text-[#C9A962] uppercase tracking-[0.2em] mb-4">
+              Ecosystem
+            </span>
+            <h2 className="font-serif text-3xl md:text-4xl lg:text-5xl font-light text-[#1A1F36] tracking-tight">
+              Ventures
+            </h2>
+          </div>
+
+          {/* Single product card — TailorShift */}
+          <div className="max-w-2xl mx-auto">
+            <Link
+              href="/tailor-shift"
+              className="group block bg-white rounded-lg overflow-hidden shadow-[0_50px_100px_-20px_rgba(26,31,54,0.08)] transition-all duration-500 hover:-translate-y-2 hover:shadow-[0_60px_120px_-20px_rgba(26,31,54,0.12)]"
+            >
+              {/* Visual placeholder */}
+              <div className="aspect-[16/9] bg-[#F0EDE8] flex items-center justify-center">
+                <div className="text-center">
+                  <span className="font-serif text-2xl text-[#1A1F36]">TailorShift</span>
+                  <p className="text-sm text-[#737373] mt-2">Luxury Talent Platform</p>
+                </div>
+              </div>
+
+              {/* Content */}
+              <div className="p-8 lg:p-10">
+                <h3 className="font-serif text-2xl lg:text-3xl text-[#1A1F36] mb-3 group-hover:text-[#C9A962] transition-colors">
+                  TailorShift
+                </h3>
+                <p className="text-[#525252] leading-relaxed mb-6">
+                  A curated talent platform connecting exceptional professionals 
+                  with visionary brands in the luxury and retail space.
+                </p>
+                <span className="inline-flex items-center gap-2 text-sm font-semibold text-[#C9A962] group-hover:gap-3 transition-all">
+                  Discover
+                  <ArrowRight className="w-4 h-4" />
+                </span>
+              </div>
             </Link>
           </div>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            {/* Card 1 */}
-            <div className="group bg-white p-8 md:p-10 rounded-xl border border-border-light hover:border-primary/30 hover:shadow-xl hover:shadow-primary/5 transition-all duration-300">
-              <div className="size-14 rounded-lg bg-primary/5 text-primary flex items-center justify-center mb-8 group-hover:bg-primary group-hover:text-white transition-colors">
-                <span className="material-symbols-outlined !text-[32px]">person_search</span>
-              </div>
-              <h4 className="text-xl md:text-2xl font-bold text-text-main mb-3">Executive Search</h4>
-              <p className="text-text-muted leading-relaxed mb-6">Leadership roles. Rare specialists. End-to-end.</p>
-              <ul className="space-y-2 mb-6">
-                <li className="flex items-center gap-2 text-sm text-text-main font-medium">
-                  <span className="size-1.5 rounded-full bg-primary"></span> C-Suite Recruitment
-                </li>
-                <li className="flex items-center gap-2 text-sm text-text-main font-medium">
-                  <span className="size-1.5 rounded-full bg-primary"></span> Board Director Search
-                </li>
-              </ul>
-            </div>
-            {/* Card 2 */}
-            <div className="group bg-white p-8 md:p-10 rounded-xl border border-border-light hover:border-primary/30 hover:shadow-xl hover:shadow-primary/5 transition-all duration-300">
-              <div className="size-14 rounded-lg bg-primary/5 text-primary flex items-center justify-center mb-8 group-hover:bg-primary group-hover:text-white transition-colors">
-                <span className="material-symbols-outlined !text-[32px]">diversity_3</span>
-              </div>
-              <h4 className="text-xl md:text-2xl font-bold text-text-main mb-3">Sparring Partner</h4>
-              <p className="text-text-muted leading-relaxed mb-6">We challenge the brief. You own the decision.</p>
-              <ul className="space-y-2 mb-6">
-                <li className="flex items-center gap-2 text-sm text-text-main font-medium">
-                  <span className="size-1.5 rounded-full bg-primary"></span> Brief Challenge
-                </li>
-                <li className="flex items-center gap-2 text-sm text-text-main font-medium">
-                  <span className="size-1.5 rounded-full bg-primary"></span> Decision Support
-                </li>
-              </ul>
-            </div>
-            {/* Card 3 */}
-            <div className="group bg-white p-8 md:p-10 rounded-xl border border-border-light hover:border-primary/30 hover:shadow-xl hover:shadow-primary/5 transition-all duration-300">
-              <div className="size-14 rounded-lg bg-primary/5 text-primary flex items-center justify-center mb-8 group-hover:bg-primary group-hover:text-white transition-colors">
-                <span className="material-symbols-outlined !text-[32px]">hub</span>
-              </div>
-              <h4 className="text-xl md:text-2xl font-bold text-text-main mb-3">Ecosystem</h4>
-              <p className="text-text-muted leading-relaxed mb-6">Specialised ventures. Same standard.</p>
-              <ul className="space-y-2 mb-6">
-                <li className="flex items-center gap-2 text-sm text-text-main font-medium">
-                  <span className="size-1.5 rounded-full bg-primary"></span> Tailor Shift
-                </li>
-                <li className="flex items-center gap-2 text-sm text-text-main font-medium">
-                  <span className="size-1.5 rounded-full bg-primary"></span> Paris
-                </li>
-              </ul>
-            </div>
+
+          {/* Coming Soon — Paris */}
+          <div className="max-w-md mx-auto mt-12 text-center">
+            <p className="text-sm text-[#737373]">
+              <span className="text-[#C9A962]">Paris</span> — Coming Soon
+            </p>
           </div>
         </div>
       </section>
 
-      {/* APPROACH SECTION */}
-      <section className="py-24 px-6 lg:px-12 bg-white">
-        <div className="max-w-[1440px] mx-auto grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
-          <div className="relative h-[600px] w-full rounded-2xl overflow-hidden">
-            <div
-              className="absolute inset-0 bg-cover bg-center transition-transform hover:scale-105 duration-700"
-              data-alt="Abstract architectural glass building reflecting the sky"
-              style={{
-                backgroundImage: `url("https://lh3.googleusercontent.com/aida-public/AB6AXuDf9NCFAalG-Z98plrKXAhmL0MW6c_vO2x6NhxAwRUyMPkhetF93h7o0cnLYeLTcoE9mSY9K2OciDrogCDicVj5EGQBYbHTht_vd4A7SUPxsdieR3GEDKEEUqF-j0evcm67Y5AuUe-cjqqwQQJboM2c4OXVIw2Gu7pH0IRp5e4B5IXUSLNgceUN9N6IB5XfTc0KgNOaFkj-Ywu7HtoZzTW3wyUQNAuA1ma2fhJ7S9v901tyQVCei4-CYSUu965nClohV2EENYol1K0")`
-              }}
-            />
-            <div className="absolute bottom-8 left-8 right-8 bg-white/90 backdrop-blur p-6 rounded-lg border-l-4 border-primary shadow-lg">
-              <p className="text-text-main font-medium text-lg italic">"They challenged our brief in ways that made us uncomfortable. Then delivered exactly what we needed."</p>
-              <p className="text-text-muted text-sm mt-4 font-bold uppercase tracking-wide">— CEO, Private Equity Portfolio</p>
-            </div>
-          </div>
-          <div className="flex flex-col gap-8">
-            <span className="text-primary font-bold tracking-widest uppercase text-sm">Our Approach</span>
-            <h2 className="text-4xl md:text-5xl font-bold text-text-main leading-tight tracking-tight">Four steps. Full commitment.</h2>
-            <p className="text-text-muted text-lg leading-relaxed">
-              Traditional search firms rely on databases. We rely on dialogue. We believe that the perfect talent is rarely "looking." They are busy leading, innovating, and driving results.
-            </p>
-            <p className="text-text-muted text-lg leading-relaxed">
-              Our method involves deep immersion into your company culture, followed by a targeted, discreet outreach strategy that respects the privacy of high-profile individuals while compelling them with your unique opportunity.
-            </p>
-            <div className="pt-4">
-              <Link href="/approach" className="flex items-center gap-2 text-primary font-bold text-lg group hover:underline underline-offset-4">
-                Learn about our process
-                <span className="material-symbols-outlined transition-transform group-hover:translate-x-1">arrow_right_alt</span>
-              </Link>
-            </div>
-            <div className="grid grid-cols-2 gap-8 mt-8 border-t border-border-light pt-8">
-              <div>
-                <h3 className="text-4xl font-bold text-text-main mb-1">95%</h3>
-                <p className="text-text-muted text-sm">Retention rate after 2 years</p>
-              </div>
-              <div>
-                <h3 className="text-4xl font-bold text-text-main mb-1">8</h3>
-                <p className="text-text-muted text-sm">Weeks to signed offer</p>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
+      {/* ============================================
+          CONTACT CTA — Final call
+          Minimal, powerful
+          ============================================ */}
+      <section className="py-32 lg:py-40 px-6 lg:px-12 bg-[#1A1F36]">
+        <div className="max-w-[1280px] mx-auto text-center">
+          {/* Gold line */}
+          <div className="w-16 h-px bg-gradient-to-r from-transparent via-[#C9A962] to-transparent mx-auto mb-12" />
 
-      {/* FINAL CTA */}
-      <section className="py-20 px-6 lg:px-12 bg-background-dark text-white relative overflow-hidden">
-        <div
-          className="absolute inset-0 opacity-20"
-          data-alt="Subtle topographic map pattern background"
-          style={{
-            backgroundImage: 'radial-gradient(#4c669a 1px, transparent 1px)',
-            backgroundSize: '32px 32px'
-          }}
-        />
-        <div className="max-w-4xl mx-auto text-center relative z-10">
-          <h2 className="text-3xl md:text-5xl font-bold mb-6">Let's talk.</h2>
-          <p className="text-white/70 text-lg mb-10 max-w-2xl mx-auto">The first conversation is free. The value isn't.</p>
+          <h2 className="font-serif text-3xl md:text-4xl lg:text-5xl font-light text-[#FAF8F5] tracking-tight mb-6">
+            Let&apos;s talk.
+          </h2>
+
+          <p className="text-lg text-[#FAF8F5]/60 mb-10 max-w-lg mx-auto">
+            The first conversation is free. The value isn&apos;t.
+          </p>
+
           <div className="flex flex-col sm:flex-row justify-center gap-4">
             <Link
               href="/contact"
-              className="flex items-center justify-center rounded-lg h-12 px-8 bg-primary text-white hover:bg-primary-dark transition-colors text-base font-bold tracking-wide"
+              className="inline-flex items-center justify-center gap-2 px-8 py-4 bg-[#C9A962] text-[#1A1F36] text-sm font-semibold tracking-wide rounded-md transition-all duration-300 hover:bg-[#D4BC82] hover:-translate-y-0.5"
             >
               Start a conversation
             </Link>
             <Link
               href="/approach"
-              className="flex items-center justify-center rounded-lg h-12 px-8 bg-white/10 text-white hover:bg-white/20 border border-white/20 transition-colors text-base font-bold tracking-wide"
+              className="inline-flex items-center justify-center gap-2 px-8 py-4 bg-transparent text-[#FAF8F5] text-sm font-semibold tracking-wide rounded-md border border-[#FAF8F5]/20 transition-all duration-300 hover:bg-[#FAF8F5]/10"
             >
               Discover the method
             </Link>
           </div>
         </div>
       </section>
-    </main>
+
+      {/* Signature */}
+      <section className="py-12 bg-[#FAF8F5] text-center">
+        <p className="text-xs text-[#A3A3A3] italic tracking-wide">
+          Irbis is a House of Perspective.
+        </p>
+      </section>
+    </>
   );
 }
