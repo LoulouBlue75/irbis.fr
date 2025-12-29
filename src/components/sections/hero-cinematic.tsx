@@ -110,7 +110,7 @@ export function HeroCinematic() {
         ref={imageRef}
         className="absolute inset-0 w-full h-full will-change-transform"
         style={{
-          backgroundImage: 'url(/images/home_page.jpg)',
+          backgroundImage: 'url(/images/hero-2mb.jpg)',
           backgroundSize: 'cover',
           backgroundPosition: 'center',
         }}
