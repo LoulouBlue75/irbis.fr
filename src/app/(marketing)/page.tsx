@@ -15,7 +15,7 @@ export default function HomePage() {
 
       {/* ============================================
           VISION — Split Screen
-          "Where others see candidates, we see trajectories"
+          Relentless pursuit, scientific rigor, impact
           ============================================ */}
       <SplitSection
         layout="image-left"
@@ -25,11 +25,12 @@ export default function HomePage() {
         }}
         content={{
           label: "Vision",
-          title: "Where others see candidates, we see trajectories.",
+          title: "Relentless. Like the pioneers who shaped history.",
           description: (
             <p>
-              Perspective is our craft. We identify the leaders others overlook—
-              those who will shape your next chapter.
+              We pursue impact with scientific rigor. Every placement is a story
+              we're proud to tell—a contribution that aligns interests and changes
+              trajectories. No shortcuts. Only convictions.
             </p>
           ),
         }}
@@ -51,15 +52,11 @@ export default function HomePage() {
           label: "Method",
           title: "Adaptive Precision",
           description: (
-            <>
-              <p className="mb-4">
-                Every mandate is singular. Our method adapts to your context,
-                your culture, your specific stakes.
-              </p>
-              <p>
-                Speed. Discretion. Precision. Three non-negotiable commitments.
-              </p>
-            </>
+            <p>
+              No compromise on what matters. A mastery of what does.
+              We adapt to your context, choose our battles wisely,
+              and deliver with unwavering commitment.
+            </p>
           ),
           cta: {
             label: "Discover our approach",
