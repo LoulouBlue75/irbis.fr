@@ -5,7 +5,7 @@ const ventures = [
   {
     name: "TailorShift",
     tagline: "The Luxury Talent Platform",
-    description: "Une plateforme curée connectant les professionnels d'exception avec les marques visionnaires du luxe et du retail.",
+    description: "A curated platform connecting exceptional professionals with visionary luxury and retail brands.",
     status: "live",
     href: "https://tailorshift.co",
     external: true,
@@ -13,7 +13,7 @@ const ventures = [
   {
     name: "Paris",
     tagline: "Coming Soon",
-    description: "Un nouveau projet en préparation. Restez connectés.",
+    description: "A new bet in the making.",
     status: "coming",
     href: "/paris",
     external: false,
@@ -42,8 +42,8 @@ export default function VenturesPage() {
 
             {/* Description */}
             <p className="text-lg text-ink-light leading-relaxed max-w-2xl">
-              Au-delà du conseil, nous construisons. Des produits, des plateformes,
-              des solutions qui façonnent l&apos;avenir du recrutement et du luxe.
+              Beyond consulting, we build. Products, platforms, solutions
+              shaping the future of recruitment and luxury.
             </p>
           </div>
         </div>
@@ -101,16 +101,16 @@ export default function VenturesPage() {
             Collaboration
           </p>
           <h2 className="font-display text-3xl md:text-4xl font-light text-ink-navy tracking-tight mb-6 italic">
-            Vous avez un projet ?
+            Have a project?
           </h2>
           <p className="text-lg text-ink-light mb-10 max-w-lg mx-auto">
-            Nous sommes toujours à l&apos;écoute d&apos;idées audacieuses et de partenariats stratégiques.
+            We&apos;re always listening to bold ideas and strategic partnerships.
           </p>
           <Link
             href="/contact"
             className="inline-flex items-center gap-3 px-10 py-5 bg-foil-gold text-ink-navy text-sm font-medium tracking-wide transition-all duration-300 hover:bg-foil-bronze hover:-translate-y-0.5"
           >
-            Parlons-en
+            Let&apos;s talk
             <ArrowRight className="w-4 h-4" />
           </Link>
         </div>
@@ -141,7 +141,7 @@ function VentureContent({ venture }: { venture: typeof ventures[0] }) {
               ? 'bg-green-50 text-green-700 border border-green-200'
               : 'bg-paper-cream text-ink-light border border-ink-navy/10'
           }`}>
-            {venture.status === 'live' ? '● Live' : '○ Coming Soon'}
+            {venture.status === 'live' ? 'Live' : 'Coming Soon'}
           </span>
         </div>
 

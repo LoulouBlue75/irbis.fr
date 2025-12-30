@@ -61,17 +61,16 @@ export default function HomePage() {
           description: (
             <>
               <p className="mb-4">
-                Chaque mandat est unique. Notre methode s'ajuste a votre contexte,
-                votre culture et vos enjeux specifiques.
+                Every mandate is singular. Our method adapts to your context,
+                your culture, your specific stakes.
               </p>
               <p>
-                Reactivite. Discretion. Precision. Trois engagements non negociables
-                pour des resultats a la hauteur de vos ambitions.
+                Speed. Discretion. Precision. Three non-negotiable commitments.
               </p>
             </>
           ),
           cta: {
-            label: "Decouvrir notre approche",
+            label: "Discover our approach",
             href: "/approach",
           },
         }}
@@ -167,7 +166,7 @@ export default function HomePage() {
                     Paris
                   </h3>
                   <p className="text-ink-light/60 leading-relaxed">
-                    Un nouveau pari en preparation. Restez connectes.
+                    A new bet in the making.
                   </p>
                 </div>
               </div>

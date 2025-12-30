@@ -58,7 +58,7 @@ export function Navbar() {
             "flex items-center justify-between transition-all duration-300",
             isScrolled ? "h-16" : "h-20 lg:h-24"
           )}>
-            <Link href="/" className="flex items-center group">
+            <Link href="/" className="flex items-center gap-4 group">
               <img
                 src="/images/Irbis_Logo_full.svg"
                 alt="Irbis Partners"
@@ -67,6 +67,12 @@ export function Navbar() {
                   isScrolled ? "h-10" : "h-12 lg:h-14"
                 )}
               />
+              <span className={cn(
+                "hidden lg:block font-serif italic text-sm text-[#525252] transition-all duration-300",
+                isScrolled ? "opacity-70 text-xs" : "opacity-100"
+              )}>
+                House of Perspective
+              </span>
             </Link>
 
             <nav className="hidden lg:flex items-center gap-10">
@@ -92,12 +98,12 @@ export function Navbar() {
                   </Link>
                 )
               ))}
-              {/* Contact button - gold outline */}
+              {/* Login button - gold outline */}
               <Link
-                href="/contact"
+                href="/login"
                 className="px-6 py-2.5 text-sm font-medium text-[#C9A962] border border-[#C9A962] transition-all duration-300 hover:bg-[#C9A962] hover:text-[#1A1F36]"
               >
-                Contact
+                Login
               </Link>
             </nav>
 
@@ -144,13 +150,13 @@ export function Navbar() {
             )
           ))}
           <div className="w-16 h-px bg-gradient-to-r from-[#C9A962] to-transparent mt-8" />
-          {/* Contact button mobile */}
+          {/* Login button mobile */}
           <Link
-            href="/contact"
+            href="/login"
             onClick={() => setIsMobileMenuOpen(false)}
             className="mt-4 px-8 py-3 text-lg font-medium text-[#C9A962] border border-[#C9A962] transition-all duration-300 hover:bg-[#C9A962] hover:text-[#1A1F36]"
           >
-            Contact
+            Login
           </Link>
         </nav>
       </div>
