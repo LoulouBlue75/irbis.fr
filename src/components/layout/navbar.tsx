@@ -44,11 +44,14 @@ export function Navbar() {
         ref={navRef}
         className={cn(
           "fixed top-0 left-0 right-0 z-[300]",
-          "transition-all duration-300",
+          "transition-all duration-500 ease-out",
           isScrolled
-            ? "bg-[rgba(250,248,245,0.95)] backdrop-blur-md shadow-sm"
+            ? "bg-[rgba(249,247,241,0.7)] backdrop-blur-[20px] backdrop-saturate-[180%] shadow-[0_4px_30px_rgba(11,17,33,0.03)]"
             : "bg-transparent"
         )}
+        style={{
+          borderBottom: isScrolled ? '1px solid rgba(198, 168, 124, 0.1)' : 'none',
+        }}
       >
         <div className="w-full max-w-[1440px] mx-auto px-6 lg:px-12">
           <div className={cn(
@@ -108,12 +111,6 @@ export function Navbar() {
           </div>
         </div>
 
-        <div className={cn(
-          "absolute bottom-0 left-0 right-0 h-px",
-          "bg-gradient-to-r from-transparent via-[#C9A962]/30 to-transparent",
-          "transition-opacity duration-300",
-          isScrolled ? "opacity-100" : "opacity-0"
-        )} />
       </header>
 
       <div className={cn(
