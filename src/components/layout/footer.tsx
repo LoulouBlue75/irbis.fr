@@ -4,11 +4,11 @@ import { Linkedin } from "lucide-react";
 const footerLinks = {
   company: [
     { label: "Approach", href: "/approach" },
-    { label: "Executive Search", href: "/executive-search" },
-    { label: "References", href: "/references" },
+    { label: "Clients", href: "/clients" },
+    { label: "Talents", href: "/talents" },
   ],
-  products: [
-    { label: "TailorShift", href: "/tailor-shift" },
+  ventures: [
+    { label: "TailorShift", href: "https://tailorshift.co", external: true },
     { label: "Paris", href: "/paris" },
   ],
   legal: [
@@ -29,23 +29,15 @@ export function Footer() {
           {/* Brand Column - Takes more space */}
           <div className="lg:col-span-5 flex flex-col gap-6">
             <Link href="/" className="flex items-center gap-3 group">
-              <div className="w-10 h-10 text-[#1A1F36] group-hover:text-[#C9A962] transition-colors duration-300">
-                <svg className="w-full h-full" fill="none" viewBox="0 0 48 48">
-                  <path
-                    clipRule="evenodd"
-                    d="M24 0.757355L47.2426 24L24 47.2426L0.757355 24L24 0.757355ZM21 35.7574V12.2426L9.24264 24L21 35.7574Z"
-                    fill="currentColor"
-                    fillRule="evenodd"
-                  />
-                </svg>
-              </div>
-              <span className="font-serif text-2xl font-medium text-[#1A1F36] tracking-tight group-hover:text-[#C9A962] transition-colors duration-300">
-                Irbis Partners
-              </span>
+              <img
+                src="/images/Irbis_Logo_full.svg"
+                alt="Irbis Partners"
+                className="h-12 transition-opacity duration-300 group-hover:opacity-80"
+              />
             </Link>
 
-            <p className="text-[#525252] text-base leading-relaxed max-w-sm">
-              Executive Search with Adaptive Precision. The alliance of human intuition and algorithmic precision.
+            <p className="text-[#525252] text-base leading-relaxed max-w-sm font-serif italic">
+              From Paris, with Adaptive Precision.
             </p>
 
             {/* Social */}
@@ -80,20 +72,32 @@ export function Footer() {
             </div>
           </div>
 
-          {/* Products Links */}
+          {/* Ventures Links */}
           <div className="lg:col-span-2 flex flex-col gap-4">
             <h3 className="text-xs font-semibold text-[#C9A962] uppercase tracking-widest">
-              Products
+              Ventures
             </h3>
             <div className="flex flex-col gap-3">
-              {footerLinks.products.map((link) => (
-                <Link
-                  key={link.href}
-                  href={link.href}
-                  className="text-sm text-[#525252] hover:text-[#1A1F36] transition-colors duration-200"
-                >
-                  {link.label}
-                </Link>
+              {footerLinks.ventures.map((link) => (
+                'external' in link && link.external ? (
+                  <a
+                    key={link.href}
+                    href={link.href}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-sm text-[#525252] hover:text-[#1A1F36] transition-colors duration-200"
+                  >
+                    {link.label}
+                  </a>
+                ) : (
+                  <Link
+                    key={link.href}
+                    href={link.href}
+                    className="text-sm text-[#525252] hover:text-[#1A1F36] transition-colors duration-200"
+                  >
+                    {link.label}
+                  </Link>
+                )
               ))}
             </div>
           </div>

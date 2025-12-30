@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { ArrowRight } from "lucide-react";
 import { HeroCinematic } from "@/components/sections/hero-cinematic";
+import { LionReveal } from "@/components/sections/lion-reveal";
 
 export default function HomePage() {
   return (
@@ -113,43 +114,9 @@ export default function HomePage() {
       </section>
 
       {/* ============================================
-          CONTACT CTA — Final call (Ink Navy section)
+          LION REVEAL + CTAs — Closing statement
           ============================================ */}
-      <section className="relative py-32 lg:py-40 px-6 lg:px-12 bg-ink-navy overflow-hidden">
-        {/* Grid lines */}
-        <div className="absolute inset-0 pointer-events-none">
-          <div className="absolute left-1/4 top-0 bottom-0 w-px bg-paper-white/5"></div>
-          <div className="absolute right-1/4 top-0 bottom-0 w-px bg-paper-white/5"></div>
-        </div>
-
-        <div className="max-w-[1280px] mx-auto text-center relative z-10">
-          {/* Gold line */}
-          <div className="w-16 h-px bg-gradient-to-r from-transparent via-foil-gold to-transparent mx-auto mb-12" />
-
-          <h2 className="font-display text-3xl md:text-4xl lg:text-5xl font-light text-paper-cream tracking-tight mb-6 italic">
-            Let&apos;s talk.
-          </h2>
-
-          <p className="text-lg text-paper-cream/60 mb-10 max-w-lg mx-auto">
-            The first conversation is free. The value isn&apos;t.
-          </p>
-
-          <div className="flex flex-col sm:flex-row justify-center gap-4">
-            <Link
-              href="/contact"
-              className="inline-flex items-center justify-center gap-2 px-8 py-4 bg-foil-gold text-ink-navy text-sm font-semibold tracking-wide transition-all duration-300 hover:bg-foil-bronze hover:-translate-y-0.5"
-            >
-              Start a conversation
-            </Link>
-            <Link
-              href="/approach"
-              className="inline-flex items-center justify-center gap-2 px-8 py-4 bg-transparent text-paper-cream text-sm font-semibold tracking-wide border border-paper-cream/20 transition-all duration-300 hover:bg-paper-cream/10"
-            >
-              Discover the method
-            </Link>
-          </div>
-        </div>
-      </section>
+      <LionReveal />
 
       {/* Signature */}
       <section className="py-12 bg-paper-cream text-center border-t border-ink-navy/10">

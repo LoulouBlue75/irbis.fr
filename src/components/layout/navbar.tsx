@@ -14,7 +14,7 @@ interface NavItem {
 const navItems: NavItem[] = [
   { label: "Talents", href: "/talents" },
   { label: "Clients", href: "/clients" },
-  { label: "TailorShift", href: "https://tailorshift.co", external: true },
+  { label: "Ventures", href: "/ventures" },
 ];
 
 export function Navbar() {
@@ -89,6 +89,13 @@ export function Navbar() {
                   </Link>
                 )
               ))}
+              {/* Contact button - gold outline */}
+              <Link
+                href="/contact"
+                className="px-6 py-2.5 text-sm font-medium text-[#C9A962] border border-[#C9A962] transition-all duration-300 hover:bg-[#C9A962] hover:text-[#1A1F36]"
+              >
+                Contact
+              </Link>
             </nav>
 
             <button
@@ -140,6 +147,14 @@ export function Navbar() {
             )
           ))}
           <div className="w-16 h-px bg-gradient-to-r from-[#C9A962] to-transparent mt-8" />
+          {/* Contact button mobile */}
+          <Link
+            href="/contact"
+            onClick={() => setIsMobileMenuOpen(false)}
+            className="mt-4 px-8 py-3 text-lg font-medium text-[#C9A962] border border-[#C9A962] transition-all duration-300 hover:bg-[#C9A962] hover:text-[#1A1F36]"
+          >
+            Contact
+          </Link>
         </nav>
       </div>
     </>
