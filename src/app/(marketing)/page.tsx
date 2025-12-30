@@ -1,7 +1,8 @@
 import Link from "next/link";
-import { ArrowRight } from "lucide-react";
+import { ArrowRight, ExternalLink } from "lucide-react";
 import { HeroCinematic } from "@/components/sections/hero-cinematic";
 import { LionReveal } from "@/components/sections/lion-reveal";
+import { SplitSection } from "@/components/sections/split-section";
 
 export default function HomePage() {
   return (
@@ -13,43 +14,77 @@ export default function HomePage() {
       <HeroCinematic />
 
       {/* ============================================
-          VISION — Quote section
-          Centered, monumental, breathing space
+          VISION — Split Screen
+          Cabinet scientifique (Franklin, Curie, Germain)
+          "Technology amplifies the human"
           ============================================ */}
-      <section id="vision" className="py-32 lg:py-40 px-6 lg:px-12 bg-paper-cream">
-        <div className="max-w-[1280px] mx-auto flex flex-col items-center text-center">
-          {/* Architectural grid line */}
-          <div className="w-full h-px bg-ink-navy/5 mb-16" />
-
-          {/* Gold line */}
-          <div className="w-16 h-px bg-gradient-to-r from-transparent via-foil-gold to-transparent mb-12" />
-
-          {/* Quote */}
-          <blockquote className="mb-8">
-            <p className="font-display text-2xl md:text-3xl lg:text-4xl xl:text-5xl font-light text-ink-navy leading-tight tracking-tight max-w-4xl italic">
-              &ldquo;Technology amplifies the human. Never replaces.&rdquo;
-            </p>
-          </blockquote>
-
-          {/* Description */}
-          <p className="text-base lg:text-lg text-ink-light leading-relaxed max-w-2xl">
-            In a landscape of constant change, leadership is the only constant.
-            We specialize in finding the unfindable—the rare blend of vision,
-            grit, and expertise that defines world-class executives.
-          </p>
-
-          {/* Architectural grid line */}
-          <div className="w-full h-px bg-ink-navy/5 mt-16" />
-        </div>
-      </section>
+      <SplitSection
+        layout="image-left"
+        image={{
+          src: "/images/idea_2.png",
+          alt: "Cabinet scientifique - Hommage aux pionnieres",
+        }}
+        content={{
+          label: "Vision",
+          title: "Technology amplifies the human. Never replaces.",
+          description: (
+            <>
+              <p className="mb-4">
+                In a landscape of constant change, leadership is the only constant.
+                We specialize in finding the unfindable—the rare blend of vision,
+                grit, and expertise that defines world-class executives.
+              </p>
+              <p>
+                Like the pioneering women of science whose work transformed our world,
+                true talent often goes unrecognized. We see what others miss.
+              </p>
+            </>
+          ),
+        }}
+        background="cream"
+      />
 
       {/* ============================================
-          PORTFOLIO — "Une pièce, une oeuvre"
-          Paper card style
+          METHOD — Split Screen (inverse)
+          Process, notes, methodology
+          "Adaptive Precision"
           ============================================ */}
-      <section className="py-32 lg:py-40 px-6 lg:px-12 bg-paper-cream">
-        <div className="max-w-[1280px] mx-auto">
-          {/* Section header - Magazine style */}
+      <SplitSection
+        layout="image-right"
+        image={{
+          src: "/images/idea_1.png",
+          alt: "Methodologie Adaptive Precision",
+        }}
+        content={{
+          label: "Method",
+          title: "Adaptive Precision",
+          description: (
+            <>
+              <p className="mb-4">
+                Chaque mandat est unique. Notre methode s'ajuste a votre contexte,
+                votre culture et vos enjeux specifiques.
+              </p>
+              <p>
+                Reactivite. Discretion. Precision. Trois engagements non negociables
+                pour des resultats a la hauteur de vos ambitions.
+              </p>
+            </>
+          ),
+          cta: {
+            label: "Decouvrir notre approche",
+            href: "/approach",
+          },
+        }}
+        background="white"
+      />
+
+      {/* ============================================
+          ECOSYSTEM — Ventures Portfolio
+          TailorShift + Paris (coming soon)
+          ============================================ */}
+      <section className="py-24 lg:py-32 px-6 lg:px-12 bg-paper-cream">
+        <div className="max-w-[1440px] mx-auto">
+          {/* Section header */}
           <div className="grid grid-cols-12 gap-6 mb-16">
             <div className="col-span-12 lg:col-span-2 border-t border-ink-navy pt-4">
               <span className="font-mono text-[10px] uppercase tracking-widest text-foil-bronze">
@@ -57,58 +92,86 @@ export default function HomePage() {
               </span>
             </div>
             <div className="col-span-12 lg:col-span-8">
-              <h2 className="font-display text-3xl md:text-4xl lg:text-5xl font-light text-ink-navy tracking-tight">
+              <h2 className="font-display text-3xl md:text-4xl lg:text-5xl font-light text-ink-navy tracking-tight italic">
                 Ecosystem
               </h2>
             </div>
           </div>
 
-          {/* Single product card — TailorShift (Paper style) */}
-          <div className="max-w-2xl mx-auto relative group">
-            {/* Paper shadow */}
-            <div className="absolute inset-0 bg-ink-navy translate-x-3 translate-y-3 opacity-0 group-hover:opacity-10 transition-opacity duration-500"></div>
-
+          {/* Ventures Grid */}
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12">
+            {/* TailorShift Card */}
             <a
               href="https://tailorshift.co"
               target="_blank"
               rel="noopener noreferrer"
-              className="relative block bg-paper-white border border-ink-navy/10 overflow-hidden transition-transform duration-500 group-hover:-translate-y-1"
+              className="group relative"
             >
-              {/* Visual placeholder */}
-              <div className="aspect-[16/9] bg-paper-cream flex items-center justify-center border-b border-ink-navy/10">
-                <div className="text-center">
-                  <span className="font-display text-3xl text-ink-navy italic">TailorShift</span>
-                  <p className="font-mono text-xs text-foil-bronze mt-2 uppercase tracking-widest">Luxury Talent Platform</p>
-                </div>
-              </div>
+              {/* Paper shadow */}
+              <div className="absolute inset-0 bg-ink-navy translate-x-3 translate-y-3 opacity-0 group-hover:opacity-10 transition-opacity duration-500" />
 
-              {/* Content */}
-              <div className="p-8 lg:p-10">
-                {/* Stationery header */}
-                <div className="border-b-2 border-ink-navy pb-1 border-double mb-6">
-                  <span className="font-mono text-[10px] uppercase tracking-widest text-foil-bronze">Featured Venture</span>
+              <div className="relative bg-paper-white border border-ink-navy/10 overflow-hidden transition-transform duration-500 group-hover:-translate-y-1">
+                {/* Image */}
+                <div className="aspect-[4/3] overflow-hidden">
+                  <img
+                    src="/images/idea3.png"
+                    alt="TailorShift - Atelier"
+                    className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+                  />
                 </div>
 
-                <h3 className="font-display text-2xl lg:text-3xl text-ink-navy mb-3 group-hover:text-foil-gold transition-colors italic">
-                  TailorShift
-                </h3>
-                <p className="text-ink-light leading-relaxed mb-6">
-                  A curated talent platform connecting exceptional professionals
-                  with visionary brands in the luxury and retail space.
-                </p>
-                <span className="inline-flex items-center gap-2 text-sm font-semibold text-foil-gold group-hover:gap-3 transition-all">
-                  Discover
-                  <ArrowRight className="w-4 h-4" />
-                </span>
+                {/* Content */}
+                <div className="p-8 lg:p-10">
+                  <div className="flex items-center gap-3 mb-4">
+                    <span className="inline-flex items-center gap-2 px-3 py-1 text-xs font-mono uppercase tracking-widest bg-green-50 text-green-700 border border-green-200">
+                      Live
+                    </span>
+                  </div>
+
+                  <h3 className="font-display text-2xl lg:text-3xl text-ink-navy mb-3 group-hover:text-foil-gold transition-colors italic">
+                    TailorShift
+                  </h3>
+                  <p className="text-ink-light leading-relaxed mb-6">
+                    A curated talent platform connecting exceptional professionals
+                    with visionary brands in the luxury and retail space.
+                  </p>
+                  <span className="inline-flex items-center gap-2 text-sm font-semibold text-foil-gold group-hover:gap-3 transition-all">
+                    Visit
+                    <ExternalLink className="w-4 h-4" />
+                  </span>
+                </div>
               </div>
             </a>
-          </div>
 
-          {/* Coming Soon — Paris */}
-          <div className="max-w-md mx-auto mt-12 text-center">
-            <p className="font-mono text-xs text-ink-light uppercase tracking-widest">
-              <span className="text-foil-gold">Paris</span> — Coming Soon
-            </p>
+            {/* Paris Card - Coming Soon */}
+            <div className="relative">
+              <div className="relative bg-paper-white border border-ink-navy/10 overflow-hidden h-full flex flex-col">
+                {/* Placeholder visual */}
+                <div className="aspect-[4/3] bg-gradient-to-br from-paper-cream to-paper-white flex items-center justify-center border-b border-ink-navy/5">
+                  <div className="text-center">
+                    <span className="font-display text-4xl lg:text-5xl text-ink-navy/20 italic">
+                      Paris
+                    </span>
+                  </div>
+                </div>
+
+                {/* Content */}
+                <div className="p-8 lg:p-10 flex-1 flex flex-col justify-center">
+                  <div className="flex items-center gap-3 mb-4">
+                    <span className="inline-flex items-center gap-2 px-3 py-1 text-xs font-mono uppercase tracking-widest bg-paper-cream text-ink-light border border-ink-navy/10">
+                      Coming Soon
+                    </span>
+                  </div>
+
+                  <h3 className="font-display text-2xl lg:text-3xl text-ink-navy/40 mb-3 italic">
+                    Paris
+                  </h3>
+                  <p className="text-ink-light/60 leading-relaxed">
+                    Un nouveau pari en preparation. Restez connectes.
+                  </p>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       </section>
@@ -117,13 +180,6 @@ export default function HomePage() {
           LION REVEAL + CTAs — Closing statement
           ============================================ */}
       <LionReveal />
-
-      {/* Signature */}
-      <section className="py-12 bg-paper-cream text-center border-t border-ink-navy/10">
-        <p className="font-mono text-xs text-ink-light italic tracking-wide">
-          Irbis is a House of Perspective.
-        </p>
-      </section>
     </>
   );
 }
