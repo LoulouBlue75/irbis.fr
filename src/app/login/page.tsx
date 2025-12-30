@@ -1,6 +1,13 @@
 import Link from "next/link";
+import { login } from "@/app/auth/actions";
 
-export default function LoginPage() {
+export default async function LoginPage({
+  searchParams,
+}: {
+  searchParams: Promise<{ error?: string }>;
+}) {
+  const { error } = await searchParams;
+
   return (
     <div className="min-h-screen w-full bg-paper-cream flex items-center justify-center px-6">
       <div className="w-full max-w-md flex flex-col items-center text-center">
@@ -22,23 +29,36 @@ export default function LoginPage() {
             Where decisions take shape.
           </p>
 
-          <form className="flex flex-col gap-6">
+          {/* Error message */}
+          {error && (
+            <div className="mb-6 p-4 bg-red-50 border border-red-200 text-red-700 text-sm">
+              {error}
+            </div>
+          )}
+
+          <form action={login} className="flex flex-col gap-6">
             <div className="flex flex-col gap-2 text-left">
-              <label className="text-xs font-mono uppercase tracking-widest text-foil-bronze">
+              <label htmlFor="email" className="text-xs font-mono uppercase tracking-widest text-foil-bronze">
                 Email
               </label>
               <input
+                id="email"
+                name="email"
                 type="email"
+                required
                 placeholder="name@company.com"
                 className="w-full px-4 py-3 bg-paper-cream border border-ink-navy/10 text-ink-navy placeholder:text-ink-light/50 focus:border-foil-gold focus:outline-none transition-colors"
               />
             </div>
             <div className="flex flex-col gap-2 text-left">
-              <label className="text-xs font-mono uppercase tracking-widest text-foil-bronze">
+              <label htmlFor="password" className="text-xs font-mono uppercase tracking-widest text-foil-bronze">
                 Password
               </label>
               <input
+                id="password"
+                name="password"
                 type="password"
+                required
                 placeholder="••••••••"
                 className="w-full px-4 py-3 bg-paper-cream border border-ink-navy/10 text-ink-navy placeholder:text-ink-light/50 focus:border-foil-gold focus:outline-none transition-colors"
               />
