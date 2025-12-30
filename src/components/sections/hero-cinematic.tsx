@@ -59,7 +59,7 @@ export function HeroCinematic() {
 
       tl.to(vignette, { opacity: 0.6, duration: 0.5 }, 0);
       tl.to(vignette, { opacity: 0, duration: 0.3 }, 0.5);
-      tl.to(overlay, { opacity: 0.94, duration: 0.3 }, 0.6);
+      tl.to(overlay, { opacity: 1, duration: 0.3 }, 0.6); // La transparence est dans la classe
       tl.to(content, { opacity: 1, y: 0, duration: 0.3, ease: 'power2.out' }, 0.7);
     }, container);
 
@@ -92,10 +92,10 @@ export function HeroCinematic() {
         }}
       />
 
-      {/* Cream Overlay */}
+      {/* Cream Overlay - légèrement transparent pour laisser transparaître l'image */}
       <div
         ref={overlayRef}
-        className="absolute inset-0 bg-paper-cream opacity-0"
+        className="absolute inset-0 bg-paper-cream/[0.88] opacity-0"
       />
 
       {/* Content — New Yorker Editorial Style */}
@@ -103,33 +103,36 @@ export function HeroCinematic() {
         ref={contentRef}
         className="absolute inset-0 flex flex-col items-center justify-center opacity-0 translate-y-8"
       >
+        {/* Cadre élégant subtil */}
+        <div className="absolute inset-8 md:inset-16 lg:inset-24 border border-foil-gold/[0.08] pointer-events-none" />
+
         {/* Brand Name — New Yorker Typography */}
-        <h1 className="font-display text-center mb-6">
-          <span className="block text-6xl md:text-7xl lg:text-8xl xl:text-9xl italic font-light text-ink-navy tracking-tight">
+        <h1 className="font-display text-center mb-4">
+          <span className="block text-7xl md:text-8xl lg:text-9xl xl:text-[10rem] italic font-light text-ink-navy tracking-tight leading-none">
             Irbis
           </span>
-          <span className="block text-2xl md:text-3xl lg:text-4xl font-medium text-foil-gold tracking-[0.3em] uppercase mt-2">
+          <span className="block text-3xl md:text-4xl lg:text-5xl font-medium text-foil-gold tracking-[0.3em] uppercase mt-4">
             Partners
           </span>
         </h1>
 
+        {/* Gold Line sous Partners */}
+        <div className="w-40 h-px bg-gradient-to-r from-transparent via-foil-gold to-transparent my-8" />
+
         {/* Tagline */}
-        <p className="font-display text-lg md:text-xl text-ink-light italic mb-12">
+        <p className="font-display text-xl md:text-2xl text-ink-light italic mb-16">
           Executive Search with Adaptive Precision
         </p>
-
-        {/* Gold Line */}
-        <div className="w-32 h-px bg-gradient-to-r from-transparent via-foil-gold to-transparent mb-12" />
 
         {/* CTA — The Hunt Begins */}
         <button
           onClick={handleScrollToContent}
           className="group inline-flex flex-col items-center gap-4 text-ink-navy transition-all duration-500 hover:text-foil-gold"
         >
-          <span className="font-display text-lg md:text-xl italic tracking-wide">
+          <span className="font-display text-xl md:text-2xl italic tracking-wide">
             The hunt begins
           </span>
-          <ArrowDown className="w-5 h-5 animate-bounce" />
+          <ArrowDown className="w-6 h-6 animate-bounce" />
         </button>
       </div>
 

@@ -56,20 +56,21 @@ export function Navbar() {
         <div className="w-full max-w-[1440px] mx-auto px-6 lg:px-12">
           <div className={cn(
             "flex items-center justify-between transition-all duration-300",
-            isScrolled ? "h-16" : "h-20 lg:h-24"
+            isScrolled ? "h-18" : "h-22 lg:h-28"
           )}>
-            <Link href="/" className="flex items-center gap-4 group">
+            <Link href="/" className="flex items-center gap-2 md:gap-3 lg:gap-4 group">
               <img
                 src="/images/Irbis_Logo_full.svg"
                 alt="Irbis Partners"
                 className={cn(
                   "transition-all duration-300",
-                  isScrolled ? "h-10" : "h-12 lg:h-14"
+                  isScrolled ? "h-12" : "h-14 lg:h-16"
                 )}
               />
               <span className={cn(
-                "hidden lg:block font-serif italic text-sm text-[#525252] transition-all duration-300",
-                isScrolled ? "opacity-70 text-xs" : "opacity-100"
+                "font-serif italic text-ink-light transition-all duration-300",
+                "text-[10px] md:text-xs lg:text-sm",
+                isScrolled ? "opacity-60" : "opacity-100"
               )}>
                 House of Perspective
               </span>

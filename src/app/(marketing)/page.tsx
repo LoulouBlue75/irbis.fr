@@ -15,14 +15,14 @@ export default function HomePage() {
 
       {/* ============================================
           VISION — Split Screen
-          Cabinet scientifique (Franklin, Curie, Germain)
+          Cabinet de réflexion stratégique
           "Technology amplifies the human"
           ============================================ */}
       <SplitSection
         layout="image-left"
         image={{
           src: "/images/idea_2.png",
-          alt: "Cabinet scientifique - Hommage aux pionnieres",
+          alt: "Cabinet de réflexion stratégique",
         }}
         content={{
           label: "Vision",
@@ -30,13 +30,11 @@ export default function HomePage() {
           description: (
             <>
               <p className="mb-4">
-                In a landscape of constant change, leadership is the only constant.
-                We specialize in finding the unfindable—the rare blend of vision,
-                grit, and expertise that defines world-class executives.
+                In a world of noise, perspective is everything.
+                We see what others overlook—the leader who will transform your organization.
               </p>
-              <p>
-                Like the pioneering women of science whose work transformed our world,
-                true talent often goes unrecognized. We see what others miss.
+              <p className="font-medium text-ink-navy">
+                House of Perspective. Where clarity meets conviction.
               </p>
             </>
           ),
