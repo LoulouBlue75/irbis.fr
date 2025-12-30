@@ -24,21 +24,21 @@ export default function VenturesPage() {
   return (
     <>
       {/* Hero */}
-      <section className="pt-32 pb-20 lg:pt-40 lg:pb-32 px-6 lg:px-12 bg-paper-cream">
+      <section className="pt-40 pb-24 lg:pt-48 lg:pb-32 px-6 lg:px-12 bg-paper-cream">
         <div className="max-w-[1280px] mx-auto">
           <div className="max-w-3xl">
             {/* Breadcrumb */}
-            <p className="font-mono text-xs uppercase tracking-widest text-foil-bronze mb-8">
+            <p className="font-mono text-[11px] uppercase tracking-[0.2em] text-foil-bronze mb-10">
               Ventures
             </p>
 
             {/* Headline */}
-            <h1 className="font-display text-4xl md:text-5xl lg:text-6xl font-light text-ink-navy tracking-tight mb-6 italic">
+            <h1 className="font-display text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-light text-ink-navy tracking-tight mb-8 italic leading-[1.1]">
               Ecosystem
             </h1>
 
             {/* Gold line */}
-            <div className="w-24 h-px bg-gradient-to-r from-foil-gold to-transparent mb-8" />
+            <div className="w-24 h-px bg-gradient-to-r from-foil-gold to-transparent mb-10" />
 
             {/* Description */}
             <p className="text-lg text-ink-light leading-relaxed max-w-2xl">
@@ -50,7 +50,7 @@ export default function VenturesPage() {
       </section>
 
       {/* Ventures Grid */}
-      <section className="py-20 lg:py-32 px-6 lg:px-12 bg-paper-white border-t border-ink-navy/5">
+      <section className="py-24 lg:py-32 px-6 lg:px-12 bg-paper-white border-t border-ink-navy/5">
         <div className="max-w-[1280px] mx-auto">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
             {ventures.map((venture) => (
@@ -82,28 +82,28 @@ export default function VenturesPage() {
       </section>
 
       {/* Philosophy */}
-      <section className="py-20 lg:py-32 px-6 lg:px-12 bg-ink-navy">
+      <section className="py-24 lg:py-32 px-6 lg:px-12 bg-ink-navy">
         <div className="max-w-[1280px] mx-auto text-center">
-          <div className="w-16 h-px bg-gradient-to-r from-transparent via-foil-gold to-transparent mx-auto mb-12" />
+          <div className="w-24 h-px bg-gradient-to-r from-transparent via-foil-gold to-transparent mx-auto mb-16" />
           <blockquote className="max-w-3xl mx-auto">
-            <p className="font-display text-2xl md:text-3xl lg:text-4xl font-light text-paper-cream leading-tight tracking-tight italic">
+            <p className="font-display text-3xl md:text-4xl lg:text-5xl font-light text-paper-cream leading-tight tracking-tight italic">
               &ldquo;We don&apos;t just advise. We build.&rdquo;
             </p>
           </blockquote>
-          <div className="w-16 h-px bg-gradient-to-r from-transparent via-foil-gold to-transparent mx-auto mt-12" />
+          <div className="w-24 h-px bg-gradient-to-r from-transparent via-foil-gold to-transparent mx-auto mt-16" />
         </div>
       </section>
 
       {/* CTA */}
-      <section className="py-20 lg:py-32 px-6 lg:px-12 bg-paper-cream">
+      <section className="py-24 lg:py-32 px-6 lg:px-12 bg-paper-cream">
         <div className="max-w-[1280px] mx-auto text-center">
-          <p className="font-mono text-xs uppercase tracking-widest text-foil-bronze mb-8">
+          <p className="font-mono text-[11px] uppercase tracking-[0.2em] text-foil-bronze mb-10">
             Collaboration
           </p>
-          <h2 className="font-display text-3xl md:text-4xl font-light text-ink-navy tracking-tight mb-6 italic">
+          <h2 className="font-display text-3xl md:text-4xl lg:text-5xl font-light text-ink-navy tracking-tight mb-8 italic">
             Have a project?
           </h2>
-          <p className="text-lg text-ink-light mb-10 max-w-lg mx-auto">
+          <p className="text-lg lg:text-xl text-ink-light mb-12 max-w-lg mx-auto">
             We&apos;re always listening to bold ideas and strategic partnerships.
           </p>
           <Link

@@ -40,21 +40,21 @@ export default function ClientsPage() {
   return (
     <>
       {/* Hero */}
-      <section className="pt-32 pb-20 lg:pt-40 lg:pb-32 px-6 lg:px-12 bg-paper-cream">
+      <section className="pt-40 pb-24 lg:pt-48 lg:pb-32 px-6 lg:px-12 bg-paper-cream">
         <div className="max-w-[1280px] mx-auto">
           <div className="max-w-3xl">
             {/* Breadcrumb */}
-            <p className="font-mono text-xs uppercase tracking-widest text-foil-bronze mb-8">
+            <p className="font-mono text-[11px] uppercase tracking-[0.2em] text-foil-bronze mb-10">
               Clients
             </p>
 
             {/* Headline */}
-            <h1 className="font-display text-4xl md:text-5xl lg:text-6xl font-light text-ink-navy tracking-tight mb-6 italic">
+            <h1 className="font-display text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-light text-ink-navy tracking-tight mb-8 italic leading-[1.1]">
               Find the leader who will transform your organization.
             </h1>
 
             {/* Gold line */}
-            <div className="w-24 h-px bg-gradient-to-r from-foil-gold to-transparent mb-8" />
+            <div className="w-24 h-px bg-gradient-to-r from-foil-gold to-transparent mb-10" />
 
             {/* Description */}
             <p className="text-lg text-ink-light leading-relaxed mb-10 max-w-2xl">
@@ -75,16 +75,16 @@ export default function ClientsPage() {
       </section>
 
       {/* Commitment / SLA */}
-      <section className="py-20 lg:py-32 px-6 lg:px-12 bg-paper-white border-t border-ink-navy/5">
+      <section className="py-24 lg:py-32 px-6 lg:px-12 bg-paper-white border-t border-ink-navy/5">
         <div className="max-w-[1280px] mx-auto">
-          <div className="grid grid-cols-12 gap-6 mb-16">
+          <div className="grid grid-cols-12 gap-6 mb-20">
             <div className="col-span-12 lg:col-span-2 border-t border-ink-navy pt-4">
-              <span className="font-mono text-[10px] uppercase tracking-widest text-foil-bronze">
+              <span className="font-mono text-[11px] uppercase tracking-[0.2em] text-foil-bronze">
                 Commitment
               </span>
             </div>
             <div className="col-span-12 lg:col-span-8">
-              <h2 className="font-display text-3xl md:text-4xl font-light text-ink-navy tracking-tight">
+              <h2 className="font-display text-3xl md:text-4xl lg:text-5xl font-light text-ink-navy tracking-tight italic">
                 High-level SLA
               </h2>
             </div>
@@ -105,16 +105,16 @@ export default function ClientsPage() {
       </section>
 
       {/* Services */}
-      <section className="py-20 lg:py-32 px-6 lg:px-12 bg-paper-cream">
+      <section className="py-24 lg:py-32 px-6 lg:px-12 bg-paper-cream">
         <div className="max-w-[1280px] mx-auto">
-          <div className="grid grid-cols-12 gap-6 mb-16">
+          <div className="grid grid-cols-12 gap-6 mb-20">
             <div className="col-span-12 lg:col-span-2 border-t border-ink-navy pt-4">
-              <span className="font-mono text-[10px] uppercase tracking-widest text-foil-bronze">
+              <span className="font-mono text-[11px] uppercase tracking-[0.2em] text-foil-bronze">
                 Services
               </span>
             </div>
             <div className="col-span-12 lg:col-span-8">
-              <h2 className="font-display text-3xl md:text-4xl font-light text-ink-navy tracking-tight">
+              <h2 className="font-display text-3xl md:text-4xl lg:text-5xl font-light text-ink-navy tracking-tight italic">
                 Our offering
               </h2>
             </div>
@@ -136,12 +136,12 @@ export default function ClientsPage() {
       </section>
 
       {/* Sectors */}
-      <section className="py-20 lg:py-32 px-6 lg:px-12 bg-ink-navy">
+      <section className="py-24 lg:py-32 px-6 lg:px-12 bg-ink-navy">
         <div className="max-w-[1280px] mx-auto text-center">
-          <p className="font-mono text-xs uppercase tracking-widest text-foil-gold mb-8">
+          <p className="font-mono text-[11px] uppercase tracking-[0.2em] text-foil-gold mb-10">
             Sectors
           </p>
-          <h2 className="font-display text-3xl md:text-4xl font-light text-paper-cream tracking-tight mb-12 italic">
+          <h2 className="font-display text-3xl md:text-4xl lg:text-5xl font-light text-paper-cream tracking-tight mb-16 italic">
             Multi-sector expertise
           </h2>
           <div className="flex flex-wrap justify-center gap-4">
@@ -158,13 +158,13 @@ export default function ClientsPage() {
       </section>
 
       {/* CTA Final */}
-      <section className="py-20 lg:py-32 px-6 lg:px-12 bg-paper-cream">
+      <section className="py-24 lg:py-32 px-6 lg:px-12 bg-paper-cream">
         <div className="max-w-[1280px] mx-auto text-center">
-          <div className="w-16 h-px bg-gradient-to-r from-transparent via-foil-gold to-transparent mx-auto mb-12" />
-          <h2 className="font-display text-3xl md:text-4xl font-light text-ink-navy tracking-tight mb-6 italic">
-            Ready to find your next leader?
+          <div className="w-24 h-px bg-gradient-to-r from-transparent via-foil-gold to-transparent mx-auto mb-16" />
+          <h2 className="font-display text-3xl md:text-4xl lg:text-5xl font-light text-ink-navy tracking-tight mb-8 italic">
+            Let's start the conversation.
           </h2>
-          <p className="text-lg text-ink-light mb-10 max-w-lg mx-auto">
+          <p className="text-lg lg:text-xl text-ink-light mb-12 max-w-lg mx-auto">
             The first conversation is free. The value isn&apos;t.
           </p>
           <Link

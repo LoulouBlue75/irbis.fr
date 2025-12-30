@@ -81,7 +81,7 @@ export function SplitSection({
     <section
       ref={sectionRef}
       className={cn(
-        "py-24 lg:py-32 px-6 lg:px-12",
+        "py-32 lg:py-40 px-6 lg:px-12",
         bgClass,
         className
       )}
@@ -109,19 +109,19 @@ export function SplitSection({
           {/* Content */}
           <div ref={contentRef} className="flex flex-col justify-center">
             {content.label && (
-              <p className="font-mono text-xs uppercase tracking-widest text-foil-bronze mb-6">
+              <p className="font-mono text-[11px] uppercase tracking-[0.2em] text-foil-bronze mb-8">
                 {content.label}
               </p>
             )}
 
-            <h2 className="font-display text-3xl md:text-4xl lg:text-5xl font-light text-ink-navy tracking-tight mb-6 italic">
+            <h2 className="font-display text-4xl md:text-5xl lg:text-6xl font-light text-ink-navy tracking-tight mb-8 italic leading-[1.1]">
               {content.title}
             </h2>
 
             {/* Gold line */}
-            <div className="w-16 h-px bg-gradient-to-r from-foil-gold to-transparent mb-8" />
+            <div className="w-24 h-px bg-gradient-to-r from-foil-gold to-transparent mb-10" />
 
-            <div className="text-lg text-ink-light leading-relaxed mb-8">
+            <div className="text-lg lg:text-xl text-ink-light leading-relaxed mb-10">
               {content.description}
             </div>
 

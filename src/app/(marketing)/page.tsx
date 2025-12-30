@@ -81,17 +81,17 @@ export default function HomePage() {
           ECOSYSTEM — Ventures Portfolio
           TailorShift + Paris (coming soon)
           ============================================ */}
-      <section className="py-24 lg:py-32 px-6 lg:px-12 bg-paper-cream">
+      <section className="py-32 lg:py-40 px-6 lg:px-12 bg-paper-cream">
         <div className="max-w-[1440px] mx-auto">
           {/* Section header */}
-          <div className="grid grid-cols-12 gap-6 mb-16">
+          <div className="grid grid-cols-12 gap-6 mb-20">
             <div className="col-span-12 lg:col-span-2 border-t border-ink-navy pt-4">
-              <span className="font-mono text-[10px] uppercase tracking-widest text-foil-bronze">
+              <span className="font-mono text-[11px] uppercase tracking-[0.2em] text-foil-bronze">
                 Ventures
               </span>
             </div>
             <div className="col-span-12 lg:col-span-8">
-              <h2 className="font-display text-3xl md:text-4xl lg:text-5xl font-light text-ink-navy tracking-tight italic">
+              <h2 className="font-display text-4xl md:text-5xl lg:text-6xl font-light text-ink-navy tracking-tight italic leading-[1.1]">
                 Ecosystem
               </h2>
             </div>
