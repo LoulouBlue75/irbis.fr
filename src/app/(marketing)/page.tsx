@@ -15,8 +15,7 @@ export default function HomePage() {
 
       {/* ============================================
           VISION — Split Screen
-          Cabinet de réflexion stratégique
-          "Technology amplifies the human"
+          "Where others see candidates, we see trajectories"
           ============================================ */}
       <SplitSection
         layout="image-left"
@@ -26,17 +25,12 @@ export default function HomePage() {
         }}
         content={{
           label: "Vision",
-          title: "Technology amplifies the human. Never replaces.",
+          title: "Where others see candidates, we see trajectories.",
           description: (
-            <>
-              <p className="mb-4">
-                In a world of noise, perspective is everything.
-                We see what others overlook—the leader who will transform your organization.
-              </p>
-              <p className="font-medium text-ink-navy">
-                House of Perspective. Where clarity meets conviction.
-              </p>
-            </>
+            <p>
+              Perspective is our craft. We identify the leaders others overlook—
+              those who will shape your next chapter.
+            </p>
           ),
         }}
         background="cream"

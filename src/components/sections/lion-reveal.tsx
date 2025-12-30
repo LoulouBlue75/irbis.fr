@@ -72,7 +72,7 @@ export function LionReveal() {
   return (
     <section
       ref={sectionRef}
-      className="relative py-32 lg:py-48 px-6 lg:px-12 bg-paper-cream overflow-hidden"
+      className="relative py-16 lg:py-24 px-6 lg:px-12 bg-paper-cream overflow-hidden"
     >
       {/* Architectural grid lines */}
       <div className="absolute inset-0 pointer-events-none">

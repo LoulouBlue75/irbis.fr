@@ -69,7 +69,7 @@ export function Navbar() {
               />
               <span className={cn(
                 "font-serif italic text-ink-light transition-all duration-300",
-                "text-[10px] md:text-xs lg:text-sm",
+                "text-xs md:text-sm lg:text-base",
                 isScrolled ? "opacity-60" : "opacity-100"
               )}>
                 House of Perspective
