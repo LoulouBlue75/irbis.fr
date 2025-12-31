@@ -1,171 +1,295 @@
-# P4 Interfaces
+# P4 : INTERFACES & DESIGN
 
-## 1. Sitemap par Rôle
+> **Version** : 2.0 (Iteration 31/12/2025)
+> **Reference** : Matrice v4.1 — Chantier 4
+> **Design System** : Matrice_dev/projects/irbis/design_system.md
 
-### 👤 Candidat (B2C)
-- `/login` : Connexion / Inscription
-- `/profile` : Mon Profil (CV, Préférences)
-- `/dashboard` : Suivi des candidatures (si applicable)
+---
 
-### 💼 Recruteur (B2B)
-- `/dashboard` : Vue d'ensemble (Activité, Matches récents)
-- `/jobs` : Mes Missions
-  - `/jobs/new` : Créer une mission
-  - `/jobs/[id]` : Détails mission & Matches
-- `/candidates` : Vivier Candidats
-  - `/candidates/[id]` : Profil complet
-- `/settings` : Préférences personnelles
+## 1. SITEMAP PAR ROLE
 
-### 🛠️ Admin (Interne)
-- `/admin/dashboard` : Stats globales plateforme
-- `/admin/users` : Gestion utilisateurs
-- `/admin/integrations` : Configuration (LinkedIn, CRM)
+### Recruteur (B2B) — PRIMARY
 
-## 2. Design System — Swiss Minimalism ✅
+| Route | Ecran | Priorite |
+|-------|-------|----------|
+| `/hunting/dashboard` | Dashboard temps reel | P0 |
+| `/hunting/talents` | Liste talents (vivier) | P0 |
+| `/hunting/talents/new` | Ajout talent / Upload CV | P0 |
+| `/hunting/talents/[id]` | Profil talent complet | P0 |
+| `/hunting/mandates` | Liste mandats | P0 |
+| `/hunting/mandates/new` | Creation mandat | P0 |
+| `/hunting/mandates/[id]` | Detail mandat + pipeline | P0 |
+| `/settings` | Preferences personnelles | P1 |
 
-> **Statut** : ✅ Implémenté  
-> **Documentation** : `design/design_system.md`  
-> **Thème** : Light Only (Blanc épuré)
+### Admin (Interne)
+
+| Route | Ecran | Priorite |
+|-------|-------|----------|
+| `/admin/dashboard` | Stats globales | P1 |
+| `/admin/users` | Gestion utilisateurs | P1 |
+| `/admin/integrations` | Config LinkedIn, etc. | P2 |
+| `/admin/settings` | Parametres plateforme | P2 |
+
+### Candidat (B2C) — V2
+
+| Route | Ecran | Note |
+|-------|-------|------|
+| `/login` | Connexion | V1 (auth partagee) |
+| `/profile` | Mon Profil | V2 |
+| `/applications` | Suivi candidatures | V2 |
+
+---
+
+## 2. DESIGN SYSTEM
+
+> **Source of Truth** : `Matrice_dev/projects/irbis/design_system.md`
+> **Theme** : Light Only — "L'Edition Architecturale"
 
 ### Stack Technique
-- **Framework CSS** : Tailwind CSS
-- **Component Library** : shadcn/ui (Radix UI primitives)
-- **Icons** : Lucide React
-- **Typography** : Geist Sans / Geist Mono (Vercel)
-- **Animations** : CSS Transitions (200-300ms)
 
-### Palette de Couleurs
+| Couche | Technologie |
+|--------|-------------|
+| Framework CSS | Tailwind CSS v4 |
+| Component Library | shadcn/ui (Radix primitives) |
+| Icons | Lucide React |
+| Typography | Cormorant Garamond (display) + Inter (body) |
+| Animations | GSAP (marketing) + Framer Motion (Console) |
+
+### Palette Console (Light)
+
 ```css
-/* Backgrounds */
---background-primary: #ffffff      /* Pure White */
---background-secondary: #fafafa    /* Subtle Gray for cards */
---background-tertiary: #f5f5f5     /* Hover states */
+/* Paper & Ink */
+--paper-cream: #F9F7F1;
+--paper-white: #FFFEFC;
+--ink-black: #121212;
+--ink-navy: #0B1121;
+--ink-light: #4A4A4A;
+--foil-gold: #C6A87C;
 
-/* Text */
---text-primary: #171717            /* Deep Charcoal */
---text-secondary: #737373          /* Medium Gray */
---text-tertiary: #a3a3a3           /* Light Gray */
-
-/* Accents */
---accent-primary: #2563eb          /* Royal Blue - Actions */
---accent-success: #059669          /* Forest Green - Matches */
---accent-warning: #f59e0b          /* Amber - Warnings */
---accent-danger: #dc2626           /* Red - Errors */
+/* Semantic */
+--success: #2E7D6B;
+--warning: #D4A74A;
+--error: #B54B4B;
+--info: #4A7DB5;
 ```
 
-### Principes Visuels
-- ✅ **Whitespace Généreux** : Minimum 24px (--space-6) pour padding
-- ✅ **Borders Subtiles** : 1px #e5e5e5
-- ✅ **Typography Hiérarchisée** : Semibold pour titres, Regular/Medium pour body
-- ✅ **Ombres Légères Uniquement** : Pas de box-shadow > 16px
-- ✅ **Transitions Rapides** : 200ms pour hover, 300ms pour modals
+### Principes Visuels Console
 
-### Paradigmes Spatiaux Utilisés
-| Écran | Paradigme | Justification |
-|-------|-----------|---------------|
-| Dashboard | **Bento Grid** | Stats cards + Activity feed |
-| Candidate Profile | **Split-Screen** | Analysis (2/3) + CRM (1/3) |
-| Candidate List | **Full-Width Cards** | Table épurée avec search |
-| Job Details | **Split-Screen** | Job info + Matches sidebar |
+- **Whitespace Genereux** : min 24px padding
+- **Borders Subtiles** : 1px rgba(11, 17, 33, 0.08)
+- **Typography Hierarchisee** : Semibold titres, Regular body
+- **Ombres Legeres** : max shadow-md
+- **Transitions Rapides** : 200ms hover, 300ms modals
 
-### Composants Disponibles
+---
 
-#### shadcn/ui Components
-```bash
-# Installed Components
-- button (primary, secondary, ghost variants)
-- card (default, clean variants)
-- input (text, search, email, tel)
-- select (dropdown menus)
-- dialog (modals)
-- table (data tables)
-- badge (status indicators)
-- tabs (navigation)
-- form (form handling)
-- dropdown-menu (action menus)
-- avatar (user avatars)
-- progress (bars for 8D dimensions)
-- skeleton (loading states)
+## 3. COMPOSANTS
+
+### shadcn/ui Installes
+
+```
+button, card, input, select, dialog, table, badge,
+tabs, form, dropdown-menu, avatar, progress, skeleton,
+alert, textarea, tooltip
 ```
 
-#### IRBIS Custom Components (À créer)
+### Composants Custom Irbis
+
+| Composant | Priorite | Status | Fichier |
+|-----------|----------|--------|---------|
+| `talent-card-paper` | P0 | Done | `src/components/talent-card-paper.tsx` |
+| `mandate-card` | P0 | Todo | - |
+| `match-score` | P0 | Todo | - |
+| `activity-timeline` | P0 | Done | `src/components/crm/activity-timeline.tsx` |
+| `stats-card` | P0 | Done | `src/components/dashboard-stats.tsx` |
+| `empty-state` | P0 | Todo | Voir `pillars/ui_states.md` |
+| `error-page` | P0 | Todo | Voir `pillars/ui_states.md` |
+| `nudge-card` | P1 | Todo | Voir `pillars/nudge_system.md` |
+
+---
+
+## 4. ETATS UI
+
+> **Documentation complete** : `pillars/ui_states.md`
+
+### Synthese
+
+| Etat | Description | Status |
+|------|-------------|--------|
+| Empty | Message + CTA quand liste vide | Documente |
+| Loading | Skeletons par ecran | A implementer |
+| Error | Types + messages + retry | Documente |
+| Success | Toast + redirect | A implementer |
+
+### Ecrans avec Empty State
+
+| Ecran | Message | CTA |
+|-------|---------|-----|
+| Dashboard | "Bienvenue ! Creez votre premier mandat..." | Ajouter talent |
+| Talents | "Aucun talent dans votre vivier" | Ajouter talent |
+| Mandates | "Aucun mandat en cours" | Creer mandat |
+| Search | "Aucun resultat" | Effacer filtres |
+
+---
+
+## 5. NUDGE SYSTEM
+
+> **Documentation complete** : `pillars/nudge_system.md`
+
+### Nudges Dashboard
+
+| ID | Prio | Condition | Message |
+|----|------|-----------|---------|
+| NUD-001 | 3 | Vivier vide | "Ajoutez votre premier talent" |
+| NUD-002 | 4 | Pas de mandat | "Creez un mandat" |
+| NUD-003 | 5 | Nouveaux matches | "X nouveaux matches" |
+| NUD-004 | 4 | Mandat inactive 7j | "Mandat en attente" |
+| NUD-008 | 2 | Erreur analyse | "Erreur d'analyse" |
+
+---
+
+## 6. SCREEN CONTRACTS
+
+> **Dossier** : `screen_contracts/`
+
+### Index
+
+| ID | Screen | Status | Fichier |
+|----|--------|--------|---------|
+| SC-01 | Dashboard Overview | YAML | `dashboard-overview.yaml` |
+| SC-02 | Dashboard Realtime | YAML | `dashboard-realtime.yaml` |
+| SC-03 | Talent Profile | YAML | `talent-profile.yaml` |
+| SC-04 | Mandate Cockpit | YAML | `mandate-cockpit.yaml` |
+| SC-05 | Candidate Profile | YAML | `candidate-profile.yaml` |
+
+### Format Screen Contract Matrice (9 sections)
+
+```yaml
+screen:
+  route: /path
+  name: "Nom"
+
+context:        # D'ou vient l'utilisateur
+goal:           # Qu'est-ce qu'il doit faire
+nudge_logic:    # Guides contextuels
+states:         # default, loading, empty, error
+parity:         # Coherence avec autres roles
+components:     # Composants utilises
+data:           # Donnees necessaires
+accessibility:  # A11y + responsive
+testing:        # Scenarios E2E
 ```
-src/components/custom/
-├── talent-card.tsx              # Card candidat avec badges
-├── mandate-card.tsx             # Card mission avec status
-├── compatibility-score.tsx      # Affichage % matching
-├── 8d-radar-chart.tsx          # Graphique dimensions
-├── activity-timeline.tsx        # Timeline CRM
-└── stats-card.tsx              # Card metric avec trend
+
+---
+
+## 7. NAVIGATION
+
+### Navbar Console (Recruiter)
+
+```
+[Logo]  Dashboard  Talents  Mandates     [Search]  [User]
 ```
 
-### Références Design
-- **Inspiration** : Apple Business, Linear, Stripe Dashboard
-- **Accessibility** : WCAG 2.1 Level AA (contraste 4.5:1 minimum)
-- **Performance** : Animations 60fps, transform/opacity only
+### Items par Role
 
-## 3. Mockups (ASCII)
+| Item | Recruiter | Admin |
+|------|-----------|-------|
+| Dashboard | Oui | Oui |
+| Talents | Oui | Oui |
+| Mandates | Oui | Oui |
+| Users | Non | Oui |
+| Integrations | Non | Oui |
+| Settings | Oui | Oui |
 
-### SC-01: Dashboard Realtime (Recruteur)
+---
+
+## 8. PARITE ROLE-BASED
+
+### Tableau Comparatif
+
+| Element | Recruiter | Admin | Divergence |
+|---------|-----------|-------|------------|
+| Dashboard | Stats perso | Stats globales | Intentionnel |
+| Talents | Ses talents | Tous talents | Intentionnel |
+| Mandates | Ses mandats | Tous mandates | Intentionnel |
+| Users | - | Full CRUD | Admin only |
+| Settings | Perso | Global | Intentionnel |
+
+### Elements Alignes
+
+- Header/Navbar : Identique (memes composants)
+- Footer : Identique
+- Cards talents/mandates : Memes composants
+- Filtres/Search : Identiques
+
+---
+
+## 9. MOCKUPS ASCII
+
+### Dashboard (avec Nudges)
+
 ```text
 +-----------------------------------------------------------------------+
-|  [Logo]  Dashboard   Jobs   Candidates   Settings          [User v]   |
+|  [Logo]  Dashboard   Talents   Mandates                    [User v]   |
 +-----------------------------------------------------------------------+
 |                                                                       |
-|  Bonjour, Louis 👋                                                    |
+|  +---------------------------------------------------------------+   |
+|  | [!] Vivier vide — Ajoutez votre premier talent  [Ajouter]     |   |
+|  +---------------------------------------------------------------+   |
+|                                                                       |
+|  Bonjour, Sophie                                                      |
 |                                                                       |
 |  +----------------+  +----------------+  +----------------+           |
-|  | Candidats      |  | Matches (New)  |  | Missions       |           |
-|  | 1,240      ^5% |  | 12         ^2  |  | 5 Active       |           |
+|  | Talents        |  | Matches        |  | Mandats        |           |
+|  | 0              |  | 0              |  | 0              |           |
 |  +----------------+  +----------------+  +----------------+           |
 |                                                                       |
 |  +--------------------------------+  +----------------------------+   |
-|  |  Activité en temps réel        |  |  Derniers Matches          |   |
+|  |  Activite recente              |  |  Derniers Matches          |   |
 |  |                                |  |                            |   |
-|  |  • Jean D. a postulé (2m)      |  |  Jean D. -> CTO (98%)      |   |
-|  |  • Match trouvé: CTO (5m)      |  |  Marie L. -> Dev (85%)     |   |
-|  |  • CV analysé: Marie L. (10m)  |  |  Paul R. -> Sales (72%)    |   |
+|  |  (Empty State)                 |  |  (Empty State)             |   |
+|  |  Aucune activite               |  |  Aucun match               |   |
 |  |                                |  |                            |   |
-|  |  [Voir tout]                   |  |  [Voir tout]               |   |
 |  +--------------------------------+  +----------------------------+   |
 |                                                                       |
 +-----------------------------------------------------------------------+
 ```
 
-### SC-02: LinkedIn Integration (Admin)
-```text
-+-----------------------------------------------------------------------+
-|  [< Retour]  Intégration LinkedIn                                     |
-+-----------------------------------------------------------------------+
-|                                                                       |
-|  Statut: ● Connecté (Compte: louis@irbis.com)      [Déconnecter]      |
-|                                                                       |
-|  +----------------------------------------------------------------+   |
-|  |  Paramètres de Synchronisation                                 |   |
-|  |                                                                |   |
-|  |  [x] Import automatique des profils visités                    |   |
-|  |                                                                |   |
-|  |  Fréquence: [ Temps réel v ]                                   |   |
-|  |                                                                |   |
-|  |  Champs: [x] Expérience  [x] Formation  [ ] Skills             |   |
-|  |                                                                |   |
-|  |  [Sauvegarder]                                                 |   |
-|  +----------------------------------------------------------------+   |
-|                                                                       |
-|  +----------------------------------------------------------------+   |
-|  |  Journal d'activité                                            |   |
-|  |  ------------------------------------------------------------  |   |
-|  |  10:42  Sync Profile  Success  Jean Dupont                     |   |
-|  |  10:40  Auth          Success  Token refreshed                 |   |
-|  +----------------------------------------------------------------+   |
-+-----------------------------------------------------------------------+
-```
+---
 
-## 4. Screen Contracts Index
-| ID | Screen Name | Status | Description |
-|----|-------------|--------|-------------|
-| SC-01 | Dashboard Realtime | 🔴 Todo | Vue temps réel des activités |
-| SC-02 | LinkedIn Integration | 🔴 Todo | Modal/Page de connexion LinkedIn |
-| SC-03 | Candidate Profile | 🟢 Done | Vue détaillée candidat (Existing) |
-| SC-04 | Job Details | 🟢 Done | Vue mission + matches (Existing) |
-`n## 5. Future Features (Backlog)`n- **Collaborative Review**: Client portal for rating/commenting candidates and sharing via Email/Slack.
+## 10. VALIDATION
+
+### Cascades a Verifier
+
+| Element P4 | Impact P2 | Impact P3 | Impact P5 |
+|------------|-----------|-----------|-----------|
+| Sitemap | Routes par role | - | Middleware auth |
+| Empty States | UX First Action | - | Logique conditions |
+| Nudges | Priorites user | - | Regles business |
+
+### Checklist Coherence
+
+- [x] Sitemap documente par role
+- [x] Design System reference
+- [x] UI States documentes
+- [x] Nudge System documente
+- [ ] Screen Contracts migres format 9 sections
+- [ ] Navigation par role testee
+- [ ] Responsive verifie
+
+---
+
+## 11. REFERENCES
+
+| Document | Chemin |
+|----------|--------|
+| Design System | `Matrice_dev/projects/irbis/design_system.md` |
+| UI States | `pillars/ui_states.md` |
+| Nudge System | `pillars/nudge_system.md` |
+| Screen Contracts | `screen_contracts/*.yaml` |
+| Direction Artistique | `Matrice_dev/projects/irbis/DIRECTION_ARTISTIQUE.md` |
+
+---
+
+*P4 Interfaces & Design — Irbis*
+*v2.0 — 31/12/2025*
