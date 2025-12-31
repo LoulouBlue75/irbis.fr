@@ -1,6 +1,6 @@
 # P3 : DONNEES & SCHEMA
 
-> **Version** : 1.0 (31/12/2025)
+> **Version** : 2.0 (31/12/2025)
 > **Reference** : Matrice v4.1 — Chantier 3
 > **Database** : Supabase PostgreSQL + pgvector
 
@@ -201,18 +201,36 @@
 
 ## 3.F — SECURITE (RLS)
 
-### Mode Dev (Actuel)
+### Mode Production (Active)
 
-Toutes tables : authenticated = full access
+Migration : 20250101000001_rls_production.sql
 
-### Mode Prod (A implementer)
+#### Fonction Helper
 
-| Table | Policy |
-|-------|--------|
-| candidates | project_id IN user_projects |
-| jobs | project_id IN user_projects |
-| matches | job_id IN user_jobs |
-| activities | created_by = auth.uid() OR is_admin |
+    is_admin() -- Verifie app_metadata.role = admin
+
+#### Colonnes Ajoutees
+
+| Table | Colonne |
+|-------|---------|
+| projects | created_by |
+| candidates | created_by |
+| jobs | created_by |
+| context_sources | created_by |
+
+#### Policies par Table
+
+| Table | SELECT | INSERT | UPDATE | DELETE |
+|-------|--------|--------|--------|--------|
+| projects | owner/admin | auth | owner/admin | admin |
+| candidates | owner/admin | owner/admin | owner/admin | admin |
+| jobs | owner/admin | owner/admin | owner/admin | admin |
+| matches | job_owner | job_owner | job_owner | job_owner |
+| activities | owner/admin | owner/admin | creator/admin | creator/admin |
+| context_sources | owner/admin | owner/admin | owner/admin | admin |
+| pillars | owner/admin | owner/admin | owner/admin | admin |
+
+Legende : owner = project.created_by, job_owner = via job.project_id
 
 ---
 
@@ -272,6 +290,7 @@ Recherche semantique de candidats par embedding.
 | 008 | matching_engine | jobs, matches, match_candidates() |
 | 009 | update_embedding | ALTER embedding 1536 |
 | 010 | crm_activities | activities |
+| 011 | rls_production | RLS policies production |
 
 ---
 
