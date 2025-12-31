@@ -3,6 +3,7 @@ import { Cormorant_Garamond, Inter } from "next/font/google";
 import "./globals.css";
 import { NavbarWrapper } from "@/components/layout/navbar-wrapper";
 import { Footer } from "@/components/layout/footer";
+import { SentryProvider } from "@/components/sentry-provider";
 
 const cormorant = Cormorant_Garamond({
   variable: "--font-display",
@@ -55,11 +56,13 @@ export default async function RootLayout({
       <body
         className={`${cormorant.variable} ${inter.variable} antialiased`}
       >
+        <SentryProvider>
         <NavbarWrapper />
         <main className="min-h-screen pt-20 lg:pt-24">
           {children}
         </main>
         <Footer />
+        </SentryProvider>
       </body>
     </html>
   );
