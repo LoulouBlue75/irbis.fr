@@ -104,14 +104,16 @@ Le corpus compound accumule une **densite operatoire maximale**. L'orchestrator 
 ### Logique de Selection
 
 ```
-CONTEXTE MISSION
+DISCOVERY (orchestrator + user)
       ↓
-Orchestrator analyse :
-- Type poste (C-Level / Director / Manager)
-- Secteur (Tech / Finance / Industrie / Luxe)
-- Geographie (Local / National / International)
-- Relation client (New / Existing / Strategic)
-- Contraintes (Delai / Budget / Exclusivite)
+Questions contextuelles :
+- Quel poste ? Quel niveau ?
+- Quel secteur ? Quelle geographie ?
+- Client nouveau ou existant ?
+- Urgence ? Contraintes specifiques ?
+- Retainer ou success only ?
+      ↓
+CONTEXTE COMPRIS
       ↓
 DIMENSIONNEMENT
 - Cadrage : sections 1-8 ou subset
@@ -120,6 +122,19 @@ DIMENSIONNEMENT
       ↓
 OUTPUT CONTEXTUALISE
 ```
+
+### Discovery First
+
+> L'orchestrator ne presume jamais.
+> Il mene la discovery necessaire avec l'user.
+> Le dimensionnement decoule du contexte decouvert.
+
+**Modes de discovery** :
+- **Explicite** : questions directes a l'user
+- **Implicite** : inference depuis documents fournis (brief client, emails, notes)
+- **Iterative** : affinement au fil de la mission
+
+**Anti-pattern** : dimensionner avant d'avoir compris → output hors sujet
 
 ### Exemples Dimensionnement
 
