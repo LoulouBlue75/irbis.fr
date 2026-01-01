@@ -1,0 +1,215 @@
+{
+  "$schema": "contract-variables",
+  "version": "1.0",
+  "description": "Variables pour generation de contrats Executive Search",
+
+  "contract": {
+    "CONTRACT_REF": {
+      "type": "string",
+      "pattern": "IRBIS-{YEAR}-{SEQ}",
+      "example": "IRBIS-2026-001",
+      "description": "Reference unique du contrat"
+    },
+    "DATE": {
+      "type": "date",
+      "format": "DD/MM/YYYY",
+      "example": "01/01/2026"
+    }
+  },
+
+  "client": {
+    "CLIENT_NAME": {
+      "type": "string",
+      "required": true,
+      "example": "Acme Corporation SAS"
+    },
+    "CLIENT_ADDRESS": {
+      "type": "string",
+      "required": true,
+      "example": "123 Avenue des Champs-Elysees, 75008 Paris"
+    },
+    "CLIENT_SIRET": {
+      "type": "string",
+      "pattern": "^[0-9]{14}$",
+      "example": "12345678901234"
+    },
+    "CLIENT_CONTACT": {
+      "type": "string",
+      "required": true,
+      "example": "Jean Dupont"
+    },
+    "CLIENT_TITLE": {
+      "type": "string",
+      "example": "Directeur des Ressources Humaines"
+    }
+  },
+
+  "irbis": {
+    "IRBIS_ADDRESS": {
+      "type": "string",
+      "default": "A completer"
+    },
+    "IRBIS_SIRET": {
+      "type": "string",
+      "default": "A completer"
+    },
+    "IRBIS_CONTACT": {
+      "type": "string",
+      "default": "A completer"
+    }
+  },
+
+  "job": {
+    "JOB_TITLE": {
+      "type": "string",
+      "required": true,
+      "example": "Directeur Commercial France"
+    },
+    "JOB_REPORTING": {
+      "type": "string",
+      "example": "Directeur General"
+    },
+    "JOB_LOCATION": {
+      "type": "string",
+      "example": "Paris + deplacements France"
+    },
+    "PACKAGE_MIN": {
+      "type": "number",
+      "example": 120000
+    },
+    "PACKAGE_MAX": {
+      "type": "number",
+      "example": 150000
+    },
+    "SHORTLIST_COUNT": {
+      "type": "number",
+      "default": 3,
+      "min": 2,
+      "max": 5
+    }
+  },
+
+  "timeline": {
+    "DELAY_BRIEFING": {
+      "type": "number",
+      "default": 3,
+      "unit": "jours",
+      "description": "Delai cadrage mission"
+    },
+    "DELAY_SHORTLIST": {
+      "type": "number",
+      "default": 21,
+      "unit": "jours",
+      "description": "Delai premiere shortlist"
+    },
+    "DELAY_FINAL": {
+      "type": "number",
+      "default": 45,
+      "unit": "jours",
+      "description": "Delai presentation finale"
+    },
+    "REPORTING_FREQUENCY": {
+      "type": "enum",
+      "values": ["hebdomadaire", "bi-mensuel", "mensuel"],
+      "default": "hebdomadaire"
+    }
+  },
+
+  "fees": {
+    "FEE_PERCENT": {
+      "type": "number",
+      "default": 25,
+      "min": 20,
+      "max": 33,
+      "description": "Pourcentage du package annuel"
+    },
+    "RETAINER": {
+      "type": "boolean",
+      "default": true,
+      "description": "Mission avec retainer"
+    },
+    "RETAINER_AMOUNT": {
+      "type": "number",
+      "example": 10000,
+      "description": "Montant total retainer HT"
+    },
+    "RETAINER_PERCENT_1": {
+      "type": "number",
+      "default": 33,
+      "description": "% a la signature"
+    },
+    "RETAINER_PERCENT_2": {
+      "type": "number",
+      "default": 33,
+      "description": "% a la shortlist"
+    },
+    "PAYMENT_DAYS": {
+      "type": "number",
+      "default": 30,
+      "values": [15, 30, 45, 60]
+    },
+    "TVA_RATE": {
+      "type": "number",
+      "default": 20
+    }
+  },
+
+  "terms": {
+    "EXCLUSIVE": {
+      "type": "boolean",
+      "default": false
+    },
+    "EXCLUSIVITY_DURATION": {
+      "type": "number",
+      "default": 3,
+      "unit": "mois"
+    },
+    "CANDIDATE_PROTECTION_MONTHS": {
+      "type": "number",
+      "default": 12
+    },
+    "CONTRACT_DURATION": {
+      "type": "number",
+      "default": 6,
+      "unit": "mois"
+    },
+    "NOTICE_DAYS": {
+      "type": "number",
+      "default": 15
+    },
+    "POST_TERMINATION_MONTHS": {
+      "type": "number",
+      "default": 6
+    },
+    "JURISDICTION": {
+      "type": "string",
+      "default": "Paris"
+    }
+  },
+
+  "presets": {
+    "standard": {
+      "FEE_PERCENT": 25,
+      "RETAINER": true,
+      "RETAINER_PERCENT_1": 33,
+      "RETAINER_PERCENT_2": 33,
+      "EXCLUSIVE": false,
+      "CONTRACT_DURATION": 6
+    },
+    "premium": {
+      "FEE_PERCENT": 30,
+      "RETAINER": true,
+      "RETAINER_PERCENT_1": 50,
+      "RETAINER_PERCENT_2": 25,
+      "EXCLUSIVE": true,
+      "EXCLUSIVITY_DURATION": 4,
+      "CONTRACT_DURATION": 6
+    },
+    "success_only": {
+      "FEE_PERCENT": 28,
+      "RETAINER": false,
+      "EXCLUSIVE": false,
+      "CONTRACT_DURATION": 4
+    }
+  }
+}
