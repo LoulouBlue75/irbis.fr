@@ -294,4 +294,74 @@ Recherche semantique de candidats par embedding.
 
 ---
 
-*P3 Donnees & Schema — Irbis v1.0 — 31/12/2025*
+## 3.K — TEMPLATES (Mode Compound)
+
+### Structure
+
+```
+src/templates/
+├── README.md              # Vue d'ensemble
+├── COMPOUND.md            # Mode compound + orchestrator
+├── contracts/             # Contractualisation
+│   ├── executive-search-standard.md
+│   ├── variables.json
+│   └── README.md
+├── cadrage/               # Cadrage mission
+│   ├── cadrage-standard.md
+│   ├── variables.json
+│   └── README.md
+└── evaluation/            # Evaluation candidats
+    ├── scorecard-standard.md
+    ├── formulaire-evaluation.md
+    ├── guide-process.md
+    ├── variables.json
+    └── README.md
+```
+
+### Categories
+
+| Categorie | Templates | Presets |
+|-----------|-----------|---------|
+| **Contracts** | executive-search-standard | standard, premium, success_only |
+| **Cadrage** | cadrage-standard | executive_c_level, senior_manager, manager |
+| **Evaluation** | scorecard, formulaire, guide | head_of_mice, head_of_hospitality, cro |
+
+### Sections Cadrage (8)
+
+1. Profil Ideal-Type
+2. Expertises (operationnelles, metier, management)
+3. Types Fonctionnels (cibles, adjacentes)
+4. Types Sectoriels (cibles, adjacents)
+5. Geographie (zones, entreprises cibles)
+6. Remuneration et Attractivite
+7. Pools de Talents (actifs, passifs)
+8. KPIs de Performance
+
+### Orchestrator Logic
+
+```
+DISCOVERY (orchestrator + user)
+      ↓
+CONTEXTE COMPRIS
+      ↓
+DIMENSIONNEMENT %
+      ↓
+OUTPUT CONTEXTUALISE
+```
+
+| Contexte | Cadrage | Evaluation | Contract |
+|----------|:-------:|:----------:|:--------:|
+| C-Level International | 100% | Full 4 etapes | Premium |
+| Manager Local | 50% | 2 etapes | Standard |
+| Urgent Success-Only | 30% | Scorecard | Success |
+
+### Principe Compound
+
+- Corpus s'enrichit mission apres mission
+- Learning log par categorie
+- Patterns valides capitalises
+- Frictions eliminees iterativement
+
+---
+
+*P3 Donnees & Schema — Irbis v2.1 — 01/01/2026*
