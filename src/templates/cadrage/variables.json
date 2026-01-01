@@ -1,0 +1,175 @@
+{
+  "$schema": "cadrage-variables",
+  "version": "1.0",
+  "description": "Variables pour generation de documents de cadrage mission Executive Search",
+
+  "mission": {
+    "CONTRACT_REF": {
+      "type": "string",
+      "pattern": "IRBIS-{YEAR}-{SEQ}",
+      "example": "IRBIS-2026-001"
+    },
+    "DATE": {
+      "type": "date",
+      "format": "DD/MM/YYYY"
+    },
+    "JOB_TITLE": {
+      "type": "string",
+      "required": true,
+      "example": "Head of Hospitality"
+    },
+    "CLIENT_NAME": {
+      "type": "string",
+      "required": true
+    }
+  },
+
+  "profil": {
+    "EXPERIENCE_MIN": {
+      "type": "number",
+      "default": 7,
+      "unit": "ans"
+    },
+    "EXPERIENCE_MAX": {
+      "type": "number",
+      "default": 15,
+      "unit": "ans"
+    },
+    "DOMAIN_PRIMARY": {
+      "type": "string",
+      "example": "operations multisites, hotellerie premium, coworking"
+    },
+    "SKILL_PRIMARY": {
+      "type": "string",
+      "example": "negociation fournisseurs & clients"
+    },
+    "SKILL_SECONDARY": {
+      "type": "string",
+      "example": "pilotage contractuel et negociation prestataires"
+    }
+  },
+
+  "competences": {
+    "description": "Liste des competences nucleus (5 max)",
+    "items": {
+      "COMPETENCE_NAME": { "type": "string" },
+      "COMPETENCE_DESC": { "type": "string" },
+      "COMPETENCE_PRIORITY": {
+        "type": "enum",
+        "values": ["Critique", "Haute", "Moyenne"]
+      }
+    }
+  },
+
+  "expertises": {
+    "levels": {
+      "type": "enum",
+      "values": ["Critique", "Haute", "Moyenne"],
+      "icons": {
+        "Critique": "🔴",
+        "Haute": "🟠",
+        "Moyenne": "🟡"
+      }
+    },
+    "categories": ["operationnelles", "metier", "management"]
+  },
+
+  "fonctions": {
+    "targets": {
+      "description": "Fonctions cibles directement pertinentes",
+      "max": 5
+    },
+    "adjacentes": {
+      "description": "Fonctions adjacentes avec transferabilite",
+      "max": 4
+    }
+  },
+
+  "secteurs": {
+    "targets": {
+      "description": "Secteurs prioritaires pour sourcing",
+      "max": 6
+    },
+    "adjacents": {
+      "description": "Secteurs secondaires",
+      "max": 4
+    }
+  },
+
+  "geographie": {
+    "zones": {
+      "description": "Zones geographiques de recherche"
+    },
+    "entreprises": {
+      "description": "Entreprises cibles pour approche directe",
+      "fields": ["name", "sector", "location", "priority"]
+    }
+  },
+
+  "remuneration": {
+    "PACKAGE_MIN": {
+      "type": "number",
+      "example": 70000
+    },
+    "PACKAGE_MAX": {
+      "type": "number",
+      "example": 85000
+    },
+    "VARIABLE_PERCENT": {
+      "type": "number",
+      "default": 15,
+      "min": 0,
+      "max": 50
+    },
+    "VARIABLE_CRITERIA": {
+      "type": "string",
+      "example": "performance operationnelle et satisfaction client"
+    }
+  },
+
+  "attractivite": {
+    "description": "Elements d'attractivite du poste (4 max)",
+    "items": {
+      "ATTRACT_TITLE": { "type": "string" },
+      "ATTRACT_DESC": { "type": "string" }
+    }
+  },
+
+  "pools": {
+    "actifs": {
+      "description": "Pools de talents en recherche active",
+      "max": 5
+    },
+    "passifs": {
+      "description": "Pools de talents ouverts aux opportunites",
+      "max": 4
+    }
+  },
+
+  "kpis": {
+    "description": "KPIs de performance du poste (6 max)",
+    "items": {
+      "KPI_NAME": { "type": "string", "example": "NPS / satisfaction client" },
+      "KPI_TARGET": { "type": "string", "example": "> 50" },
+      "KPI_METHOD": { "type": "string", "example": "Enquetes post-event" }
+    }
+  },
+
+  "presets": {
+    "executive_c_level": {
+      "EXPERIENCE_MIN": 12,
+      "EXPERIENCE_MAX": 20,
+      "VARIABLE_PERCENT": 20
+    },
+    "senior_manager": {
+      "EXPERIENCE_MIN": 7,
+      "EXPERIENCE_MAX": 15,
+      "VARIABLE_PERCENT": 15
+    },
+    "manager": {
+      "EXPERIENCE_MIN": 5,
+      "EXPERIENCE_MAX": 10,
+      "VARIABLE_PERCENT": 10
+    }
+  }
+}

@@ -1,0 +1,178 @@
+{
+  "$schema": "evaluation-variables",
+  "version": "1.0",
+  "description": "Variables pour templates d'evaluation candidats Executive Search",
+
+  "scorecard": {
+    "CANDIDATE_NAME": {
+      "type": "string",
+      "required": true
+    },
+    "JOB_TITLE": {
+      "type": "string",
+      "required": true
+    },
+    "CONTRACT_REF": {
+      "type": "string",
+      "pattern": "IRBIS-{YEAR}-{SEQ}"
+    },
+    "DATE": {
+      "type": "date",
+      "format": "DD/MM/YYYY"
+    },
+    "EVALUATOR_NAME": {
+      "type": "string",
+      "required": true
+    }
+  },
+
+  "categories": {
+    "description": "Categories d'evaluation (4 typiques)",
+    "structure": {
+      "CATEGORY_NAME": { "type": "string" },
+      "CATEGORY_WEIGHT": { "type": "number", "min": 0, "max": 100 }
+    },
+    "default": [
+      { "name": "STRATEGIE & VISION", "weight": 35 },
+      { "name": "COMMERCIAL & DEVELOPPEMENT", "weight": 30 },
+      { "name": "OPERATIONS & DIGITAL", "weight": 25 },
+      { "name": "LEADERSHIP", "weight": 10 }
+    ]
+  },
+
+  "criteres": {
+    "description": "Criteres par categorie (3 max par categorie)",
+    "structure": {
+      "CRIT_NAME": { "type": "string" },
+      "CRIT_WEIGHT": { "type": "number", "unit": "%" },
+      "CRIT_DESC": { "type": "string" },
+      "CRIT_INDICATORS": { "type": "string" }
+    }
+  },
+
+  "scoring": {
+    "scale": {
+      "min": 1,
+      "max": 5,
+      "labels": {
+        "1": "Tres faible",
+        "2": "Faible",
+        "3": "Moyen",
+        "4": "Bon",
+        "5": "Excellent"
+      }
+    },
+    "thresholds": {
+      "strongly_recommended": 4.0,
+      "recommended": 3.5,
+      "consider": 3.0
+    }
+  },
+
+  "evaluation_form": {
+    "sections": [
+      "experience_professionnelle",
+      "competences_techniques",
+      "competences_comportementales",
+      "vision_strategique",
+      "objectifs_carriere",
+      "evaluation_globale",
+      "points_attention",
+      "decision_comite",
+      "suivi_post_integration"
+    ]
+  },
+
+  "competences_techniques": {
+    "default": [
+      "Gestion P&L & budget",
+      "Negociation grands comptes",
+      "HubSpot & CRM",
+      "Marketing digital (Google Ads/SEA)",
+      "Management multi-sites",
+      "Contrats prestataires"
+    ]
+  },
+
+  "competences_comportementales": {
+    "default": [
+      "Leadership & federation equipe",
+      "Resolution problemes complexes",
+      "Negociation & influence",
+      "Reactivite & orientation client",
+      "Rigueur & attention detail",
+      "Communication interpersonnelle"
+    ]
+  },
+
+  "presets": {
+    "head_of_mice": {
+      "categories": [
+        { "name": "STRATEGIE & VISION", "weight": 35, "criteres": [
+          { "name": "Vision MICE et roadmap", "weight": 10 },
+          { "name": "Pilotage P&L BU", "weight": 10 },
+          { "name": "Pricing & offre premium", "weight": 15 }
+        ]},
+        { "name": "COMMERCIAL & DEVELOPPEMENT", "weight": 30, "criteres": [
+          { "name": "Pipeline grands comptes", "weight": 10 },
+          { "name": "Cross-sell bureaux", "weight": 10 },
+          { "name": "Reseau agences & partenaires", "weight": 10 }
+        ]},
+        { "name": "OPERATIONS & DIGITAL", "weight": 25, "criteres": [
+          { "name": "Plateforme reservation", "weight": 10 },
+          { "name": "Acquisition digitale", "weight": 10 },
+          { "name": "HubSpot & CRM", "weight": 5 }
+        ]},
+        { "name": "LEADERSHIP", "weight": 10, "criteres": [
+          { "name": "Management equipe", "weight": 5 },
+          { "name": "Standardisation process", "weight": 5 }
+        ]}
+      ]
+    },
+    "head_of_hospitality": {
+      "categories": [
+        { "name": "OPERATIONS MULTISITES", "weight": 40, "criteres": [
+          { "name": "Gestion multisites", "weight": 15 },
+          { "name": "Standardisation process", "weight": 15 },
+          { "name": "Pilotage budgetaire", "weight": 10 }
+        ]},
+        { "name": "HOSPITALITY & SERVICE", "weight": 30, "criteres": [
+          { "name": "Experience premium", "weight": 15 },
+          { "name": "Gestion incidents", "weight": 10 },
+          { "name": "Onboarding clients", "weight": 5 }
+        ]},
+        { "name": "MANAGEMENT", "weight": 20, "criteres": [
+          { "name": "Pilotage equipe", "weight": 10 },
+          { "name": "Recrutement & integration", "weight": 5 },
+          { "name": "Gestion conflits", "weight": 5 }
+        ]},
+        { "name": "REPORTING", "weight": 10, "criteres": [
+          { "name": "Reporting Direction", "weight": 5 },
+          { "name": "Audit qualite", "weight": 5 }
+        ]}
+      ]
+    },
+    "cro": {
+      "categories": [
+        { "name": "STRATEGIE REVENUE", "weight": 40, "criteres": [
+          { "name": "Vision commerciale globale", "weight": 15 },
+          { "name": "Architecture Go-To-Market", "weight": 15 },
+          { "name": "Synergies inter-BU", "weight": 10 }
+        ]},
+        { "name": "PILOTAGE COMMERCIAL", "weight": 30, "criteres": [
+          { "name": "Pipeline management", "weight": 15 },
+          { "name": "Pricing & yield", "weight": 10 },
+          { "name": "Grands comptes", "weight": 5 }
+        ]},
+        { "name": "DIGITAL & OUTILS", "weight": 15, "criteres": [
+          { "name": "CRM & analytics", "weight": 10 },
+          { "name": "Automation marketing", "weight": 5 }
+        ]},
+        { "name": "LEADERSHIP", "weight": 15, "criteres": [
+          { "name": "Management equipes commerciales", "weight": 10 },
+          { "name": "Culture performance", "weight": 5 }
+        ]}
+      ]
+    }
+  }
+}
