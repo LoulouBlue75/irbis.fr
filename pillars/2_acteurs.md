@@ -340,21 +340,42 @@ THEN je vois :
 
 ## 2.E — VALIDATION
 
-### Cascades a Verifier
+### Cascades Verifiees (01/01/2026)
 
-| Element P2 | Impact P3 (Donnees) | Impact P4 (Interfaces) | Impact P5 (Logique) |
-|------------|---------------------|------------------------|---------------------|
-| Role `admin` | Table `profiles.role` | Pages `/admin/*` | Middleware RBAC |
-| Story US-001 | Table `talents`, `documents` | Ecran upload | Pipeline analyse |
-| Story US-003 | Table `matches`, `scores` | Composant MatchScore | Algo matching |
+| Element P2 | Impact P3 (Donnees) | Impact P4 (Interfaces) | Impact P5 (Logique) | Status |
+|------------|---------------------|------------------------|---------------------|--------|
+| Role `admin` | RLS is_admin() | Pages `/admin/*` | Middleware RBAC | Coherent |
+| Role `recruiter` | RLS created_by | Pages `/hunting/*` | RBAC OWN/ALL | Coherent |
+| Story US-001 | candidates, context_sources | SC-03 Talent Profile | WF-001 Ingestion | Coherent |
+| Story US-002 | candidates.embedding | Search component | match_candidates() | Coherent |
+| Story US-003 | matches.score | MatchScore component | BR-002 seuil 0.5 | Coherent |
+| Story US-007 | aggregations | SC-01 Dashboard | Stats queries | Coherent |
+
+**Resultat** : Toutes les cascades P2 → P3/P4/P5 sont coherentes.
 
 ### Validation Utilisateurs
 
-- [ ] Feedback Sophie (recruteur senior) sur parcours
-- [ ] Test Admin avec Louis
-- [ ] Observation session sourcing reelle
+**Status** : A planifier apres deploiement staging
+
+| Session | Participant | Objectif | Duree | Prerequis |
+|---------|-------------|----------|-------|-----------|
+| VAL-001 | Sophie (recruteur) | Valider Happy Path sourcing | 1h | Staging + seed data |
+| VAL-002 | Louis (admin) | Valider acces admin, KPIs | 30min | Staging + multi-users |
+| VAL-003 | Observation | Session sourcing reelle | 2h | Prod avec vrais CVs |
+
+**Criteres de Succes** :
+- Sophie complete le Happy Path en < 10min
+- Louis comprend les KPIs en < 2min
+- Pas de friction majeure identifiee (blocage > 30s)
+
+**Livrables Post-Validation** :
+- Friction points documentes → P4 UI improvements
+- Ajustements prioritaires → Sprint backlog
+
+> Note: Ces validations bloquent le passage a 100% sur P2.
+> Items 2.13 (cascades) et 2.14 (validation users) marques comme PARTIEL.
 
 ---
 
 *P2 Acteurs & Stories — Irbis*
-*v2.0 — 31/12/2025*
+*v2.1 — 01/01/2026*

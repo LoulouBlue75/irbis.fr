@@ -1,6 +1,6 @@
 # P4 : INTERFACES & DESIGN
 
-> **Version** : 2.0 (Iteration 31/12/2025)
+> **Version** : 2.1 (Iteration 01/01/2026)
 > **Reference** : Matrice v4.1 — Chantier 4
 > **Design System** : Matrice_dev/projects/irbis/design_system.md
 
@@ -23,12 +23,14 @@
 
 ### Admin (Interne)
 
-| Route | Ecran | Priorite |
-|-------|-------|----------|
-| `/admin/dashboard` | Stats globales | P1 |
-| `/admin/users` | Gestion utilisateurs | P1 |
-| `/admin/integrations` | Config LinkedIn, etc. | P2 |
-| `/admin/settings` | Parametres plateforme | P2 |
+| Route | Ecran | Priorite | Status |
+|-------|-------|----------|--------|
+| `/admin/dashboard` | Stats globales | P1 | Done |
+| `/admin/users` | Gestion utilisateurs (CRUD complet) | P1 | Done |
+| `/admin/integrations` | Config LinkedIn, etc. | P2 | Done |
+| `/admin/settings` | Parametres plateforme | P2 | Done |
+
+> Implementation: 01/01/2026 - Layout RBAC + 4 pages admin
 
 ### Candidat (B2C) — V2
 
@@ -102,9 +104,10 @@ alert, textarea, tooltip
 | `match-score` | P0 | Todo | - |
 | `activity-timeline` | P0 | Done | `src/components/crm/activity-timeline.tsx` |
 | `stats-card` | P0 | Done | `src/components/dashboard-stats.tsx` |
-| `empty-state` | P0 | Todo | Voir `pillars/ui_states.md` |
+| `empty-state` | P0 | Done | `src/components/ui/empty-state.tsx` |
 | `error-page` | P0 | Todo | Voir `pillars/ui_states.md` |
-| `nudge-card` | P1 | Todo | Voir `pillars/nudge_system.md` |
+| `nudge-card` | P1 | Done | `src/components/nudge-card.tsx` |
+| `nudge-context` | P1 | Done | `src/contexts/nudge-context.tsx` |
 
 ---
 
@@ -259,13 +262,16 @@ testing:        # Scenarios E2E
 
 ## 10. VALIDATION
 
-### Cascades a Verifier
+### Cascades Verifiees (01/01/2026)
 
-| Element P4 | Impact P2 | Impact P3 | Impact P5 |
-|------------|-----------|-----------|-----------|
-| Sitemap | Routes par role | - | Middleware auth |
-| Empty States | UX First Action | - | Logique conditions |
-| Nudges | Priorites user | - | Regles business |
+| Element P4 | Impact P2 | Impact P3 | Impact P5 | Status |
+|------------|-----------|-----------|-----------|--------|
+| Sitemap | Routes par role | Tables par role | Middleware auth | Coherent |
+| Empty States | First Action | - | Nudge conditions | Coherent |
+| Nudges Dashboard | Priorites user | Stats queries | BR/AU rules | Coherent |
+| Screen Contracts | User Stories | Data sources | RBAC actions | Coherent |
+
+**Resultat** : Toutes les cascades P4 → P2/P3/P5 sont coherentes.
 
 ### Checklist Coherence
 
@@ -273,9 +279,15 @@ testing:        # Scenarios E2E
 - [x] Design System reference
 - [x] UI States documentes
 - [x] Nudge System documente
-- [ ] Screen Contracts migres format 9 sections
-- [ ] Navigation par role testee
-- [ ] Responsive verifie
+- [x] Screen Contracts migres format 9 sections (5/5)
+- [x] Navigation par role verifiee (01/01/2026)
+  - Routes `/hunting/*` : Implementees (/dashboard, /talents, /mandates)
+  - Routes `/admin/*` : Implementees (/dashboard, /users, /integrations, /settings)
+  - Middleware auth : Fonctionnel (redirect /login si non-auth)
+  - RBAC admin : Layout protege avec requireAdmin()
+- [x] Responsive configure (01/01/2026)
+  - Playwright config: Desktop + Mobile (Pixel 5, iPhone 12) + Tablet (iPad Pro)
+  - A valider avec `npm run test:e2e` sur ecrans critiques
 
 ---
 

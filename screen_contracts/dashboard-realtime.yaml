@@ -1,87 +1,160 @@
-id: SC-01
-name: Dashboard Realtime
-route: /dashboard
-description: Vue d'ensemble avec mises à jour en temps réel des activités
-access: Private (Recruiter, Admin)
+# Screen Contract: Dashboard Realtime
+# ID: SC-02
+# Format: Matrice v4.1 (9 sections)
+# Note: This is a variant/mode of SC-01 with realtime focus
 
-layout:
-  type: DashboardLayout
-  sidebar: true
-  header: true
+screen:
+  route: /hunting/dashboard
+  name: "Dashboard Realtime Mode"
+  id: SC-02
+  variant_of: SC-01
 
-sections:
-  - id: stats-overview
-    type: Grid
-    columns: 4
-    components:
-      - type: StatCard
-        props:
-          label: "Candidats (Total)"
-          value: "{stats.totalCandidates}"
-          icon: "Users"
-          trend: "{stats.candidatesTrend}"
-      - type: StatCard
-        props:
-          label: "Matches (Nouveaux)"
-          value: "{stats.newMatches}"
-          icon: "Zap"
-          trend: "{stats.matchesTrend}"
-          highlight: true
-      - type: StatCard
-        props:
-          label: "Missions (Actives)"
-          value: "{stats.activeJobs}"
-          icon: "Briefcase"
-      - type: StatCard
-        props:
-          label: "Messages (Non lus)"
-          value: "{stats.unreadMessages}"
-          icon: "MessageSquare"
+context:
+  origin:
+    - Dashboard with realtime subscription active
+    - Push notification click
+  prerequisites:
+    - User authenticated
+    - Supabase Realtime connection established
+  frequency: Continuous during session
 
-  - id: live-activity
-    type: Section
-    title: "Activité en temps réel"
-    components:
-      - type: ActivityFeed
-        props:
-          source: "supabase-realtime:activities"
-          limit: 10
-          renderItem: "ActivityItem"
-          emptyState: "Aucune activité récente"
+goal:
+  primary: "Suivre l'activite en temps reel sans rafraichir"
+  secondary:
+    - Voir les nouveaux matches instantanement
+    - Recevoir les alertes systeme
+    - Suivre les actions des collegues (admin)
+  success_criteria:
+    - New activity appears in < 2s after event
+    - No page refresh needed
+    - Visual feedback on new items
 
-  - id: recent-matches
-    type: Section
-    title: "Derniers Matches"
-    components:
-      - type: Table
-        props:
-          data: "{matches}"
-          columns:
-            - header: "Candidat"
-              accessor: "candidate.name"
-            - header: "Mission"
-              accessor: "job.title"
-            - header: "Score"
-              accessor: "score"
-              render: "ScoreBadge"
-            - header: "Statut"
-              accessor: "status"
-            - header: "Action"
-              render: "MatchActions"
+nudge_logic:
+  conditions:
+    - id: NUD-RT-001
+      priority: 1
+      condition: "realtime_disconnected"
+      message: "Connexion temps reel perdue"
+      variant: warning
+      cta: "Reconnecter"
+      auto_dismiss: false
+    - id: NUD-RT-002
+      priority: 3
+      condition: "new_match_arrived"
+      message: "Nouveau match detecte"
+      variant: success
+      cta: "Voir le match"
+      auto_dismiss: 10s
+  max_visible: 3
+  ordering: priority ASC
 
-interactions:
-  - trigger: "OnMount"
-    action: "Subscribe to Supabase Realtime channels (activities, matches)"
-  - trigger: "Click Match"
-    action: "Navigate to /jobs/[id]"
-  - trigger: "Click Candidate"
-    action: "Navigate to /dashboard/candidates/[id]"
+states:
+  default:
+    description: "Realtime connected, activity streaming"
+    indicators:
+      - type: pulse
+        location: header
+        label: "Live"
+        color: success
+  loading:
+    description: "Establishing realtime connection"
+    skeleton: false
+    indicator:
+      type: spinner
+      label: "Connexion..."
+  disconnected:
+    description: "Realtime connection lost"
+    indicator:
+      type: badge
+      label: "Hors ligne"
+      color: warning
+    fallback: polling (30s)
+  error:
+    description: "Realtime subscription failed"
+    fallback: static-dashboard
+    message: "Mode temps reel indisponible"
 
-data_requirements:
-  - source: "supabase"
-    query: "getDashboardStats()"
-  - source: "supabase"
-    query: "getRecentMatches()"
-  - source: "supabase-realtime"
-    channel: "public:activities"
-    event: "INSERT"
+parity:
+  role_recruiter:
+    channels: ["activities:own", "matches:own"]
+    scope: OWN
+  role_admin:
+    channels: ["activities:all", "matches:all", "system:alerts"]
+    scope: ALL
+  shared_layout: true
+
+components:
+  realtime_specific:
+    live_indicator:
+      component: Badge
+      props: [status, pulsing]
+    activity_toast:
+      component: Toast
+      props: [message, type, duration]
+    match_notification:
+      component: NotificationCard
+      props: [match, onView, onDismiss]
+  inherited_from_sc01:
+    - StatCard (with live updates)
+    - ActivityTimeline (with prepend animation)
+    - Table (with row highlight animation)
+
+data:
+  sources:
+    - name: stats
+      query: getDashboardStats()
+      realtime: true
+      channel: "stats:updates"
+    - name: recentActivity
+      query: null
+      realtime: true
+      channel: "public:activities"
+      event: INSERT
+      transform: prependToList
+    - name: matches
+      query: null
+      realtime: true
+      channel: "public:matches"
+      event: INSERT
+      transform: prependToList
+  subscriptions:
+    - channel: "public:activities"
+      filter: "user_id=eq.{userId}"
+      events: [INSERT]
+    - channel: "public:matches"
+      filter: "recruiter_id=eq.{userId}"
+      events: [INSERT, UPDATE]
+
+accessibility:
+  aria:
+    - aria-live: polite
+    - role: status (for live indicator)
+  announcements:
+    - "Nouvelle activite" on activity insert
+    - "Nouveau match" on match insert
+  motion:
+    - Reduce motion: skip animations, use opacity only
+
+testing:
+  e2e_scenarios:
+    - name: "Realtime connection established"
+      steps:
+        - Login as recruiter
+        - Assert live indicator visible
+        - Assert green pulse animation
+    - name: "New activity appears in feed"
+      steps:
+        - Subscribe to realtime
+        - Trigger INSERT in activities table
+        - Assert new item appears at top of feed
+        - Assert highlight animation plays
+    - name: "Handle disconnection gracefully"
+      steps:
+        - Simulate network disconnect
+        - Assert warning nudge appears
+        - Assert polling fallback activates
+        - Reconnect → assert live indicator returns
+  integration_tests:
+    - Supabase Realtime subscription connects
+    - Multiple channels subscribed simultaneously
+    - Cleanup on unmount

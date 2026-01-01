@@ -1,49 +1,192 @@
-# ACI Contract: Dashboard Overview
-# ID: dashboard-overview
-# Description: Main entry point for the recruiter cockpit.
+# Screen Contract: Dashboard Overview
+# ID: SC-01
+# Format: Matrice v4.1 (9 sections)
+
+screen:
+  route: /hunting/dashboard
+  name: "Dashboard Console"
+  id: SC-01
 
 context:
-  user:
-    role: "recruiter" | "admin"
-    organizationId: string
+  origin:
+    - Login successful → redirect to dashboard
+    - Navigation menu → "Dashboard" click
+    - Logo click from any page
+  prerequisites:
+    - User authenticated
+    - Profile loaded with role (recruiter | admin)
+  frequency: Daily, multiple times per session
+
+goal:
+  primary: "Visualiser l'etat global de son activite en un coup d'oeil"
+  secondary:
+    - Identifier les actions prioritaires (nudges)
+    - Acceder rapidement aux mandats/talents
+    - Suivre l'activite recente
+  success_criteria:
+    - User understands current pipeline state in < 5s
+    - User knows what action to take next
+    - Zero clicks to see key metrics
+
+nudge_logic:
+  conditions:
+    - id: NUD-001
+      priority: 3
+      condition: "talents_count == 0"
+      message: "Ajoutez votre premier talent"
+      variant: info
+      cta: "Ajouter un talent"
+      cta_href: "/hunting/talents/new"
+    - id: NUD-002
+      priority: 4
+      condition: "mandates_count == 0"
+      message: "Creez votre premier mandat"
+      variant: info
+      cta: "Creer un mandat"
+      cta_href: "/hunting/mandates/new"
+    - id: NUD-003
+      priority: 5
+      condition: "new_matches_count > 0"
+      message: "{n} nouveaux matches a examiner"
+      variant: success
+      cta: "Voir les matches"
+    - id: NUD-008
+      priority: 2
+      condition: "has_analysis_error"
+      message: "Une analyse CV a echoue"
+      variant: error
+      cta: "Voir le probleme"
+  max_visible: 2
+  ordering: priority ASC
+
+states:
+  default:
+    description: "Stats populated, activity feed with items"
+    components_visible: [stats-grid, nudge-banner, activity-feed, matches-list]
+  loading:
+    description: "Initial data fetch"
+    skeleton: true
+    skeleton_layout:
+      - type: stats-grid-skeleton
+        count: 4
+      - type: list-skeleton
+        rows: 5
+  empty:
+    description: "New user, no data yet"
+    show_nudges: true
+    empty_state:
+      icon: Sparkles
+      title: "Bienvenue sur Irbis Console"
+      message: "Commencez par ajouter votre premier talent ou creer un mandat."
+      actions:
+        - label: "Ajouter un talent"
+          href: "/hunting/talents/new"
+          variant: default
+        - label: "Creer un mandat"
+          href: "/hunting/mandates/new"
+          variant: outline
+  error:
+    description: "API fetch failure"
+    fallback: error-page
+    retry: true
+    message: "Impossible de charger le dashboard"
+
+parity:
+  role_recruiter:
+    stats: ["Mes talents", "Mes matches", "Mes mandats", "Placements mois"]
+    scope: OWN
+    actions: [view_talent, view_mandate, add_talent, add_mandate]
+  role_admin:
+    stats: ["Total talents", "Total matches", "Total mandats", "Placements globaux"]
+    scope: ALL
+    actions: [view_talent, view_mandate, add_talent, add_mandate, manage_users]
+  shared_layout: true
+  shared_components: [Navbar, StatCard, ActivityTimeline, NudgeCard]
+
+components:
+  layout:
+    - DashboardLayout
+    - Navbar
+  sections:
+    stats_grid:
+      component: "Grid"
+      items:
+        - component: StatCard
+          props: [label, value, icon, trend]
+    nudge_banner:
+      component: NudgeCard
+      props: [id, variant, title, description, ctaLabel, ctaHref, dismissable]
+    activity_feed:
+      component: ActivityTimeline
+      props: [items, limit, emptyState]
+    matches_list:
+      component: Table
+      columns: [Candidat, Mission, Score, Status, Actions]
+  shared:
+    - EmptyState
+    - Skeleton
 
 data:
-  stats:
-    activeMandates: number
-    pipelineCount: number
-    placementsThisMonth: number
-    newTalentsThisWeek: number
-  
-  recentActivity:
-    - id: string
-      type: "mandate_created" | "candidate_match" | "placement" | "system_alert"
-      message: string
-      timestamp: string
-      metadata: object
+  sources:
+    - name: stats
+      query: getDashboardStats()
+      realtime: false
+      cache_ttl: 60s
+    - name: recentActivity
+      query: getRecentActivity(limit: 10)
+      realtime: true
+      channel: "activities"
+    - name: matches
+      query: getRecentMatches(limit: 5)
+      realtime: false
+  aggregates:
+    - talents_count
+    - mandates_count
+    - matches_count
+    - placements_month
+  filters: none
 
-  quickActions:
-    - label: "New Mandate"
-      action: "createMandate"
-      icon: "plus-circle"
-    - label: "Ingest Profile"
-      action: "ingestProfile"
-      icon: "upload"
+accessibility:
+  aria:
+    - role: main
+    - aria-label: "Dashboard principal"
+  keyboard:
+    - Tab navigation through stats cards
+    - Enter to activate CTA
+  screen_reader:
+    - Stats announced with label + value
+    - Activity items announced in order
+  responsive:
+    mobile:
+      - Stats grid: 2 columns
+      - Activity feed: full width
+      - Matches table: card view
+    tablet:
+      - Stats grid: 4 columns
+      - Side-by-side layout for feed/matches
+    desktop:
+      - Full layout as designed
 
-actions:
-  createMandate:
-    description: "Navigate to mandate creation wizard"
-    navigation: "/dashboard/mandates/new"
-
-  ingestProfile:
-    description: "Open profile ingestion modal or page"
-    navigation: "/dashboard/ingestion"
-
-  viewMandate:
-    description: "Navigate to specific mandate cockpit"
-    parameters:
-      mandateId: string
-    navigation: "/dashboard/mandates/:mandateId"
-
-  viewTalentPool:
-    description: "Navigate to global talent list"
-    navigation: "/dashboard/talents"
+testing:
+  e2e_scenarios:
+    - name: "Dashboard loads with stats"
+      steps:
+        - Login as recruiter
+        - Navigate to /hunting/dashboard
+        - Assert stats cards visible
+        - Assert activity feed visible
+    - name: "Empty state for new user"
+      steps:
+        - Login as new recruiter (no data)
+        - Assert empty state visible
+        - Assert nudge visible
+        - Click CTA → navigate to /hunting/talents/new
+    - name: "Error state handling"
+      steps:
+        - Mock API failure
+        - Assert error message visible
+        - Assert retry button works
+  unit_tests:
+    - StatCard renders with correct values
+    - NudgeCard respects priority ordering
+    - ActivityTimeline handles empty array

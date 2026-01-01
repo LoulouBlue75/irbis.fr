@@ -1,65 +1,215 @@
-# ACI Contract: Talent Profile
-# ID: talent-profile
-# Description: Comprehensive view of a candidate's profile, insights, and history.
+# Screen Contract: Talent Profile
+# ID: SC-03
+# Format: Matrice v4.1 (9 sections)
+
+screen:
+  route: /hunting/talents/[id]
+  name: "Profil Talent"
+  id: SC-03
 
 context:
-  candidateId: string
-  user:
-    role: "recruiter" | "admin"
+  origin:
+    - Talents list → click on talent card
+    - Search results → click on result
+    - Dashboard matches → click on candidate name
+    - Direct URL access
+  prerequisites:
+    - User authenticated
+    - Talent exists in database
+    - User has permission (recruiter: OWN or ASSIGNED, admin: ALL)
+  frequency: Multiple times per day during sourcing sessions
+
+goal:
+  primary: "Evaluer rapidement la pertinence d'un candidat"
+  secondary:
+    - Consulter l'historique des interactions
+    - Ajouter des notes et observations
+    - Associer a un ou plusieurs mandats
+    - Regenerer l'analyse IA si necessaire
+  success_criteria:
+    - Key info visible without scrolling
+    - AI summary helps decision in < 30s
+    - Quick actions accessible in header
+
+nudge_logic:
+  conditions:
+    - id: NUD-TP-001
+      priority: 4
+      condition: "no_notes && viewed_count > 3"
+      message: "Ajoutez une note sur ce profil"
+      variant: info
+      cta: "Ajouter une note"
+    - id: NUD-TP-002
+      priority: 3
+      condition: "insights_outdated > 30d"
+      message: "Analyse IA datee de plus de 30 jours"
+      variant: warning
+      cta: "Regenerer"
+    - id: NUD-TP-003
+      priority: 5
+      condition: "matching_mandates.length > 0"
+      message: "{n} mandats compatibles"
+      variant: success
+      cta: "Voir les mandats"
+  max_visible: 2
+  ordering: priority ASC
+
+states:
+  default:
+    description: "Profile loaded with all sections"
+    sections_visible:
+      - header (name, photo, status, quick actions)
+      - insights (AI summary, strengths, fit)
+      - experience (timeline)
+      - skills (tags)
+      - history (activity log)
+  loading:
+    description: "Fetching profile data"
+    skeleton: true
+    skeleton_layout:
+      - type: header-skeleton
+      - type: card-skeleton
+        count: 3
+      - type: timeline-skeleton
+        rows: 4
+  not_found:
+    description: "Talent ID does not exist"
+    error_code: 404
+    redirect: /hunting/talents
+    message: "Ce profil n'existe pas ou a ete supprime"
+  error:
+    description: "API fetch failure"
+    fallback: error-page
+    retry: true
+    message: "Impossible de charger le profil"
+
+parity:
+  role_recruiter:
+    view: full_profile
+    actions: [add_note, add_to_mandate, update_status]
+    restrictions:
+      - Cannot delete talent
+      - Cannot see other recruiters' notes (unless shared)
+  role_admin:
+    view: full_profile + admin_metadata
+    actions: [add_note, add_to_mandate, update_status, delete, reassign]
+    extra_sections:
+      - audit_log
+      - system_metadata
+  shared_layout: true
+  shared_components: [ProfileHeader, InsightsCard, ExperienceTimeline]
+
+components:
+  layout:
+    - DashboardLayout
+    - TwoColumnLayout (main + sidebar)
+  main_column:
+    profile_header:
+      component: ProfileHeader
+      props: [name, avatarUrl, status, location, linkedinUrl]
+    insights_card:
+      component: Card
+      children:
+        - InsightsSummary
+        - StrengthsList
+        - CulturalFitBadge
+    experience_section:
+      component: ExperienceTimeline
+      props: [experiences, education]
+    skills_section:
+      component: SkillsTags
+      props: [skills, languages]
+  sidebar:
+    quick_actions:
+      component: ActionButtonGroup
+      buttons:
+        - label: "Ajouter au mandat"
+          action: openMandateSelector
+          icon: Plus
+        - label: "Ajouter une note"
+          action: openNoteEditor
+          icon: MessageSquare
+        - label: "Regenerer analyse"
+          action: triggerReanalysis
+          icon: RefreshCw
+    history_feed:
+      component: ActivityTimeline
+      props: [items, compact: true]
+    matching_mandates:
+      component: MandateMatchList
+      props: [mandates, scores]
 
 data:
-  profile:
-    id: string
-    name: string
-    email: string
-    phone: string
-    location: string
-    linkedinUrl: string
-    avatarUrl: string
-    
-    skills: string[]
-    languages: string[]
-    
-    experience:
-      - title: string
-        company: string
-        startDate: string
-        endDate: string
-        description: string
-        
-    education:
-      - degree: string
-        institution: string
-        year: string
+  sources:
+    - name: profile
+      query: getTalentById(id)
+      includes: [experience, education, skills, languages]
+    - name: insights
+      query: getTalentInsights(id)
+      cache_ttl: 1h
+    - name: history
+      query: getTalentHistory(id, limit: 20)
+      realtime: true
+      channel: "talent:{id}:history"
+    - name: matchingMandates
+      query: getMatchingMandates(talentId)
+      cache_ttl: 5m
+  mutations:
+    - name: updateStatus
+      action: updateTalentStatus(id, status)
+    - name: addNote
+      action: addTalentNote(id, content)
+    - name: addToMandate
+      action: addTalentToMandate(talentId, mandateId)
+    - name: regenerateInsights
+      action: triggerInsightsRegeneration(id)
 
-  insights:
-    summary: string # AI-generated summary
-    strengths: string[]
-    weaknesses: string[]
-    culturalFit: string
-    
-  history:
-    - id: string
-      type: "note" | "email" | "status_change" | "match"
-      content: string
-      author: string
-      timestamp: string
+accessibility:
+  aria:
+    - role: article
+    - aria-label: "Profil de {name}"
+  landmarks:
+    - header: profile header
+    - main: profile content
+    - complementary: sidebar actions
+  keyboard:
+    - Tab through sections
+    - Escape to close modals
+    - Ctrl+N to add note
+  responsive:
+    mobile:
+      - Single column layout
+      - Sticky action bar at bottom
+      - Collapsible sections
+    tablet:
+      - Two column layout
+      - Actions in header
+    desktop:
+      - Full layout with sidebar
 
-actions:
-  updateStatus:
-    description: "Change the global status of the candidate"
-    parameters:
-      status: "active" | "passive" | "blacklisted"
-      
-  addNote:
-    description: "Add a note to the candidate's history"
-    parameters:
-      content: string
-      
-  regenerateInsights:
-    description: "Trigger AI to re-analyze the profile"
-    
-  addToMandate:
-    description: "Associate candidate with a specific mandate"
-    parameters:
-      mandateId: string
+testing:
+  e2e_scenarios:
+    - name: "Profile loads correctly"
+      steps:
+        - Navigate to /hunting/talents/{id}
+        - Assert header visible with name
+        - Assert insights section visible
+        - Assert experience timeline populated
+    - name: "Add note to profile"
+      steps:
+        - Click "Ajouter une note"
+        - Enter note content
+        - Submit
+        - Assert note appears in history
+    - name: "Add talent to mandate"
+      steps:
+        - Click "Ajouter au mandat"
+        - Select mandate from list
+        - Confirm
+        - Assert success toast
+        - Navigate to mandate → assert talent in pipeline
+  unit_tests:
+    - ProfileHeader renders all props
+    - InsightsCard handles null insights
+    - ExperienceTimeline sorts by date DESC
+    - ActionButtonGroup respects permissions

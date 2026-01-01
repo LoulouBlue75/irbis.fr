@@ -1,77 +1,251 @@
-# ACI Contract: Mandate Cockpit
-# ID: mandate-cockpit
-# Description: Detailed view and management of a specific recruitment mandate.
+# Screen Contract: Mandate Cockpit
+# ID: SC-04
+# Format: Matrice v4.1 (9 sections)
+
+screen:
+  route: /hunting/mandates/[id]
+  name: "Cockpit Mandat"
+  id: SC-04
 
 context:
-  mandateId: string
-  user:
-    role: "recruiter" | "admin"
+  origin:
+    - Mandates list → click on mandate card
+    - Dashboard → click on active mandate
+    - Notification → new match for mandate
+    - Direct URL access
+  prerequisites:
+    - User authenticated
+    - Mandate exists
+    - User has access (recruiter: OWN, admin: ALL)
+  frequency: Multiple times per day during active recruitment
+
+goal:
+  primary: "Gerer le pipeline de candidats pour ce mandat"
+  secondary:
+    - Suivre l'avancement du recrutement
+    - Deplacer les candidats entre les etapes
+    - Consulter les matches IA
+    - Communiquer avec les candidats
+  success_criteria:
+    - Pipeline state visible at a glance
+    - Drag & drop candidate between stages
+    - Quick access to candidate profiles
+
+nudge_logic:
+  conditions:
+    - id: NUD-MC-001
+      priority: 3
+      condition: "pipeline.sourcing.count == 0"
+      message: "Pipeline vide - lancez une recherche"
+      variant: info
+      cta: "Rechercher des talents"
+    - id: NUD-MC-002
+      priority: 4
+      condition: "mandate.status == 'active' && days_since_activity > 7"
+      message: "Aucune activite depuis 7 jours"
+      variant: warning
+      cta: "Voir le pipeline"
+    - id: NUD-MC-003
+      priority: 5
+      condition: "new_matches.length > 0"
+      message: "{n} nouveaux matches disponibles"
+      variant: success
+      cta: "Voir les matches"
+    - id: NUD-MC-004
+      priority: 2
+      condition: "mandate.status == 'draft'"
+      message: "Ce mandat est en brouillon"
+      variant: warning
+      cta: "Publier"
+  max_visible: 2
+  ordering: priority ASC
+
+states:
+  default:
+    description: "Mandate loaded with pipeline"
+    sections_visible:
+      - header (title, client, status, actions)
+      - pipeline (kanban board)
+      - matches (AI suggestions)
+      - details (requirements, description)
+  loading:
+    description: "Fetching mandate data"
+    skeleton: true
+    skeleton_layout:
+      - type: header-skeleton
+      - type: kanban-skeleton
+        columns: 5
+      - type: card-skeleton
+        count: 3
+  empty_pipeline:
+    description: "No candidates in pipeline"
+    show_nudges: true
+    empty_state:
+      icon: Users
+      title: "Pipeline vide"
+      message: "Ajoutez des candidats depuis votre vivier ou consultez les matches IA."
+      actions:
+        - label: "Rechercher des talents"
+          href: "/hunting/talents?mandate={id}"
+          variant: default
+        - label: "Voir les matches"
+          action: scrollToMatches
+          variant: outline
+  not_found:
+    description: "Mandate does not exist"
+    error_code: 404
+    redirect: /hunting/mandates
+    message: "Ce mandat n'existe pas"
+  error:
+    description: "API fetch failure"
+    fallback: error-page
+    retry: true
+
+parity:
+  role_recruiter:
+    view: full_mandate
+    actions: [move_candidate, add_candidate, add_note, update_status]
+    restrictions:
+      - Cannot delete mandate
+      - Cannot reassign to other recruiter
+  role_admin:
+    view: full_mandate + admin_metadata
+    actions: [move_candidate, add_candidate, add_note, update_status, delete, reassign, close]
+    extra_sections:
+      - analytics
+      - audit_log
+  shared_layout: true
+  shared_components: [MandateHeader, KanbanBoard, MatchCard]
+
+components:
+  layout:
+    - DashboardLayout
+    - TabLayout (Pipeline | Matches | Details)
+  header:
+    mandate_header:
+      component: MandateHeader
+      props: [title, client, status, location, salaryRange]
+    actions_bar:
+      component: ActionButtonGroup
+      buttons:
+        - label: "Ajouter candidat"
+          action: openTalentSearch
+          icon: UserPlus
+        - label: "Generer matches"
+          action: triggerMatchGeneration
+          icon: Sparkles
+        - label: "Modifier"
+          action: openEditModal
+          icon: Edit
+  tabs:
+    pipeline:
+      component: KanbanBoard
+      columns:
+        - id: sourcing
+          label: "Sourcing"
+          color: gray
+        - id: screening
+          label: "Screening"
+          color: blue
+        - id: interview
+          label: "Entretien"
+          color: purple
+        - id: offer
+          label: "Offre"
+          color: orange
+        - id: hired
+          label: "Place"
+          color: green
+      card_component: CandidateKanbanCard
+      draggable: true
+    matches:
+      component: MatchesGrid
+      props: [matches, onView, onAdd]
+    details:
+      component: MandateDetails
+      sections:
+        - description
+        - requirements
+        - client_info
 
 data:
-  mandate:
-    id: string
-    title: string
-    status: "active" | "pending" | "closed" | "draft"
-    client: string
-    location: string
-    salaryRange: string
-    description: string
-    requirements: string[]
-    createdAt: string
-    
-  pipeline:
-    stages:
-      - id: "sourcing"
-        label: "Sourcing"
-        count: number
-        candidates: [] # Array of candidate summaries
-      - id: "screening"
-        label: "Screening"
-        count: number
-        candidates: []
-      - id: "interview"
-        label: "Interview"
-        count: number
-        candidates: []
-      - id: "offer"
-        label: "Offer"
-        count: number
-        candidates: []
-      - id: "hired"
-        label: "Hired"
-        count: number
-        candidates: []
+  sources:
+    - name: mandate
+      query: getMandateById(id)
+      includes: [client, requirements]
+    - name: pipeline
+      query: getMandatePipeline(id)
+      realtime: true
+      channel: "mandate:{id}:pipeline"
+    - name: matches
+      query: getMandateMatches(id)
+      cache_ttl: 5m
+    - name: candidates
+      query: getMandateCandidates(id)
+      grouped_by: stage
+  mutations:
+    - name: moveCandidate
+      action: moveCandidateToStage(candidateId, mandateId, stageId)
+      optimistic: true
+    - name: addCandidate
+      action: addCandidateToMandate(candidateId, mandateId, stage: 'sourcing')
+    - name: updateStatus
+      action: updateMandateStatus(id, status)
+    - name: generateMatches
+      action: triggerMatchGeneration(mandateId)
 
-  matches:
-    - candidateId: string
-      name: string
-      matchScore: number # 0-100
-      matchReasoning: string
-      skills: string[]
-      status: "new" | "viewed" | "contacted"
+accessibility:
+  aria:
+    - role: application (for kanban drag-drop)
+    - aria-label: "Pipeline du mandat {title}"
+  keyboard:
+    - Arrow keys to navigate kanban
+    - Space to pick up card
+    - Enter to drop card
+    - Escape to cancel drag
+  screen_reader:
+    - Announce column when entering
+    - Announce position in column
+    - Announce successful move
+  responsive:
+    mobile:
+      - Kanban as vertical list (swipe between stages)
+      - Floating action button
+    tablet:
+      - Horizontal scroll kanban
+      - Compact cards
+    desktop:
+      - Full kanban view
+      - Side panel for candidate preview
 
-actions:
-  updateMandateStatus:
-    description: "Change the status of the mandate"
-    parameters:
-      status: "active" | "pending" | "closed"
-    
-  moveCandidate:
-    description: "Move a candidate to a different pipeline stage"
-    parameters:
-      candidateId: string
-      targetStageId: string
-      
-  addNote:
-    description: "Add a private note to the mandate"
-    parameters:
-      content: string
-      
-  generateMatches:
-    description: "Trigger AI matching engine to find new candidates"
-    
-  viewCandidateProfile:
-    description: "Navigate to full candidate profile"
-    parameters:
-      candidateId: string
-    navigation: "/dashboard/talents/:candidateId"
+testing:
+  e2e_scenarios:
+    - name: "Mandate cockpit loads"
+      steps:
+        - Navigate to /hunting/mandates/{id}
+        - Assert header visible with title
+        - Assert kanban columns visible
+        - Assert candidate cards in correct columns
+    - name: "Drag candidate between stages"
+      steps:
+        - Pick up candidate card from Sourcing
+        - Drop in Screening column
+        - Assert card moved
+        - Assert toast confirmation
+        - Refresh → assert change persisted
+    - name: "View AI matches"
+      steps:
+        - Click "Matches" tab
+        - Assert match cards visible with scores
+        - Click "Ajouter au pipeline"
+        - Assert candidate appears in Sourcing
+    - name: "Generate new matches"
+      steps:
+        - Click "Generer matches"
+        - Assert loading state
+        - Assert new matches appear
+  unit_tests:
+    - KanbanBoard handles drag events
+    - CandidateKanbanCard renders score
+    - MatchCard handles add action
+    - Pipeline updates optimistically

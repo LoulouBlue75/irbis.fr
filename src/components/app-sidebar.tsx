@@ -4,6 +4,7 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { cn } from "@/lib/utils";
 import { LayoutDashboard, Briefcase, Users, Settings } from "lucide-react";
+import { AdminLink } from "./admin-link";
 
 const navigation = [
   { name: "Vue d'ensemble", href: "/hunting/dashboard", icon: LayoutDashboard },
@@ -31,6 +32,9 @@ export function AppSidebar() {
 
       {/* Navigation */}
       <nav className="flex-1 flex flex-col gap-2 px-4 py-8">
+        {/* Admin Link - Only visible for admins */}
+        <AdminLink />
+
         {navigation.map((item) => {
           const isActive = pathname.startsWith(item.href);
           return (
