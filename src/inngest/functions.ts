@@ -233,7 +233,10 @@ export const executeAIQuery = inngest.createFunction(
 );
 
 export const processCV = inngest.createFunction(
-  { id: 'process-cv' },
+  {
+    id: 'process-cv',
+    retries: 3, // P5 AU-006: Retry 3x on failure
+  },
   { event: 'document/uploaded' },
   async ({ event, step }) => {
     const { projectId, sourceId, storagePath, userId } = event.data;

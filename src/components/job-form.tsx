@@ -21,8 +21,18 @@ export function JobForm({ initialData }: JobFormProps) {
   const [requirements, setRequirements] = useState<string[]>(initialData?.requirements || []);
   const [newRequirement, setNewRequirement] = useState('');
 
+  // P5 BR-005/BL-004: Mandat closed = readonly
+  const isReadonly = initialData?.status === 'closed';
+
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+
+    // P5 BR-005/BL-004: Prevent submission if mandate is closed
+    if (isReadonly) {
+      setError('Ce mandat est cloture et ne peut pas etre modifie.');
+      return;
+    }
+
     setLoading(true);
     setError(null);
 
@@ -67,6 +77,13 @@ export function JobForm({ initialData }: JobFormProps) {
 
   return (
     <form onSubmit={handleSubmit} className="space-y-8 max-w-2xl mx-auto py-8">
+      {isReadonly && (
+        <Alert>
+          <AlertDescription>
+            Ce mandat est cloture. Les modifications sont desactivees.
+          </AlertDescription>
+        </Alert>
+      )}
       {error && (
         <Alert variant="destructive">
           <AlertDescription>{error}</AlertDescription>
@@ -81,6 +98,7 @@ export function JobForm({ initialData }: JobFormProps) {
           name="title"
           id="title"
           required
+          disabled={isReadonly}
           defaultValue={initialData?.title}
           placeholder="Ex: Directeur Commercial Retail Luxe"
           className="bg-white"
@@ -96,6 +114,7 @@ export function JobForm({ initialData }: JobFormProps) {
           id="description"
           rows={5}
           required
+          disabled={isReadonly}
           defaultValue={initialData?.description}
           placeholder="Décrivez le contexte, les responsabilités, l'environnement..."
           className="bg-white resize-none"
@@ -104,23 +123,25 @@ export function JobForm({ initialData }: JobFormProps) {
 
       <div className="space-y-3">
         <label className="text-sm font-medium text-irbis-navy">Critères & Compétences Requises</label>
-        <div className="flex gap-2">
-          <Input
-            value={newRequirement}
-            onChange={(e) => setNewRequirement(e.target.value)}
-            onKeyDown={(e) => {
-              if (e.key === 'Enter') {
-                e.preventDefault();
-                addRequirement();
-              }
-            }}
-            placeholder="Ajouter un critère (ex: MBA, 10+ ans expérience)..."
-            className="bg-white max-w-md"
-          />
-          <Button type="button" onClick={addRequirement} variant="secondary" size="icon">
-            <Plus className="w-4 h-4" />
-          </Button>
-        </div>
+        {!isReadonly && (
+          <div className="flex gap-2">
+            <Input
+              value={newRequirement}
+              onChange={(e) => setNewRequirement(e.target.value)}
+              onKeyDown={(e) => {
+                if (e.key === 'Enter') {
+                  e.preventDefault();
+                  addRequirement();
+                }
+              }}
+              placeholder="Ajouter un critère (ex: MBA, 10+ ans expérience)..."
+              className="bg-white max-w-md"
+            />
+            <Button type="button" onClick={addRequirement} variant="secondary" size="icon">
+              <Plus className="w-4 h-4" />
+            </Button>
+          </div>
+        )}
 
         <div className="flex flex-wrap gap-2 min-h-[40px] p-4 bg-irbis-cream rounded-md border border-gray-200/50">
           {requirements.length === 0 && (
@@ -129,13 +150,15 @@ export function JobForm({ initialData }: JobFormProps) {
           {requirements.map((req, index) => (
             <Badge key={index} variant="secondary" className="bg-white text-irbis-navy border-gray-200 pl-3 pr-1 py-1">
               {req}
-              <button
-                type="button"
-                onClick={() => removeRequirement(index)}
-                className="ml-2 p-1 hover:text-red-600 rounded-full transition-colors"
-              >
-                <X className="w-3 h-3" />
-              </button>
+              {!isReadonly && (
+                <button
+                  type="button"
+                  onClick={() => removeRequirement(index)}
+                  className="ml-2 p-1 hover:text-red-600 rounded-full transition-colors"
+                >
+                  <X className="w-3 h-3" />
+                </button>
+              )}
             </Badge>
           ))}
         </div>
@@ -148,8 +171,9 @@ export function JobForm({ initialData }: JobFormProps) {
         <select
           name="status"
           id="status"
+          disabled={isReadonly}
           defaultValue={initialData?.status || 'open'}
-          className="w-full rounded-md border border-gray-200 bg-white px-4 py-2 text-sm text-irbis-navy focus:border-irbis-gold focus:ring-irbis-gold"
+          className="w-full rounded-md border border-gray-200 bg-white px-4 py-2 text-sm text-irbis-navy focus:border-irbis-gold focus:ring-irbis-gold disabled:opacity-50 disabled:cursor-not-allowed"
         >
           <option value="open">Actif</option>
           <option value="closed">Clôturé</option>
@@ -162,19 +186,21 @@ export function JobForm({ initialData }: JobFormProps) {
           <ArrowLeft className="w-4 h-4 mr-2" />
           Annuler
         </Button>
-        <Button type="submit" disabled={loading} className="min-w-[140px]">
-          {loading ? (
-            <>
-              <Loader2 className="w-4 h-4 mr-2 animate-spin" />
-              Sauvegarde...
-            </>
-          ) : (
-            <>
-              <Save className="w-4 h-4 mr-2" />
-              {initialData ? 'Mettre à jour' : 'Créer Mandat'}
-            </>
-          )}
-        </Button>
+        {!isReadonly && (
+          <Button type="submit" disabled={loading} className="min-w-[140px]">
+            {loading ? (
+              <>
+                <Loader2 className="w-4 h-4 mr-2 animate-spin" />
+                Sauvegarde...
+              </>
+            ) : (
+              <>
+                <Save className="w-4 h-4 mr-2" />
+                {initialData ? 'Mettre à jour' : 'Créer Mandat'}
+              </>
+            )}
+          </Button>
+        )}
       </div>
     </form>
   );

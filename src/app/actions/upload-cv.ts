@@ -4,9 +4,12 @@ import { createClient } from '@/lib/supabase/server';
 import { revalidatePath } from 'next/cache';
 import { inngest } from '@/lib/inngest';
 
+// P5 BR-007: Taille max CV 10MB
+const MAX_FILE_SIZE = 10 * 1024 * 1024; // 10MB in bytes
+
 export async function uploadCV(formData: FormData) {
   const supabase = await createClient();
-  
+
   // 1. Authenticate
   // const { data: { user }, error: authError } = await supabase.auth.getUser();
   // if (authError || !user) {
@@ -17,6 +20,16 @@ export async function uploadCV(formData: FormData) {
   const file = formData.get('file') as File;
   if (!file) {
     return { error: 'No file provided' };
+  }
+
+  // P5 BR-007/BL-001: Validate file size (10MB max)
+  if (file.size > MAX_FILE_SIZE) {
+    return { error: 'Fichier trop volumineux. Taille maximum: 10MB' };
+  }
+
+  // P5 BR-008/BL-002: Validate PDF format
+  if (file.type !== 'application/pdf') {
+    return { error: 'Seuls les fichiers PDF sont acceptes' };
   }
 
   // TODO: Get actual project ID. For now, we'll fetch the first one or create a default.
