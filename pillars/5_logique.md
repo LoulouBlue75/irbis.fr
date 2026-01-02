@@ -1,8 +1,8 @@
 # P5 : LOGIQUE & REGLES
 
-> **Version** : 2.1 (01/01/2026)
+> **Version** : 2.2 (02/01/2026)
 > **Reference** : Matrice v4.1 - Chantier 5
-> **Audit** : `pillars/5_logique_audit.md` - Score: 61%
+> **Audit** : `pillars/5_logique_audit.md` - Score: 70%
 
 ---
 

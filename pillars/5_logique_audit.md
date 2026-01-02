@@ -21,18 +21,18 @@
 
 **Score P5 initial** : 35% (8/23 regles completement implementees)
 
-### Apres Corrections (01/01/2026 - 11h)
+### Apres Corrections (02/01/2026 - 14h)
 
 | Categorie | Total | OK | Partiel | GAP |
 |-----------|-------|-----|---------|-----|
-| Business Rules (BR) | 8 | 5 | 0 | 3 |
-| Blocking Rules (BL) | 6 | 4 | 1 | 1 |
+| Business Rules (BR) | 8 | 6 | 0 | 2 |
+| Blocking Rules (BL) | 6 | 5 | 1 | 0 |
 | Automatic Rules (AU) | 6 | 3 | 1 | 2 |
 | Workflows (WF) | 3 | 2 | 0 | 1 |
 | RBAC | - | OK | - | - |
-| **TOTAL** | 23 | 14 | 2 | 7 |
+| **TOTAL** | 23 | 16 | 2 | 5 |
 
-**Score P5 apres corrections** : 61% (14/23 regles OK)
+**Score P5 apres corrections** : 70% (16/23 regles OK)
 
 ### Corrections Appliquees
 
@@ -40,8 +40,10 @@
 |----|-------------|---------|--------|
 | FIX-001 | Validation 10MB server-side | `upload-cv.ts` | DONE |
 | FIX-002 | Validation PDF server-side | `upload-cv.ts` | DONE |
+| FIX-003 | UNIQUE(project_id, email) candidates | `migrations/20260102000001_*.sql` | DONE |
 | FIX-004 | Form readonly si mandat closed | `job-form.tsx` | DONE |
 | FIX-005 | Retries: 3 sur processCV | `functions.ts` | DONE |
+| FIX-006 | UNIQUE(job_id, candidate_id) matches | Deja present dans schema | DONE |
 
 ---
 
@@ -61,11 +63,10 @@
 | **Code** | `match_threshold: 0.5` |
 
 ### BR-003 : Candidat unique par mandat
-| Status | GAP |
-|--------|-----|
-| **Localisation attendue** | Table `matches` ou `alignments` |
-| **Constat** | Aucune contrainte UNIQUE(candidate_id, mandate_id) |
-| **Action requise** | Migration: `UNIQUE(candidate_id, mandate_id)` sur matches |
+| Status | OK (FIX-006) |
+|--------|--------------|
+| **Localisation** | `supabase/migrations/20241220000008_matching_engine.sql:48` |
+| **Code** | `UNIQUE(job_id, candidate_id)` deja present dans schema initial |
 
 ### BR-004 : Seul createur/admin peut supprimer mandat
 | Status | OK |
@@ -82,11 +83,11 @@
 | **Implementation** | Form disabled, submit blocked, alert affiche |
 
 ### BR-006 : Email candidat unique par projet
-| Status | GAP |
-|--------|-----|
-| **Localisation attendue** | `supabase/migrations/20241220000006_cv_candidates.sql` |
-| **Constat** | Index sur email mais pas de contrainte UNIQUE(project_id, email) |
-| **Action requise** | Migration: `UNIQUE(project_id, email) WHERE email IS NOT NULL` |
+| Status | OK (FIX-003) |
+|--------|--------------|
+| **Localisation** | `supabase/migrations/20260102000001_unique_candidate_email.sql` |
+| **Code** | Partial unique index `idx_candidates_unique_email_per_project` |
+| **Note** | Gere les doublons existants avant creation de l'index |
 
 ### BR-007 : Taille max CV 10MB
 | Status | OK (FIX-001) |
@@ -281,7 +282,7 @@
 |----|--------|---------|--------|
 | FIX-001 | Validation 10MB server-side | `upload-cv.ts` | DONE |
 | FIX-002 | Validation PDF server-side | `upload-cv.ts` | DONE |
-| FIX-003 | UNIQUE(project_id, email) | Migration SQL | TODO |
+| FIX-003 | UNIQUE(project_id, email) | `migrations/20260102000001_*.sql` | DONE |
 
 ### Important (P1) - Fonctionnel
 
@@ -289,7 +290,7 @@
 |----|--------|---------|--------|
 | FIX-004 | Bloquer form si mandat closed | `job-form.tsx` | DONE |
 | FIX-005 | Ajouter retries: 3 sur processCV | `functions.ts` | DONE |
-| FIX-006 | UNIQUE(candidate_id, mandate_id) | Migration SQL | TODO |
+| FIX-006 | UNIQUE(candidate_id, mandate_id) | Deja dans schema | DONE |
 
 ### Moyen (P2) - Notifications
 
@@ -312,14 +313,15 @@
 
 **Avant audit** : P5 estime a 75% (estimation)
 **Apres audit initial** : P5 reel a 35% (8/23 regles OK)
-**Apres corrections** : P5 a 61% (14/23 regles OK)
+**Apres corrections session 1** : P5 a 61% (14/23 regles OK)
+**Apres corrections session 2** : P5 a 70% (16/23 regles OK)
 
-**Corrections effectuees** : 4/11 (FIX-001, FIX-002, FIX-004, FIX-005)
-**Restant a faire** : 7 fixes (FIX-003, FIX-006 a FIX-011)
+**Corrections effectuees** : 6/11 (FIX-001 a FIX-006)
+**Restant a faire** : 5 fixes (FIX-007 a FIX-011)
 
-**Gap principal restant** : Notifications et pipeline candidat
+**Gap principal restant** : Notifications (P2) et pipeline candidat (P3)
 
 ---
 
 *Audit P5 Logique - IRBIS*
-*01/01/2026 - Mise a jour apres corrections*
+*02/01/2026 - Mise a jour apres migrations DB*
